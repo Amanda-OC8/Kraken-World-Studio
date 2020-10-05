@@ -11,7 +11,7 @@ const projectSchema = new Schema({
         required: true,
         unique: true,
     },
-    Genre: {
+    genre: {
         type: String,
         enum: ["Fantasy", "Horror", "Science-Fiction", "Space Opera", "Romance", "Adventure", "Erotic", "FanFiction", "Historical", "Mistery", "Religious/Spiritual", "Satire/Humour", "Thriller/Suspense", "Others (Tell us more in the synopsis"],
         required: true,

@@ -2,43 +2,51 @@ const express = require('express')
 const router = express.Router()
 const mongoose = require('mongoose')
 
-const User = require('../models/User.model')
-const Project = require('../models/Project.model')
-const Character = require('../models/Character.model')
-const Folder = require('../models/Folder.model')
-const Archive = require('../models/Archive.model')
+const User = require('../models/user.model')
+const Project = require('../models/project.model')
+const Character = require('../models/character.model')
+const Folder = require('../models/folder.model')
+const Archive = require('../models/archive.model')
 
-//Endints User
+//Endpoints User
 router.get('/profile', (req, res) => {
 
-    // const userPromise = User.findById(req.user._id)
+    const userPromise = User.findById(req.user._id)
 
 
-    // const pojectPromise = Project.find({ "owner": { $in: [req.user._id] } }, { a mostrar })
+    const projectPromise = Project.find({ "owner": { $in: [req.user._id] } }, { username: 1, bio: 1, image: 1, favProjects: 1 })
 
-    // Promise.all([projectPromise, userPromise])
-    //     .then(response => res.json(response))
-    //     .catch(err => res.status(500).json(err))
+    Promise.all([projectPromise, userPromise])
+        .then(response => res.json(response))
+        .catch(err => res.status(500).json(err))
         
 })
 
-router.post('/profile/edit', (req, res) => {
+router.post('/profile/new', (req, res) => {
 
-    // const {deconstruido} = req.body
+  
+    User.create(req.body)
+        .then(response => res.json(response))
+        .catch(err => res.status(500).json(err))
+
+})
+
+router.put('/profile/edit', (req, res) => {
+
+    const {email, bio, image} = req.body
 
 
-    // User.findByIdAndUpdate(req.user._id, { deconstruido })
-    //     .then(response => res.json(response))
-    //     .catch(err => res.status(500).json(err))
+    User.findByIdAndUpdate(req.user._id, { email, bio, image })
+        .then(response => res.json(response))
+        .catch(err => res.status(500).json(err))
 
 })
 
 //Endpoints Project
 router.get('/project/:project_id', (req, res) => {
-
-    const projectId = req.params.project_id
-
-    Project.findById(projectId)
+    
+    Project.findById(req.params.project_id)
+        .populate("owner")
         .then(response => res.json(response))
         .catch(err => res.status(500).json(err))
 })
@@ -50,20 +58,16 @@ router.post('/project/new', (req, res) => {
         .catch(err => res.status(500).json(err))
 })
 
-router.put('/project/:project_id', (req, res) => {
+router.put('/project/:project_id/edit', (req, res) => {
 
-    const projectId = req.params.project_id
-
-    Project.findByIdAndUpdate(projectId, req.body)
+    Project.findByIdAndUpdate(req.params.project_id, req.body)
         .then(response => res.json(response))
         .catch(err => res.status(500).json(err))
 })
 
 router.delete('/project/:project_id/delete', (req, res) => {
 
-    const projectId = req.params.project_id
-
-    Project.findByIdAndDelete(projectId)
+    Project.findByIdAndDelete(req.params.project_id)
         .then(response => res.json(response))
         .catch(err => res.status(500).json(err))
 })
@@ -71,273 +75,253 @@ router.delete('/project/:project_id/delete', (req, res) => {
 //Endpoints Character
 router.get('/project/:project_id/:character_id', (req, res) => {
 
-    const projectId = req.params.project_id
-    const characterId = req.params.character_id
-
-    const projectPromise = Project.findById(projectId)
-    const characterPromise = Character.findById(characterId)
-
-    Promise.all([projectPromise, characterPromise])
-    .then(response => res.json(response))
-    .catch(err => res.status(500).json(err))
+    Character.findById(req.params.character_id)
+        .populate("originProject")
+        .then(response => res.json(response))
+        .catch(err => res.status(500).json(err))
 })
 
-router.post('/project/:project_id/:character_id/edit', (req, res) => {
+router.put('/project/:project_id/:character_id/edit', (req, res) => {
+    const { name, surname, genre, age, background, rolHistory, occupation, physicalDescription, personality, habits, notes, isPublic } = req.body
     
-    // const projectId = req.params.project_id
-    // const characterId = req.params.character_id
-    
-    // const { name, actType, shortDescription, longDescription, minParticipants, maxParticipants, minAge, maxAge, materials, monuments } = req.body
-
-    // Character.findByIdAndUpdate(characterId, { deconstruido, OriginProject: { $in: projectId } })
-    //     .then(response => res.json(response))
-    //     .catch(err => res.status(500).json(err))
+    Character.findByIdAndUpdate(req.params.character_id, { name, surname, genre, age, background, rolHistory, occupation, physicalDescription, personality, habits, notes, isPublic, OriginProject: req.params.project_id  })
+        .then(response => res.json(response))
+        .catch(err => res.status(500).json(err))
    
 })
 
-router.put('/project/:project_id/character/new', (req, res) => {
+router.post('/project/:project_id/character/new', (req, res) => {
+    
+    const { name, surname, genre, age, background, rolHistory, occupation, physicalDescription, personality, habits, notes, isPublic } = req.body
 
-    // const projectId = req.params.project_id
-
-    // const { name, actType, shortDescription, longDescription, minParticipants, maxParticipants, minAge, maxAge, materials, monuments } = req.body
-
-    // Character.create({ deconstruido, OriginProject: { $in: projectId } })
-    //     .then(response => res.json(response))
-    //     .catch(err => res.status(500).json(err))
+    Character.create({ originProject: req.params.project_id, name, surname, genre, age, background, rolHistory, occupation, physicalDescription, personality, habits, notes, isPublic })
+        .then(response => res.json(response))
+        .catch(err => res.status(500).json(err))
 
 })
 
 router.delete('/project/:project_id/:character_id/delete', (req, res) => {
 
-    const projectId = req.params.project_id
-    const characterId = req.params.character_id
-
-    const projectPromise = Project.findById(projectId)
-    const characterPromise = Character.findByIdandDelete(characterId)
+    const projectPromise = Project.findById(req.params.project_id)
+    const characterPromise = Character.findByIdAndDelete(req.params.character_id)
 
     Promise.all([projectPromise, characterPromise])
         .then(response => res.json(response))
         .catch(err => res.status(500).json(err))
 })
 
-//Endpoints Folder
-router.get('/project/:project_id/:folder_id', (req, res) => {
+// //Endpoints Folder
+// router.get('/project/:project_id/:folder_id', (req, res) => {
 
-    const projectId = req.params.project_id
-    const folderId = req.params.folder_id
+//     Folder.findById(req.params.folder_id)
+//         .populate("parentFolder")
+//         .populate("folders")
+//         .populate("archives")
+//         .then(response => res.json(response))
+//         .catch(err => res.status(500).json(err))
+// })
 
-    const projectPromise = Project.findById(projectId)
-    const folderPromise = Folder.findById(folderId)
+// router.post('/project/:project_id/:folder_id/edit', (req, res) => {
 
-    Promise.all([projectPromise, folderPromise])
-        .then(response => res.json(response))
-        .catch(err => res.status(500).json(err))
-})
+//         const { name, isPublic } = req.body
 
-router.post('/project/:project_id/:folder_id/edit', (req, res) => {
+//         Folder.findByIdAndUpdate(req.params.folder_id, { name, isPublic})
+//             .then(response => res.json(response))
+//             .catch(err => res.status(500).json(err))
 
-    // const projectId = req.params.project_id
-    // const folderId = req.params.folder_id
+// })
 
-    // const { name, actType, shortDescription, longDescription, minParticipants, maxParticipants, minAge, maxAge, materials, monuments } = req.body
+// router.put('/project/:project_id/folder/new', (req, res) => {
 
-    // Folder.findByIdAndUpdate(folderId, { deconstruido, OriginProject: { $in: projectId } })
-    //     .then(response => res.json(response))
-    //     .catch(err => res.status(500).json(err))
+//     const projectId = req.params.project_id
 
-})
+//     const projectPromise = Project.findById(projectId)
+//     const folderPromise = Folder.find({ "OriginProject": { $in: [projectId] } })
 
-router.put('/project/:project_id/folder/new', (req, res) => {
+//     Promise.all([projectPromise, folderPromise])
+//         .then(response => res.json(response))
+//         .catch(err => res.status(500).json(err))
+// })
 
-    const projectId = req.params.project_id
+// router.delete('/project/:project_id/:folder_id/delete', (req, res) => {
 
-    const projectPromise = Project.findById(projectId)
-    const folderPromise = Folder.find({ "OriginProject": { $in: [projectId] } })
+//     const projectId = req.params.project_id
+//     const folderId = req.params.folder_id
 
-    Promise.all([projectPromise, folderPromise])
-        .then(response => res.json(response))
-        .catch(err => res.status(500).json(err))
-})
+//     const projectPromise = Project.findById(projectId)
+//     const folderPromise = Folder.findByIdAndDelete(folderId)
 
-router.delete('/project/:project_id/:folder_id/delete', (req, res) => {
+//     Promise.all([projectPromise, folderPromise])
+//         .then(response => res.json(response))
+//         .catch(err => res.status(500).json(err))
+// })
 
-    const projectId = req.params.project_id
-    const folderId = req.params.folder_id
+// //Endpoints Archive
+// router.get('/project/:project_id/:folder_id/:archive_id', (req, res) => {
 
-    const projectPromise = Project.findById(projectId)
-    const folderPromise = Folder.findByIdAndDelete(folderId)
+//     const projectId = req.params.project_id
+//     const folderId = req.params.folder_id
+//     const archiveId = req.params.archive_id
 
-    Promise.all([projectPromise, folderPromise])
-        .then(response => res.json(response))
-        .catch(err => res.status(500).json(err))
-})
+//     const projectPromise = Project.findById(projectId)
+//     const folderPromise = Folder.findById(folderId)
+//     const archivePromise = Archive.findById(archiveId)
 
-//Endpoints Archive
-router.get('/project/:project_id/:folder_id/:archive_id', (req, res) => {
+//     Promise.all([projectPromise, folderPromise, archivePromise])
+//         .then(response => res.json(response))
+//         .catch(err => res.status(500).json(err))
+// })
 
-    const projectId = req.params.project_id
-    const folderId = req.params.folder_id
-    const archiveId = req.params.archive_id
+// router.post('/project/:project_id/:folder_id/:archive_id/edit', (req, res) => {
 
-    const projectPromise = Project.findById(projectId)
-    const folderPromise = Folder.findById(folderId)
-    const archivePromise = Archive.findById(archiveId)
+//     // const projectId = req.params.project_id
+//     // const folderId = req.params.folder_id
+//     // const archiveId = req.params.archive_id
 
-    Promise.all([projectPromise, folderPromise, archivePromise])
-        .then(response => res.json(response))
-        .catch(err => res.status(500).json(err))
-})
+//     // const { name, actType, shortDescription, longDescription, minParticipants, maxParticipants, minAge, maxAge, materials, monuments } = req.body
 
-router.post('/project/:project_id/:folder_id/:archive_id/edit', (req, res) => {
-
-    // const projectId = req.params.project_id
-    // const folderId = req.params.folder_id
-    // const archiveId = req.params.archive_id
-
-    // const { name, actType, shortDescription, longDescription, minParticipants, maxParticipants, minAge, maxAge, materials, monuments } = req.body
-
-    // Folder.findByIdAndUpdate(folderId, { deconstruido, OriginProject: { $in: projectId }, OriginFolder: archiveId })
-    //     .then(response => res.json(response))
-    //     .catch(err => res.status(500).json(err))
+//     // Folder.findByIdAndUpdate(folderId, { deconstruido, OriginProject: { $in: projectId }, OriginFolder: archiveId })
+//     //     .then(response => res.json(response))
+//     //     .catch(err => res.status(500).json(err))
     
-})
+// })
 
-router.put('/project/:project_id/:folder_id/archive/new', (req, res) => {
+// router.put('/project/:project_id/:folder_id/archive/new', (req, res) => {
 
-    // const projectId = req.params.project_id
+//     // const projectId = req.params.project_id
 
-    // const projectId = req.params.project_id
+//     // const projectId = req.params.project_id
 
-    // const { name, actType, shortDescription, longDescription, minParticipants, maxParticipants, minAge, maxAge, materials, monuments } = req.body
+//     // const { name, actType, shortDescription, longDescription, minParticipants, maxParticipants, minAge, maxAge, materials, monuments } = req.body
 
-    // Archive.create({ deconstruido, OriginProject: { $in: projectId }, OriginFolder: archiveId })
-    //     .then(response => res.json(response))
-    //     .catch(err => res.status(500).json(err))
-})
+//     // Archive.create({ deconstruido, OriginProject: { $in: projectId }, OriginFolder: archiveId })
+//     //     .then(response => res.json(response))
+//     //     .catch(err => res.status(500).json(err))
+// })
 
-router.delete('/project/:project_id/:folder_id/:archive_id/edit', (req, res) => {
+// router.delete('/project/:project_id/:folder_id/:archive_id/edit', (req, res) => {
 
-    const projectId = req.params.project_id
-    const folderId = req.params.folder_id
-    const archiveId = req.params.archive_id
+//     const projectId = req.params.project_id
+//     const folderId = req.params.folder_id
+//     const archiveId = req.params.archive_id
 
-    const projectPromise = Project.findById(projectId)
-    const folderPromise = Folder.findById(folderId)
-    const archivePromise = Archive.findByIdAndDelete(archiveId)
+//     const projectPromise = Project.findById(projectId)
+//     const folderPromise = Folder.findById(folderId)
+//     const archivePromise = Archive.findByIdAndDelete(archiveId)
 
-    Promise.all([projectPromise, folderPromise, archivePromise])
-        .then(response => res.json(response))
-        .catch(err => res.status(500).json(err))
-})
+//     Promise.all([projectPromise, folderPromise, archivePromise])
+//         .then(response => res.json(response))
+//         .catch(err => res.status(500).json(err))
+// })
 
-//Endpoints Timeline
-router.get('/project/:project_id/timeline', (req, res) => {
+// //Endpoints Timeline
+// router.get('/project/:project_id/timeline', (req, res) => {
 
-    const projectId = req.params.project_id
+//     const projectId = req.params.project_id
    
     
-    Project.findById(projectId, { timeline: 1 })
-        .then(response => res.json(response))
-        .catch(err => res.status(500).json(err))
+//     Project.findById(projectId, { timeline: 1 })
+//         .then(response => res.json(response))
+//         .catch(err => res.status(500).json(err))
 
-})
+// })
 
-router.put('/project/:project_id/timeline', (req, res) => {
+// router.put('/project/:project_id/timeline', (req, res) => {
 
-    const projectId = req.params.project_id
-    const timeline = req.body
-
-
-    Project.findByIdAndUpdate(projectId, { timeline })
-        .then(response => res.json(response))
-        .catch(err => res.status(500).json(err))
-
-})
-
-//Endpoints Glossary
-router.get('/project/:project_id/glossary', (req, res) => {
-
-    const projectId = req.params.project_id
+//     const projectId = req.params.project_id
+//     const timeline = req.body
 
 
-    Project.findById(projectId, { glossary: 1 })
-        .then(response => res.json(response))
-        .catch(err => res.status(500).json(err))
+//     Project.findByIdAndUpdate(projectId, { timeline })
+//         .then(response => res.json(response))
+//         .catch(err => res.status(500).json(err))
 
-})
+// })
 
-router.put('/project/:project_id/glossary', (req, res) => {
+// //Endpoints Glossary
+// router.get('/project/:project_id/glossary', (req, res) => {
 
-    const projectId = req.params.project_id
-    const glossary = req.body
-
-
-    Project.findByIdAndUpdate(projectId, { glossary })
-        .then(response => res.json(response))
-        .catch(err => res.status(500).json(err))
-
-})
-
-//Endpoints History
-router.get('/project/:project_id/history', (req, res) => {
-
-    const projectId = req.params.project_id
+//     const projectId = req.params.project_id
 
 
-    Project.findById(projectId, { history: 1 })
-        .then(response => res.json(response))
-        .catch(err => res.status(500).json(err))
+//     Project.findById(projectId, { glossary: 1 })
+//         .then(response => res.json(response))
+//         .catch(err => res.status(500).json(err))
 
-})
+// })
 
-router.put('/project/:project_id/history', (req, res) => {
+// router.put('/project/:project_id/glossary', (req, res) => {
 
-    const projectId = req.params.project_id
-    const story = req.body
-
-
-    Project.findByIdAndUpdate(projectId, { story })
-        .then(response => res.json(response))
-        .catch(err => res.status(500).json(err))
-
-})
+//     const projectId = req.params.project_id
+//     const glossary = req.body
 
 
-//Endpoint wiki view
+//     Project.findByIdAndUpdate(projectId, { glossary })
+//         .then(response => res.json(response))
+//         .catch(err => res.status(500).json(err))
 
-router.get('/project/:project_id/wiki-elements', (req, res) => {
+// })
 
-    const projectId = req.params.project_id
+// //Endpoints History
+// router.get('/project/:project_id/history', (req, res) => {
 
-    const projectPromise = Project.findById(projectId)
-    const characterPromise = Character.find({ $and: [{ OriginProject: { $in: projectId } }, { isPublic: { $exists: true } }] })
-    const archivePromise = Archive.find({ $and: [{ OriginProject: { $in: projectId } }, { isPublic: { $exists: true } }] })
+//     const projectId = req.params.project_id
 
-    Promise.all([projectPromise, characterPromise, archivePromise])
-        .then(response => res.json(response))
-        .catch(err => res.status(500).json(err))
 
-})
+//     Project.findById(projectId, { history: 1 })
+//         .then(response => res.json(response))
+//         .catch(err => res.status(500).json(err))
 
-// Endpoint Public view projects
+// })
 
-router.get('/all-projects', (req, res) => {
+// router.put('/project/:project_id/history', (req, res) => {
+
+//     const projectId = req.params.project_id
+//     const story = req.body
+
+
+//     Project.findByIdAndUpdate(projectId, { story })
+//         .then(response => res.json(response))
+//         .catch(err => res.status(500).json(err))
+
+// })
+
+
+// //Endpoint wiki view
+
+// router.get('/project/:project_id/wiki-elements', (req, res) => {
+
+//     const projectId = req.params.project_id
+
+//     const projectPromise = Project.findById(projectId)
+//     const characterPromise = Character.find({ $and: [{ OriginProject: { $in: projectId } }, { isPublic: { $exists: true } }] })
+//     const archivePromise = Archive.find({ $and: [{ OriginProject: { $in: projectId } }, { isPublic: { $exists: true } }] })
+
+//     Promise.all([projectPromise, characterPromise, archivePromise])
+//         .then(response => res.json(response))
+//         .catch(err => res.status(500).json(err))
+
+// })
+
+// // Endpoint Public view projects
+
+// router.get('/all-projects', (req, res) => {
 
     
-   Project.find({proyeccion})
-        .then(response => res.json(response))
-        .catch(err => res.status(500).json(err))
+//    Project.find({proyeccion})
+//         .then(response => res.json(response))
+//         .catch(err => res.status(500).json(err))
 
-})
+// })
 
-router.get('/all-projects/results', (req, res) => {
+// router.get('/all-projects/results', (req, res) => {
 
     // const queryResults = req.query.results
     
     // Project.find({querys result})
     //     .then(response => res.json(response))
     //     .catch(err => res.status(500).json(err))
-})
+// })
 
 
 module.exports = router
