@@ -7,6 +7,8 @@ import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 
 import authService from '../../../service/auth.service'
+import krakenService from '../../../service/kraken.service'
+
 
 class Login extends Component {
     constructor(props) {
@@ -16,6 +18,7 @@ class Login extends Component {
             password: ''
         }
         this.authService = new authService()
+        
     }
 
     handleInputChange = e => {
@@ -26,19 +29,20 @@ class Login extends Component {
     handleFormSubmit = e => {
 
         e.preventDefault()
-
+        
         this.authService
             .login(this.state)
             .then(response => {
+                console.log(this.props)
                 this.props.setTheUser(response.data)
                 this.props.history.push('/')
             })
-            .catch(err => console.log('Erroooooor:', { err }))
+            .catch(err => console.log('Error:', { err }))
     }
 
 
     render() {
-
+        
         return (
 
             <Container>

@@ -3,20 +3,20 @@ const cookieParser = require('cookie-parser')
 const logger = require('morgan')
 const cors = require('cors')
 
-// const whitelist = [process.env.DOMAIN]
-// const corsOptions = {
-//     origin: (origin, cb) => {
-//         const originIsWhitelisted = whitelist.includes(origin)
-//         cb(null, originIsWhitelisted)
-//     },
-//     credentials: true
-// }
+const whitelist = [process.env.DOMAIN]
+const corsOptions = {
+    origin: (origin, cb) => {
+        console.log(whitelist, origin)
+        const originIsWhitelisted = whitelist.includes(origin)
+        cb(null, originIsWhitelisted)
+    }
+}
 
 
 
 
 module.exports = app => {
-    // app.use(cors(corsOptions))
+    app.use(cors({ credentials: true, origin: whitelist }))
     app.use(logger('dev'))
     app.use(bodyParser.json())
     app.use(bodyParser.urlencoded({ extended: false }))
