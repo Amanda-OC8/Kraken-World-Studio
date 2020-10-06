@@ -6,7 +6,6 @@ export default class KrakenService {
         this.api = axios.create({
             // baseURLLocal: 'http://localhost:5000/api/auth',
             baseURL: process.env.REACT_APP_API_URL,
-            baseURL: 'http://localhost:5000/api/kraken',
             withCredentials: true
         })
     }
