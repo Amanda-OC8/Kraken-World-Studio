@@ -5,6 +5,8 @@ import Login from './pages/login/Login'
 import Signup from './pages/signup/Signup'
 
 import authService from './../service/auth.service'
+import krakenService from './../service/kraken.service'
+
 
 import './App.css'
 
@@ -16,6 +18,7 @@ class App extends Component {
       loggedInUser: undefined
     }
     this.authService = new authService()
+    this.krakenService = new krakenService()
   }
   componentDidMount = () => this.fetchUser()
 
@@ -29,6 +32,7 @@ class App extends Component {
   }
 
   render() {
+    
     return (
       <>
         <h1>Hi</h1>
