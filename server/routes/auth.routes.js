@@ -39,7 +39,7 @@ router.post('/signup', (req, res, next) => {
 
         const aNewUser = new User({
             username: username,
-            password: hashPass, 
+            password: hashPass,
             email: email
         });
 
@@ -68,7 +68,7 @@ router.post('/signup', (req, res, next) => {
 
 
 router.post('/login', (req, res, next) => {
-    
+
     passport.authenticate('local', (err, theUser, failureDetails) => {
         if (err) {
             res.status(500).json({ message: 'Error authenticating user' });
@@ -88,7 +88,7 @@ router.post('/login', (req, res, next) => {
                 res.status(500).json({ message: 'Session error' });
                 return;
             }
-            
+
             // We are now logged in (that's why we can also send req.user)
             res.status(200).json(theUser);
         });
