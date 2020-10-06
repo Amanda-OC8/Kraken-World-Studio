@@ -9,35 +9,33 @@
 |4|Get|/profile|Profile page|
 |5|Put|/profile/edit|Profile page edit (Modal)|
 |6|Post|/logout|Logout|
-|7|Deltele|Remove card from profile|
-|8|Get|/project/new|Project view|
-|9|Post|/project/new|Project creation|
-|10|Put|/project/project_id|Project edit|
-|11|Delete|/project/project_id/delete|Project delete|
-|12|Post|/project/project_id/character/new|New Character page|
-|13|Delete|/project/project_id/character_id/delete|Delete Character page|
-|14|Put|/project/project_id/character_id/edit|Edit Character page|
-|15|Get|/project/project_id/character_id|View Character page|
-|16|Post|/project/project_id/folder/new|New Tentacle (folder) page|
-|17|Delete|/project/project_id/folder_id/delete|Delete Tentacle (folder)page|
-|18|Put|/project/project_id/folder_id/edit|Edit Tentacle (folder) page|
-|19|Get|/project/project_id/folder_id|View Tentacle (folder Page|
-|0|Post|/project/project_id/folder_id/archive/new|New Archive (folder) page|
-|21|Delete|/project/project_id/folder_id/archive_id/delete|Delete Archive page|
-|2|Put|/project/project_id/folder_id/archive_id/edit|Edit Archive Page|
-|23|Get|/project/project_id/folder_id/archive_id|View Archive Page|
-|24|Put|/project/project_id/timeline|Edit Timeline|
-|25|Get|/project/project_id/timeline|View Timeline|
-|26|Put|/project/project_id/glossary|Edit Glossary|
-|2|Get|/project/project_id/glossary|View Glossary|
+|7|Get|/project/new|Project view|
+|8|Post|/project/new|Project creation|
+|9|Put|/project/project_id|Project edit|
+|10|Delete|/project/project_id/delete|Project delete|
+|11|Post|/project/project_id/character/new|New Character page|
+|12|Delete|/project/project_id/character_id/delete|Delete Character page|
+|13|Put|/project/project_id/character_id/edit|Edit Character page|
+|14|Get|/project/project_id/character_id|View Character page|
+|15|Post|/project/project_id/folder/new|New Tentacle (folder) page|
+|16|Delete|/project/project_id/folder_id/delete|Delete Tentacle (folder)page|
+|17|Put|/project/project_id/folder_id/edit|Edit Tentacle (folder) page|
+|18|Get|/project/project_id/folder_id|View Tentacle (folder Page|
+|19|Post|/project/project_id/folder_id/archive/new|New Archive (folder) page|
+|20|Delete|/project/project_id/folder_id/archive_id/delete|Delete Archive page|
+|21|Put|/project/project_id/folder_id/archive_id/edit|Edit Archive Page|
+|22|Get|/project/project_id/folder_id/archive_id|View Archive Page|
+|23|Put|/project/project_id/timeline|Edit Timeline|
+|24|Get|/project/project_id/timeline|View Timeline|
+|25|Put|/project/project_id/glossary|Edit Glossary|
+|26|Get|/project/project_id/glossary|View Glossary|
 |27|Put|/project/project_id/story|Edit Story|
 |29|Get|/project/project_id/story|View Story|
 |30|Get|/public/project_id/wiki-elements|View the selected wiki elements|
 |31|Get|/public/all-projects|View all the projects|
 |32|Get|/public/all-projects/?query|Query selector projects|
 ​
-​
-​
+
 **Proceso hasta ahora.**
  
 **Pendientes.**
