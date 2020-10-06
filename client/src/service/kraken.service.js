@@ -4,10 +4,12 @@ export default class KrakenService {
 
     constructor() {
         this.api = axios.create({
+            // baseURLLocal: 'http://localhost:5000/api/auth',
+            baseURL: process.env.REACT_APP_API_URL,
             baseURL: 'http://localhost:5000/api/kraken',
             withCredentials: true
         })
     }
 
-    getProject = () => this.api.get('/project/5f7affe663dd150402a5a331')
+    getProject = () => this.api.get('/kraken/project/5f7affe663dd150402a5a331')
 }
