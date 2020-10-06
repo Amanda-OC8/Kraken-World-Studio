@@ -10,6 +10,7 @@ router.post('/signup', (req, res, next) => {
 
     const username = req.body.username;
     const password = req.body.password;
+    const email = req.body.email
 
     if (!username || !password) {
         res.status(400).json({ message: 'Empty fields' });
@@ -38,7 +39,8 @@ router.post('/signup', (req, res, next) => {
 
         const aNewUser = new User({
             username: username,
-            password: hashPass
+            password: hashPass,
+            email: email
         });
 
         aNewUser.save(err => {

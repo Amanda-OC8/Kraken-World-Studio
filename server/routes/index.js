@@ -1,6 +1,6 @@
 module.exports = app => {
 
     // Base URLS
-    // app.use('/api', require('./kraken.routes.js'))
-    app.use('/api', require('./auth.routes.js'))
+    app.use('/api/auth', require('./auth.routes.js'))
+    app.use('/api/kraken', require('./kraken.routes.js'))
 }
