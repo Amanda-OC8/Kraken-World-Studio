@@ -7,7 +7,6 @@ import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 
 import authService from '../../../service/auth.service'
-import krakenService from '../../../service/project.service'
 
 
 class Login extends Component {

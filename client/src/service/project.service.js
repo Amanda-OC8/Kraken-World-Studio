@@ -14,5 +14,6 @@ export default class ProjectService {
     newProject = project => this.appi.post('/kraken/project/new', project)
     editProject = (id, project) => this.api.put(`/kraken/project/${id}/edit`, project)
     deleteProject = id => this.api.delete(`/kraken/project/${id}/delete`)
+    getAllProjects = () => this.api.get('kraken/all-projects')
 
 }

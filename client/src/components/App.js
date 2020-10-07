@@ -14,6 +14,8 @@ import profileService from './../service/profile.service'
 
 import './App.css'
 import Welcome from './pages/welcome/Welcome'
+import Testing from './Testing'
+
 
 class App extends Component {
 
@@ -48,6 +50,9 @@ class App extends Component {
           <Welcome />
           <Route path="/login" render={props => <Login setTheUser={this.setTheUser} {...props} />} />
           <Route path="/profile" render={props => <Profile theUser={this.state.loggedInUser} {...props} />} />
+          <Route path="/testing" render={props => <Testing theUser={this.state.loggedInUser} {...props} />} />
+
+
         </>
       
       );
@@ -55,9 +60,11 @@ class App extends Component {
       return (
 
       <>
-        <NavBar />
+        <NavBar setTheUser={this.setTheUser} loggedInUser={this.state.loggedInUser}/>
         <Route path="/login" render={props => <Login setTheUser={this.setTheUser} {...props} />} />
         <Route path="/profile" render={props => <Profile theUser={this.state.loggedInUser} {...props} />} />
+        <Route path="/testing" render={props => <Testing theUser={this.state.loggedInUser} {...props} />} />
+
         </>
       );
 

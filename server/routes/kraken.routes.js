@@ -66,6 +66,22 @@ router.delete('/project/:project_id/delete', (req, res) => {
 })
 
 //Endpoints Character
+
+router.get('/project/:project_id/allcharacters', (req, res) => {
+
+    Character.find()
+        .populate({
+            path: "originProject",
+            match: { _id: req.params.project_id },
+            select: "title genre"
+        })
+        .then(response => {
+           let filterResponse = response.filter(elm => elm.originProject != null)
+            res.json(filterResponse)
+        })
+        .catch(err => res.status(500).json(err))
+})
+
 router.get('/project/:project_id/:character_id', (req, res) => {
 
     Character.findById(req.params.character_id)
@@ -296,16 +312,16 @@ router.delete('/project/:project_id/:character_id/delete', (req, res) => {
 
 // })
 
-// // Endpoint Public view projects
+// Endpoint Public view projects
 
-// router.get('/all-projects', (req, res) => {
+router.get('/all-projects', (req, res) => {
 
     
-//    Project.find({proyeccion})
-//         .then(response => res.json(response))
-//         .catch(err => res.status(500).json(err))
+   Project.find()
+        .then(response => res.json(response))
+        .catch(err => res.status(500).json(err))
 
-// })
+})
 
 // router.get('/all-projects/results', (req, res) => {
 
