@@ -3,10 +3,13 @@ import { Switch, Route, Redirect } from 'react-router-dom'
 
 import Login from './pages/login/Login'
 import Signup from './pages/signup/Signup'
+import Profile from './pages/profile/Profile'
 import NavBar from './layout/navbar/NavBar'
 
 import authService from './../service/auth.service'
-import krakenService from './../service/kraken.service'
+import projectService from './../service/project.service'
+import profileService from './../service/profile.service'
+
 
 
 import './App.css'
@@ -20,7 +23,9 @@ class App extends Component {
       loggedInUser: undefined
     }
     this.authService = new authService()
-    this.krakenService = new krakenService()
+    this.projectService = new projectService()
+    this.profileService = new profileService()
+
   }
   componentDidMount = () => this.fetchUser()
 
@@ -31,17 +36,32 @@ class App extends Component {
       .isLoggedIn()
       .then(response => this.setState({ loggedInUser: response.data }))
       .catch(err => this.setState({ loggedInUser: null }))
+    
   }
 
   render() {
+    
+    if(!this.state.loggedInUser){
+      return (
+        <>
+          <NavBar />
+          <Welcome />
+          <Route path="/login" render={props => <Login setTheUser={this.setTheUser} {...props} />} />
+          <Route path="/profile" render={props => <Profile theUser={this.state.loggedInUser} {...props} />} />
+        </>
+      
+      );
+    } else {
+      return (
 
-    return (
       <>
         <NavBar />
-        <Welcome />
         <Route path="/login" render={props => <Login setTheUser={this.setTheUser} {...props} />} />
-      </>
-    );
+        <Route path="/profile" render={props => <Profile theUser={this.state.loggedInUser} {...props} />} />
+        </>
+      );
+
+    }
   }
 }
 

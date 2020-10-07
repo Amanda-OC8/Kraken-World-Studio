@@ -9,14 +9,15 @@ const corsOptions = {
         console.log(whitelist, origin)
         const originIsWhitelisted = whitelist.includes(origin)
         cb(null, originIsWhitelisted)
-    }
+    }, 
+    credentials: true
 }
 
 
 
 
 module.exports = app => {
-    app.use(cors({ credentials: true, origin: whitelist }))
+    app.use(cors(corsOptions))
     app.use(logger('dev'))
     app.use(bodyParser.json())
     app.use(bodyParser.urlencoded({ extended: false }))

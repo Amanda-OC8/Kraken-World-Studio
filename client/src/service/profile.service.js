@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-export default class KrakenService {
+export default class ProjectService {
 
     constructor() {
         this.api = axios.create({
@@ -10,5 +10,6 @@ export default class KrakenService {
         })
     }
 
-    getProject = () => this.api.get('/kraken/project/5f7affe663dd150402a5a331')
+    getProfile = () => this.api.get(`/kraken/profile`)
+    editProfile = profile => this.appi.put(`/kraken/profile/edit`, profile)
 }

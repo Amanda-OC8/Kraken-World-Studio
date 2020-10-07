@@ -22,14 +22,7 @@ router.get('/profile', (req, res) => {
         
 })
 
-router.post('/profile/new', (req, res) => {
 
-  
-    User.create(req.body)
-        .then(response => res.json(response))
-        .catch(err => res.status(500).json(err))
-
-})
 
 router.put('/profile/edit', (req, res) => {
 
@@ -81,15 +74,6 @@ router.get('/project/:project_id/:character_id', (req, res) => {
         .catch(err => res.status(500).json(err))
 })
 
-router.put('/project/:project_id/:character_id/edit', (req, res) => {
-    const { name, surname, genre, age, background, rolHistory, occupation, physicalDescription, personality, habits, notes, isPublic } = req.body
-    
-    Character.findByIdAndUpdate(req.params.character_id, { name, surname, genre, age, background, rolHistory, occupation, physicalDescription, personality, habits, notes, isPublic, OriginProject: req.params.project_id  })
-        .then(response => res.json(response))
-        .catch(err => res.status(500).json(err))
-   
-})
-
 router.post('/project/:project_id/character/new', (req, res) => {
     
     const { name, surname, genre, age, background, rolHistory, occupation, physicalDescription, personality, habits, notes, isPublic } = req.body
@@ -99,6 +83,15 @@ router.post('/project/:project_id/character/new', (req, res) => {
         .catch(err => res.status(500).json(err))
 
 })
+router.put('/project/:project_id/:character_id/edit', (req, res) => {
+    const { name, surname, genre, age, background, rolHistory, occupation, physicalDescription, personality, habits, notes, isPublic } = req.body
+    
+    Character.findByIdAndUpdate(req.params.character_id, { name, surname, genre, age, background, rolHistory, occupation, physicalDescription, personality, habits, notes, isPublic, OriginProject: req.params.project_id  })
+        .then(response => res.json(response))
+        .catch(err => res.status(500).json(err))
+   
+})
+
 
 router.delete('/project/:project_id/:character_id/delete', (req, res) => {
 
