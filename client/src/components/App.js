@@ -3,12 +3,14 @@ import { Switch, Route, Redirect } from 'react-router-dom'
 
 import Login from './pages/login/Login'
 import Signup from './pages/signup/Signup'
+import NavBar from './layout/navbar/NavBar'
 
 import authService from './../service/auth.service'
 import krakenService from './../service/kraken.service'
 
 
 import './App.css'
+import Welcome from './pages/welcome/Welcome'
 
 class App extends Component {
 
@@ -32,10 +34,11 @@ class App extends Component {
   }
 
   render() {
-    
+
     return (
       <>
-        <h1>Hi</h1>
+        <NavBar />
+        <Welcome />
         <Route path="/login" render={props => <Login setTheUser={this.setTheUser} {...props} />} />
       </>
     );

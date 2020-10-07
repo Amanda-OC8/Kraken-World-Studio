@@ -8,3 +8,9 @@ body {
 h1 {
     margin-bottom: 30px;
 }
+
+
+.hero-logo{
+    width: 40%;
+    background-color: rgb(48, 48, 48);
+}
