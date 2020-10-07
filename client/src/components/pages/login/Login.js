@@ -17,7 +17,7 @@ class Login extends Component {
             password: ''
         }
         this.authService = new authService()
-        
+
     }
 
     handleInputChange = e => {
@@ -28,7 +28,7 @@ class Login extends Component {
     handleFormSubmit = e => {
 
         e.preventDefault()
-        
+
         this.authService
             .login(this.state)
             .then(response => {
@@ -40,14 +40,13 @@ class Login extends Component {
 
 
     render() {
-        
+
         return (
 
             <Container>
                 <main>
                     <Row className="justify-content-center">
                         <Col md={{ span: 5 }}>
-                            <h1>Inicio de sesión</h1>
                             <Form onSubmit={this.handleFormSubmit}>
                                 <Form.Group>
                                     <Form.Label>Nombre de usuario</Form.Label>
