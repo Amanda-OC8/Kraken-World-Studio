@@ -2,9 +2,11 @@ import React, { Component } from 'react'
 import { Switch, Route, Redirect } from 'react-router-dom'
 
 import Login from './pages/login/Login'
-import Signup from './pages/signup/Signup'
+import Signup from './pages/register/Signup'
 import Profile from './pages/profile/Profile'
 import NavBar from './layout/navbar/NavBar'
+import Footer from './layout/footer/Footer'
+import Register from './pages/register/Register'
 
 import authService from './../service/auth.service'
 import projectService from './../service/project.service'
@@ -36,28 +38,32 @@ class App extends Component {
       .isLoggedIn()
       .then(response => this.setState({ loggedInUser: response.data }))
       .catch(err => this.setState({ loggedInUser: null }))
-    
+
   }
 
   render() {
-    
-    if(!this.state.loggedInUser){
+
+    if (!this.state.loggedInUser) {
       return (
         <>
           <NavBar />
-          <Welcome />
+
+          <Route path="/" exact render={() => <Welcome />} />
+          <Route path="/register" render={() => <Register />} />
           <Route path="/login" render={props => <Login setTheUser={this.setTheUser} {...props} />} />
           <Route path="/profile" render={props => <Profile theUser={this.state.loggedInUser} {...props} />} />
+          <Footer />
         </>
-      
+
       );
     } else {
       return (
 
-      <>
-        <NavBar />
-        <Route path="/login" render={props => <Login setTheUser={this.setTheUser} {...props} />} />
-        <Route path="/profile" render={props => <Profile theUser={this.state.loggedInUser} {...props} />} />
+        <>
+          <NavBar />
+          <Route path="/login" render={props => <Login setTheUser={this.setTheUser} {...props} />} />
+          <Route path="/profile" render={props => <Profile theUser={this.state.loggedInUser} {...props} />} />
+          <Footer />
         </>
       );
 
