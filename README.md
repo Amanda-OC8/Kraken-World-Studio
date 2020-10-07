@@ -34,7 +34,7 @@
 |30|Get|/public/project_id/wiki-elements|View the selected wiki elements|
 |31|Get|/public/all-projects|View all the projects|
 |32|Get|/public/all-projects/?query|Query selector projects|
-​
+
 
 **Proceso hasta ahora.**
  
@@ -54,7 +54,7 @@
 |   └── ...
 |__
  ```
-​
+
 **Components**
 
  ```
@@ -81,7 +81,7 @@
 |   |__ ...            
 └── ...
  ```
-​
+
 **Pages**
 
  ```
@@ -126,7 +126,7 @@
 └── ... 
 
  ```
-​
+
 **Shared**
 
  ```
@@ -142,7 +142,7 @@
 
  ## Models
 
- **User model **
+ **User model**
 
  ```
  {

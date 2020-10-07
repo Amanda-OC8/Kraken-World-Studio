@@ -44,7 +44,7 @@ export default class extends Component {
                         <Link className="nav-link" to="/">Home</Link>
                         <Link className="nav-link" to="#">Explore</Link>
                         {!this.props.loggedInUser && <Link className="nav-link" to="#">Register</Link>}
-                        {!this.props.loggedInUser && <Link className="nav-link" to="#">Access</Link>}
+                        {!this.props.loggedInUser && <Link className="nav-link" to="/login">Access</Link>}
                         {this.props.loggedInUser && <div className="nav-link" onClick={this.logoutUser}>Logout</div>}
                         <Link className="nav-link" to="/profile">- Hello, {this.props.loggedInUser ? this.props.loggedInUser.username : 'little kraken'}</Link>
                     </Nav>
