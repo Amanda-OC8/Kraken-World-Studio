@@ -19,17 +19,17 @@ router.get('/profile', (req, res) => {
     Promise.all([projectPromise, userPromise])
         .then(response => res.json(response))
         .catch(err => res.status(500).json(err))
-        
+
 })
 
 
 
 router.put('/profile/edit', (req, res) => {
 
-    const {email, bio, image} = req.body
+    const { username, email, bio, image } = req.body
 
 
-    User.findByIdAndUpdate(req.user._id, { email, bio, image })
+    User.findByIdAndUpdate(req.user._id, { username, email, bio, image })
         .then(response => res.json(response))
         .catch(err => res.status(500).json(err))
 
@@ -37,7 +37,7 @@ router.put('/profile/edit', (req, res) => {
 
 //Endpoints Project
 router.get('/project/:project_id', (req, res) => {
-    
+
     Project.findById(req.params.project_id)
         .populate("owner")
         .then(response => res.json(response))
@@ -76,7 +76,7 @@ router.get('/project/:project_id/allcharacters', (req, res) => {
             select: "title genre"
         })
         .then(response => {
-           let filterResponse = response.filter(elm => elm.originProject != null)
+            let filterResponse = response.filter(elm => elm.originProject != null)
             res.json(filterResponse)
         })
         .catch(err => res.status(500).json(err))
@@ -91,7 +91,7 @@ router.get('/project/:project_id/:character_id', (req, res) => {
 })
 
 router.post('/project/:project_id/character/new', (req, res) => {
-    
+
     const { name, surname, genre, age, background, rolHistory, occupation, physicalDescription, personality, habits, notes, isPublic } = req.body
 
     Character.create({ originProject: req.params.project_id, name, surname, genre, age, background, rolHistory, occupation, physicalDescription, personality, habits, notes, isPublic })
@@ -101,11 +101,11 @@ router.post('/project/:project_id/character/new', (req, res) => {
 })
 router.put('/project/:project_id/:character_id/edit', (req, res) => {
     const { name, surname, genre, age, background, rolHistory, occupation, physicalDescription, personality, habits, notes, isPublic } = req.body
-    
-    Character.findByIdAndUpdate(req.params.character_id, { name, surname, genre, age, background, rolHistory, occupation, physicalDescription, personality, habits, notes, isPublic, OriginProject: req.params.project_id  })
+
+    Character.findByIdAndUpdate(req.params.character_id, { name, surname, genre, age, background, rolHistory, occupation, physicalDescription, personality, habits, notes, isPublic, OriginProject: req.params.project_id })
         .then(response => res.json(response))
         .catch(err => res.status(500).json(err))
-   
+
 })
 
 
@@ -192,7 +192,7 @@ router.delete('/project/:project_id/:character_id/delete', (req, res) => {
 //     // Folder.findByIdAndUpdate(folderId, { deconstruido, OriginProject: { $in: projectId }, OriginFolder: archiveId })
 //     //     .then(response => res.json(response))
 //     //     .catch(err => res.status(500).json(err))
-    
+
 // })
 
 // router.put('/project/:project_id/:folder_id/archive/new', (req, res) => {
@@ -227,8 +227,8 @@ router.delete('/project/:project_id/:character_id/delete', (req, res) => {
 // router.get('/project/:project_id/timeline', (req, res) => {
 
 //     const projectId = req.params.project_id
-   
-    
+
+
 //     Project.findById(projectId, { timeline: 1 })
 //         .then(response => res.json(response))
 //         .catch(err => res.status(500).json(err))
@@ -316,8 +316,8 @@ router.delete('/project/:project_id/:character_id/delete', (req, res) => {
 
 router.get('/all-projects', (req, res) => {
 
-    
-   Project.find()
+
+    Project.find()
         .then(response => res.json(response))
         .catch(err => res.status(500).json(err))
 
@@ -325,11 +325,11 @@ router.get('/all-projects', (req, res) => {
 
 // router.get('/all-projects/results', (req, res) => {
 
-    // const queryResults = req.query.results
-    
-    // Project.find({querys result})
-    //     .then(response => res.json(response))
-    //     .catch(err => res.status(500).json(err))
+// const queryResults = req.query.results
+
+// Project.find({querys result})
+//     .then(response => res.json(response))
+//     .catch(err => res.status(500).json(err))
 // })
 
 
