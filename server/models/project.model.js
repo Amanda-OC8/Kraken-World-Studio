@@ -22,7 +22,7 @@ const projectSchema = new Schema({
     },
     type: {
         type: String,
-        enum: ["World-Building", "Novel", "Tabletop RPG", "Video Game Script", "Movie/Series Script", "Short-Stories"],
+        enum: ["World-Building", "Novel", "Tabletop RPG", "Video Game Script","Cómic Script", "Movie/Series Script", "Short-Stories"],
         required: true,
     },
     synopsis: {

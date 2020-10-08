@@ -4,3 +4,10 @@
    text-align: center;
    margin: 15px auto;
 }
+
+.show-more {
+    color: #efc88bff;
+}
+.show-more:hover {
+    color: #E9B35D;
+}

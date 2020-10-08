@@ -36,13 +36,8 @@ class Welcome extends Component {
                         <Col className="m-auto" md={{ span: 10, offset: 1 }}><img className='hero-logo d-block mx-auto img-fluid ' src={Logo} alt="Golden Kraken"></img>
                             <h1 className='d-flex justify-content-center'>Create, Order, Write, Release the Kraken</h1>
                             <div className='d-flex justify-content-center'>
-<<<<<<< HEAD
                                 <Link to='/register' className="btn-shape btn-dark-mode-config" style={{ marginRight: 30 }}>Signup</Link>
                                 {!this.props.loggedInUser && <Button onClick={() => this.handleModal(true)} style={{ marginBottom: '20px' }} variant="dark" size="sm">Login</Button>}
-=======
-                                <Link to='/register' className="btn btn-dark btn-lg" style={{ marginRight: '30px' }}>Signup</Link>
-                                {!this.props.loggedInUser && <Button onClick={() => this.handleModal(true)} style={{ marginBottom: '20px' }} variant="dark" size="lg">Login</Button>}
->>>>>>> sergio
                             </div>
 
                         </Col>
