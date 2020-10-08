@@ -1,0 +1,8 @@
+.drop-link {
+    background:#343a40;
+ }
+
+ .dropdown-item:hover {
+     background:rgba(52, 58, 64, 0.8);
+
+ }

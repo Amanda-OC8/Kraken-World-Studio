@@ -3,6 +3,9 @@ import { Link } from 'react-router-dom'
 
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
+import Dropdown from 'react-bootstrap/Dropdown'
+
+import "./NavBar.css"
 
 import logo from './logo-nav.png'
 
@@ -45,7 +48,17 @@ export default class extends Component {
                         <Link className="nav-link" to="/testing">Explore</Link>
                         {!this.props.loggedInUser && <Link className="nav-link" to="#">Register</Link>}
                         {!this.props.loggedInUser && <Link className="nav-link" to="/login">Access</Link>}
-                        {!this.props.loggedInUser && <Link className="nav-link" to="/profile">Profile</Link>}
+                        <Dropdown>
+                            <Dropdown.Toggle variant="dark" >
+                               Proyectos
+                            </Dropdown.Toggle>
+                            <Dropdown.Menu className="drop-link">
+                                <Dropdown.Item><Link className="nav-link" to="/projects/new">Nuevo Proyecto</Link> </Dropdown.Item>
+                                <Dropdown.Item><Link className="nav-link" to="/all-projects/">Editar Proyectos</Link> </Dropdown.Item>
+                            </Dropdown.Menu>
+                        </Dropdown>
+                        
+                        <Link className="nav-link" to="/testing">testing</Link>
                         {this.props.loggedInUser && <div className="nav-link" onClick={this.logoutUser}>Logout</div>}
                         <Link className="nav-link" to="/profile">- Hello, {this.props.loggedInUser ? this.props.loggedInUser.username : 'little kraken'}</Link>
                     </Nav>
