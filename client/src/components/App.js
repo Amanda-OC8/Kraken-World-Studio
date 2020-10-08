@@ -50,7 +50,7 @@ class App extends Component {
     if (!this.state.loggedInUser) {
       return (
         <>
-          <NavBar setTheUser={this.setTheUser} loggedInUser={this.state.loggedInUser}/>
+          <NavBar setTheUser={this.setTheUser} loggedInUser={this.state.loggedInUser} />
 
           <Route path="/" exact render={() => <Welcome setTheUser={this.setTheUser} />} />
           <Route path="/register" render={() => <Register />} />
@@ -64,7 +64,7 @@ class App extends Component {
       return (
 
         <>
-          <NavBar setTheUser={this.setTheUser} loggedInUser={this.state.loggedInUser}/>
+          <NavBar setTheUser={this.setTheUser} loggedInUser={this.state.loggedInUser} />
           <Route path="/login" render={props => <Login setTheUser={this.setTheUser} {...props} />} />
           <Route path="/profile" render={props => <Profile theUser={this.state.loggedInUser} {...props} />} />
           <Route path="/projects/new" render={props => <ProjectNew theUser={this.state.loggedInUser} {...props} />} />

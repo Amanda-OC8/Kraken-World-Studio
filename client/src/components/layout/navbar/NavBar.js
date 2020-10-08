@@ -50,16 +50,16 @@ export default class extends Component {
                         {!this.props.loggedInUser && <Link className="nav-link" to="/login">Access</Link>}
                         <Dropdown>
                             <Dropdown.Toggle variant="dark" >
-                               Proyectos
+                                Proyectos
                             </Dropdown.Toggle>
                             <Dropdown.Menu className="drop-link">
                                 <Dropdown.Item><Link className="nav-link" to="/projects/new">Nuevo Proyecto</Link> </Dropdown.Item>
                                 <Dropdown.Item><Link className="nav-link" to="/all-projects/">Todos tus Proyectos</Link> </Dropdown.Item>
                             </Dropdown.Menu>
                         </Dropdown>
-                        
+
                         <Link className="nav-link" to="/testing">testing</Link>
-                        {this.props.loggedInUser && <div className="nav-link" onClick={this.logoutUser}>Logout</div>}
+                        {this.props.loggedInUser && <Link className="nav-link" onClick={this.logoutUser}>Logout</Link>}
                         <Link className="nav-link" to="/profile">- Hello, {this.props.loggedInUser ? this.props.loggedInUser.username : 'little kraken'}</Link>
                     </Nav>
                 </Navbar.Collapse>
