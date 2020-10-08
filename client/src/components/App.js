@@ -50,7 +50,7 @@ class App extends Component {
         <>
           <NavBar />
 
-          <Route path="/" exact render={() => <Welcome />} />
+          <Route path="/" exact render={() => <Welcome setTheUser={this.setTheUser} />} />
           <Route path="/register" render={() => <Register />} />
           <Route path="/login" render={props => <Login setTheUser={this.setTheUser} {...props} />} />
           <Route path="/profile" render={props => <Profile theUser={this.state.loggedInUser} {...props} />} />
