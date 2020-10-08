@@ -54,7 +54,7 @@ export default class extends Component {
                             </Dropdown.Toggle>
                             <Dropdown.Menu className="drop-link">
                                 <Dropdown.Item><Link className="nav-link" to="/projects/new">Nuevo Proyecto</Link> </Dropdown.Item>
-                                <Dropdown.Item><Link className="nav-link" to="/all-projects/">Editar Proyectos</Link> </Dropdown.Item>
+                                <Dropdown.Item><Link className="nav-link" to="/all-projects/">Todos tus Proyectos</Link> </Dropdown.Item>
                             </Dropdown.Menu>
                         </Dropdown>
                         

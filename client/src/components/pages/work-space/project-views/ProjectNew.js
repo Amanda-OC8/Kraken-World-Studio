@@ -16,6 +16,7 @@ class ProjectNew extends Component {
             genre: "",
             tagLines: [],
             type: "",
+            synopsis:"",
             owner: props.theUser._id,
             isPublic: false,
         }
@@ -50,6 +51,7 @@ class ProjectNew extends Component {
             genre: "",
             tagLines: [],
             type: "",
+            synopsis: "",
             owner: this.props.theUser._id,
             isPublic: false,
         })
@@ -60,7 +62,7 @@ class ProjectNew extends Component {
         return (
             <Container>
                 <Row className="justify-content-center">
-                    <Col md={{ span: 5 }}>
+                    <Col md={{ span: 8 }}>
                         <Form onSubmit={this.handleFormSubmit}>
                             <Form.Group>
                                 <Form.Label>Nombre del Proyecto*</Form.Label>
@@ -85,6 +87,12 @@ class ProjectNew extends Component {
                                 <Form.Control required as="select" custom name="type" value={this.state.type} onChange={this.handleInputChange}>
                                     <option>---Selecciona</option>
                                     {this.typeList.map(elm => <option value={elm} > {elm} </option>)}
+                                </Form.Control>
+                            </Form.Group>
+
+                            <Form.Group>
+                                <Form.Label>Sinopsis o resumen*</Form.Label>
+                                <Form.Control required as="textarea" rows="5"  name="synopsis" value={this.state.synopsis} onChange={this.handleInputChange}>
                                 </Form.Control>
                             </Form.Group>
 

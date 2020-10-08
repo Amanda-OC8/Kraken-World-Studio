@@ -25,6 +25,10 @@ const projectSchema = new Schema({
         enum: ["World-Building", "Novel", "Tabletop RPG", "Video Game Script", "Movie/Series Script", "Short-Stories"],
         required: true,
     },
+    synopsis: {
+        type: String,
+        required: true,
+    },
     owner: {
         type: Schema.Types.ObjectId,
         ref: "User",
