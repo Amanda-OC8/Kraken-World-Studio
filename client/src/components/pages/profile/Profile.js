@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom'
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
 import ProfileEdit from './ProfileEdit'
+import profileService from '../../../service/profile.service'
 
 import ProfileService from "../../../service/profile.service"
 import ProjectCard from "../../shared/cards/ProjectCard"
@@ -35,13 +36,25 @@ class Profile extends Component {
 
 
     handleModal = showModal => {
-        console.log(this.setState.showModal, showModal)
         this.setState({ showModal })
     }
 
-    render() {
+    componentDidMount = () => this.loadProfile()
 
+    loadProfile = () => {
+        console.log('holiii')
+        this.profileService
+            .getProfile()
+            .then(response => this.setState({ profile: response.data }))
+
+            .catch(err => console.log('Error:', err))
+    }
+
+
+    render() {
+        console.log(this.profileService)
         return (
+
             <>
                 <Container>
                     <h1>Estás en tu perfil {this.props.theUser.username}</h1>
@@ -49,7 +62,9 @@ class Profile extends Component {
 
                 <Container>
 
-                    <h3>Tu información</h3>
+                    <h3>
+                        Tu información
+                        </h3>
                     <p>Tu usuario es:{this.props.theUser.username}</p>
                     <p>Tu correo es: {this.props.theUser.email}</p>
                     <p>Tu bio:{this.props.theUser.bio}</p>
@@ -70,7 +85,7 @@ class Profile extends Component {
                         <Modal.Title>Editar perfil</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        <ProfileEdit closeModal={() => this.handleModal(false)} />
+                        <ProfileEdit closeModal={() => this.handleModal(false)} refreshList={this.loadProfile} />
                     </Modal.Body>
                 </Modal>
             </>

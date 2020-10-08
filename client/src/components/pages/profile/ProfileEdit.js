@@ -31,14 +31,14 @@ class ProfileEdit extends Component {
                 this.props.closeModal()
                 this.props.refreshList()
             })
-            .catch(err => console.log('Erroro!!', { err }))
+            .catch(err => console.log('Error!!', { err }))
     }
 
 
 
 
     render() {
-
+        console.log(this.state.username)
         return (
 
             <Form onSubmit={this.handleFormSubmit}>

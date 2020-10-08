@@ -67,7 +67,7 @@ class App extends Component {
       return (
 
         <>
-          <NavBar setTheUser={this.setTheUser} loggedInUser={this.state.loggedInUser}/>
+          <NavBar setTheUser={this.setTheUser} loggedInUser={this.state.loggedInUser} />
           <Route path="/login" render={props => <Login setTheUser={this.setTheUser} {...props} />} />
           <Route path="/profile" render={props => <Profile theUser={this.state.loggedInUser} {...props} />} />
           <Route path="/all-projects" render={props => <AllProjects theUser={this.state.loggedInUser} {...props} />} />
