@@ -1,27 +1,71 @@
-import React from 'react'
-
+import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 
 import Col from 'react-bootstrap/Col'
 import Card from 'react-bootstrap/Card'
-import Button from 'react-bootstrap/Button'
+import NavLink from 'react-bootstrap/NavLink'
+import Collapse from 'react-bootstrap/Collapse'
 import "./ProjectCard.css"
+import "../buttons/button.css"
 
 
 
-const ProjectCard = (props) => {
-    return (
+class ProjectCard extends Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            showMore: false,
+            synopsis: this.props.synopsis
+        }
+    }
 
+    showMoreText = () => this.setState({ showMore: !this.state.showMore })
+
+    render() {
+
+
+        if (this.state.synopsis.length > 100) {
+            let shortSynopsis = this.state.synopsis.slice(0, 100)
+            return (
                 <Col md={{ span: 4 }} className="justifiy-content-center">
                     <Card className="dark-mode">
                         <Card.Body >
-                            <Card.Title>{props.title}</Card.Title>
-                            <Card.Text> {props.synopsis} </Card.Text>
-                            <Button variant="primary">Detalles</Button>
+                            <Card.Title><h3>{this.props.title}</h3></Card.Title>
+
+                            <Card.Text>
+                                <Collapse in={!this.state.showMore}><div>{shortSynopsis}</div></Collapse>
+
+                                {!this.state.showMore && <NavLink onClick={this.showMoreText} className="show-more">Leer la sinopsis completa </NavLink>}
+                                {this.state.showMore && <NavLink onClick={this.showMoreText} className="show-more">Leer menos </NavLink>}
+
+                                <Collapse in={this.state.showMore}>
+                                    <div>{this.state.synopsis}</div>
+                                </Collapse>
+
+                            </Card.Text>
+                            <Link className="btn-shape btn-dark-mode-config" to={`/projects/${this.props.id}/details`}>Detalles</Link>
                         </Card.Body>
                     </Card>
                 </Col>
+            )
 
-    )
+        } else {
+
+            return (
+                <Col md={{ span: 4 }} className="justifiy-content-center">
+                    <Card className="dark-mode">
+                        <Card.Body >
+                            <Card.Title><h3>{this.props.title}</h3></Card.Title>
+                            <Card.Text>{this.state.synopsis}</Card.Text>
+                            <Link className="btn-shape btn-dark-mode-config" to={`/projects/${this.props.id}/details`}>Detalles</Link>
+                        </Card.Body>
+                    </Card>
+                </Col>
+            )
+
+        }
+
+    }
 }
-
 export default ProjectCard
+

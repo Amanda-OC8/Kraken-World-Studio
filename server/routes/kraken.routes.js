@@ -22,8 +22,6 @@ router.get('/profile', (req, res) => {
 
 })
 
-
-
 router.put('/profile/edit', (req, res) => {
 
     const { username, email, bio, image } = req.body
@@ -33,6 +31,19 @@ router.put('/profile/edit', (req, res) => {
         .then(response => res.json(response))
         .catch(err => res.status(500).json(err))
 
+})
+
+router.get('/own-projects', (req, res) => {
+
+    Project.find()
+        .populate({
+            path: "owner",
+            match: { _id: req.user._id }
+        })
+        .then(response => {
+            let filterResponse = response.filter(elm => elm.owner != null)
+            res.json(filterResponse)
+        })
 })
 
 //Endpoints Project

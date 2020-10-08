@@ -19,6 +19,8 @@ import Welcome from './pages/welcome/Welcome'
 import ProjectNew from './pages/work-space/project-views/ProjectNew'
 import Testing from './Testing'
 import AllProjects from './pages/work-space/project-views/AllProjects'
+import ProjectDetails from './pages/work-space/project-views/ProjectDetails'
+
 
 
 class App extends Component {
@@ -68,9 +70,11 @@ class App extends Component {
           <NavBar setTheUser={this.setTheUser} loggedInUser={this.state.loggedInUser}/>
           <Route path="/login" render={props => <Login setTheUser={this.setTheUser} {...props} />} />
           <Route path="/profile" render={props => <Profile theUser={this.state.loggedInUser} {...props} />} />
-          <Route path="/projects/new" render={props => <ProjectNew theUser={this.state.loggedInUser} {...props} />} />
           <Route path="/all-projects" render={props => <AllProjects theUser={this.state.loggedInUser} {...props} />} />
+          <Route path="/projects/:project_id/details" render={props => <ProjectDetails {...props} />} />
+          <Route path="/projects/new" render={props => <ProjectNew theUser={this.state.loggedInUser} {...props} />} />
           <Route path="/testing" render={props => <Testing theUser={this.state.loggedInUser} {...props} />} />
+
           <Footer />
         </>
       );
