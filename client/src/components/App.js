@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Switch, Route, Redirect } from 'react-router-dom'
 
 import Login from './pages/login/Login'
-import Signup from './pages/register/Signup'
+// import Signup from './pages/register/Signup'
 import Profile from './pages/profile/Profile'
 import NavBar from './layout/navbar/NavBar'
 import Footer from './layout/footer/Footer'
@@ -16,7 +16,7 @@ import profileService from './../service/profile.service'
 
 import './App.css'
 import Welcome from './pages/welcome/Welcome'
-import Testing from './Testing'
+// import Testing from './Testing'
 
 
 class App extends Component {

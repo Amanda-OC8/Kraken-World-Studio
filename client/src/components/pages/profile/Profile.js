@@ -9,7 +9,7 @@ const Profile = props => {
 
     return (
         <Container>
-            {/* <h1>Soy el perfil de  {props.theUser.username}</h1> */}
+            <h1>Soy el perfil de {props.theUser.username}</h1>
         </Container>
     )
 }
