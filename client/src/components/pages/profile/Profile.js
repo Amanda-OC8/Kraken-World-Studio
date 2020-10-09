@@ -78,7 +78,7 @@ class Profile extends Component {
                     <h3>Tus proyectos</h3>
 
                     <Row className="justify-content-md-center">
-                        {this.state.ownProjects.map(elm => <ProjectCard key={elm._id} title={elm.title} synopsis={elm.synopsis} id={elm._id} />)}
+                        {this.state.ownProjects.map(elm => <ProjectCard key={elm._id} author={elm.owner.username} title={elm.title} synopsis={elm.synopsis} id={elm._id} />)}
                     </Row>
                 </Container>
 

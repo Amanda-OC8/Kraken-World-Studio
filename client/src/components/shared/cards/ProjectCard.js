@@ -22,10 +22,41 @@ class ProjectCard extends Component {
     showMoreText = () => this.setState({ showMore: !this.state.showMore })
 
     render() {
-    
+        console.log(this.props)
+        let shortSynopsis = this.state.synopsis.slice(0, 100)
+        return (
+            <Col md={{ span: 4 }} className="justifiy-content-center">
+                <Card className="dark-mode">
+                    <Card.Body >
+                        <Card.Title>
+                            <h3>{this.props.title}</h3>
+                            <hr></hr>
+                            <h5>Responsable: {this.props.author}</h5>
+                        </Card.Title>
+                        {this.state.synopsis.length > 100 ? (
+                            <Card.Text>
+                                <Collapse in={!this.state.showMore}><span>{shortSynopsis}</span></Collapse>
 
-        if (this.state.synopsis.length > 100) {
-            let shortSynopsis = this.state.synopsis.slice(0, 100)
+                                {!this.state.showMore && <NavLink onClick={this.showMoreText} className="show-more">Leer la sinopsis completa </NavLink>}
+                                {this.state.showMore && <NavLink onClick={this.showMoreText} className="show-more">Leer menos </NavLink>}
+
+                                <Collapse in={this.state.showMore}>
+                                    <span>{this.state.synopsis}</span>
+                                </Collapse>
+
+                            </Card.Text>
+                        ) : (<Card.Text>{this.state.synopsis}</Card.Text>)
+                        }
+
+                      
+                        <Link className="btn-shape btn-dark-mode-config" to={`/projects/${this.props.id}/details`}>Detalles</Link>
+                    </Card.Body>
+                </Card>
+            </Col>
+        );
+
+        /*if (this.state.synopsis.length > 100) {
+            
             return (
                 <Col md={{ span: 4 }} className="justifiy-content-center">
                     <Card className="dark-mode">
@@ -72,7 +103,7 @@ class ProjectCard extends Component {
                 </Col>
             )
 
-        }
+        }*/
 
     }
 }
