@@ -34,6 +34,7 @@
 |30|Get|/public/project_id/wiki-elements|View the selected wiki elements|
 |31|Get|/public/all-projects|View all the projects|
 |32|Get|/public/all-projects/?query|Query selector projects|
+|33|Get|/own-projects| View own projects|
 
 
 **Proceso hasta ahora.**
