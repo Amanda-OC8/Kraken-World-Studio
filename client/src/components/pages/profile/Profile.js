@@ -4,11 +4,11 @@ import React, { Component } from 'react'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 
-import { Link } from 'react-router-dom'
+
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
 import ProfileEdit from './ProfileEdit'
-import profileService from '../../../service/profile.service'
+
 
 import ProfileService from "../../../service/profile.service"
 import ProjectCard from "../../shared/cards/ProjectCard"
@@ -25,7 +25,10 @@ class Profile extends Component {
         this.profileService = new ProfileService()
     }
 
-    componentDidMount = () => this.loadOwnProjects()
+    componentDidMount = () => {
+        this.loadProfile()
+        this.loadOwnProjects()
+    }
 
     loadOwnProjects = () => {
         this.profileService
@@ -39,20 +42,19 @@ class Profile extends Component {
         this.setState({ showModal })
     }
 
-    componentDidMount = () => this.loadProfile()
+  
 
     loadProfile = () => {
-        console.log('holiii')
+        
         this.profileService
             .getProfile()
             .then(response => this.setState({ profile: response.data }))
-
             .catch(err => console.log('Error:', err))
     }
 
 
     render() {
-        console.log(this.profileService)
+        
         return (
 
             <>

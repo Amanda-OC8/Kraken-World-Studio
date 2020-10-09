@@ -329,6 +329,7 @@ router.get('/all-projects', (req, res) => {
 
 
     Project.find()
+        .populate("owner")
         .then(response => res.json(response))
         .catch(err => res.status(500).json(err))
 

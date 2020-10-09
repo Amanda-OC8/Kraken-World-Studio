@@ -26,3 +26,24 @@
     color:#505739;
     text-decoration:none;
 }
+
+
+.btn-dark-mode-secondary {
+    box-shadow: 2px 2px 4px 0px #1c1b18;
+	background:linear-gradient(to bottom, #78756F 5%, #3F3D43 100%);
+	background-color:#78756F;
+	border:2px solid #050517;
+	color:#f4e3b2ff;
+	text-shadow:0px 1px 6px#eae4c6ff;
+}
+
+.btn-dark-mode-secondary:hover {
+    background:linear-gradient(to bottom, #3F3D43 5%, #78756F 100%);
+    background-color:#3F3D43;
+    color:#f4e3b2ff;
+    text-decoration:none;
+}
+
+btn-link {
+	padding: 0;
+}

@@ -30,7 +30,7 @@ class AllProjects extends Component {
 
             <Container>
                 <Row className="justify-content-md-center">
-                    {this.state.projects.map(elm => <ProjectCard key={elm._id} title={elm.title} synopsis={elm.synopsis} id={elm._id} />)}
+                    {this.state.projects.map(elm => <ProjectCard key={elm._id} author={elm.owner.username} title={elm.title} synopsis={elm.synopsis} id={elm._id} />)}
                 </Row>
             </Container>
 

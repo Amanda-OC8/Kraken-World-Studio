@@ -63,6 +63,8 @@ class ProjectNew extends Component {
             <Container>
                 <Row className="justify-content-center">
                     <Col md={{ span: 8 }}>
+                        <h2>Nuevo proyecto</h2>
+                        <h5>Los campos con asterticos con obligatorios</h5>
                         <Form onSubmit={this.handleFormSubmit}>
                             <Form.Group>
                                 <Form.Label>Nombre del Proyecto*</Form.Label>
@@ -73,7 +75,7 @@ class ProjectNew extends Component {
                                 <Form.Label>Género*</Form.Label>
                                 <Form.Control required as="select" custom name="genre" value={this.state.genre} onChange={this.handleInputChange}>
                                     <option>---Selecciona</option>
-                                    {this.genreList.map(elm => <option value={elm} > {elm} </option>)}
+                                    {this.genreList.map((elm, index) => <option key={index} value={elm}> {elm} </option>)}
                                 </Form.Control>
                             </Form.Group>
 
@@ -86,7 +88,7 @@ class ProjectNew extends Component {
                                 <Form.Label>Tipo de proyecto*</Form.Label>
                                 <Form.Control required as="select" custom name="type" value={this.state.type} onChange={this.handleInputChange}>
                                     <option>---Selecciona</option>
-                                    {this.typeList.map(elm => <option value={elm} > {elm} </option>)}
+                                    {this.typeList.map((elm, index) => <option key={index} value={elm} > {elm} </option>)}
                                 </Form.Control>
                             </Form.Group>
 

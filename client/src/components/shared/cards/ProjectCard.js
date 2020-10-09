@@ -22,7 +22,7 @@ class ProjectCard extends Component {
     showMoreText = () => this.setState({ showMore: !this.state.showMore })
 
     render() {
-
+    
 
         if (this.state.synopsis.length > 100) {
             let shortSynopsis = this.state.synopsis.slice(0, 100)
@@ -30,16 +30,21 @@ class ProjectCard extends Component {
                 <Col md={{ span: 4 }} className="justifiy-content-center">
                     <Card className="dark-mode">
                         <Card.Body >
-                            <Card.Title><h3>{this.props.title}</h3></Card.Title>
+                            <Card.Title>
+                                <h3>{this.props.title}</h3>
+                                <hr></hr>
+                                <h5>Responsable: {this.props.author}</h5>
+                            </Card.Title>
+
 
                             <Card.Text>
-                                <Collapse in={!this.state.showMore}><div>{shortSynopsis}</div></Collapse>
+                                <Collapse in={!this.state.showMore}><span>{shortSynopsis}</span></Collapse>
 
                                 {!this.state.showMore && <NavLink onClick={this.showMoreText} className="show-more">Leer la sinopsis completa </NavLink>}
                                 {this.state.showMore && <NavLink onClick={this.showMoreText} className="show-more">Leer menos </NavLink>}
 
                                 <Collapse in={this.state.showMore}>
-                                    <div>{this.state.synopsis}</div>
+                                    <span>{this.state.synopsis}</span>
                                 </Collapse>
 
                             </Card.Text>
@@ -55,7 +60,11 @@ class ProjectCard extends Component {
                 <Col md={{ span: 4 }} className="justifiy-content-center">
                     <Card className="dark-mode">
                         <Card.Body >
-                            <Card.Title><h3>{this.props.title}</h3></Card.Title>
+                            <Card.Title>
+                                <h3>{this.props.title}</h3>
+                                <hr></hr>
+                                <h5>Responsable: {this.props.author}</h5>
+                            </Card.Title>
                             <Card.Text>{this.state.synopsis}</Card.Text>
                             <Link className="btn-shape btn-dark-mode-config" to={`/projects/${this.props.id}/details`}>Detalles</Link>
                         </Card.Body>
