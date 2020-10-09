@@ -8,8 +8,6 @@ import Collapse from 'react-bootstrap/Collapse'
 import "./ProjectCard.css"
 import "../buttons/button.css"
 
-
-
 class ProjectCard extends Component {
     constructor(props) {
         super(props)
