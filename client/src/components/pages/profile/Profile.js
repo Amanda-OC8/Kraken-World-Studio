@@ -14,15 +14,25 @@ import ProfileService from "../../../service/profile.service"
 import ProjectCard from "../../shared/cards/ProjectCard"
 
 
+import '../../App.css'
+import '../modal/Modal.css'
+
 class Profile extends Component {
 
     constructor(props) {
         super(props)
         this.state = {
+            profile: {},
             showModal: false,
             ownProjects: []
         }
         this.profileService = new ProfileService()
+    }
+
+
+
+    handleModal = showModal => {
+        this.setState({ showModal })
     }
 
     componentDidMount = () => {
@@ -30,31 +40,28 @@ class Profile extends Component {
         this.loadOwnProjects()
     }
 
+    loadProfile = () => {
+
+        this.profileService
+            .getProfile()
+            .then(response => {
+                console.log(response.data[1])
+                this.setState({ ...this.state, profile: response.data[1] }, () => {
+                    this.loadOwnProjects()
+                })
+            })
+
+            .catch(err => console.log('Error:', err))
+    }
+
     loadOwnProjects = () => {
         this.profileService
             .getOwnProjects()
-            .then(response => this.setState({ ownProjects: response.data }))
+            .then(response => this.setState({ ...this.state, ownProjects: response.data }))
             .catch(err => console.log('Error:', err))
     }
-
-
-    handleModal = showModal => {
-        this.setState({ showModal })
-    }
-
-  
-
-    loadProfile = () => {
-        
-        this.profileService
-            .getProfile()
-            .then(response => this.setState({ profile: response.data }))
-            .catch(err => console.log('Error:', err))
-    }
-
 
     render() {
-        
         return (
 
             <>
