@@ -49,10 +49,22 @@ main {
 
 .drop-link {
     background:#343a40;
-
  }
 
  .dropdown-item:hover {
-     background:rgba(52, 58, 64, 0.8);
+    background:rgba(52, 58, 64, 0.8);
 
  } 
+
+ .link-drop {
+     color: white
+ }
+ 
+ .link-drop:hover {
+     color: rgba(255, 255, 255, 0.8)
+ }
+
+ .warning-drop {
+    background: red;
+    border-radius: 5px;
+ }
