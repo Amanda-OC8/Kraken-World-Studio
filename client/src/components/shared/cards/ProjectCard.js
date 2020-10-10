@@ -36,7 +36,6 @@ class ProjectCard extends Component {
                                 <h5>Responsable: {this.props.author}</h5>
                             </Card.Title>
 
-
                             <Card.Text>
                                 <Collapse in={!this.state.showMore}><span>{shortSynopsis}</span></Collapse>
 
