@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 
+
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import profileService from '../../../service/profile.service'
@@ -62,7 +63,7 @@ class ProfileEdit extends Component {
                     <Form.Control type="text" name="image" onChange={this.handleInputChange} />
                 </Form.Group>
 
-                <Button variant="dark" type="submit">Editar</Button>
+                <Button className='btn-shape btn-dark-mode-config' type="submit">Editar</Button>
             </Form>
         )
     }

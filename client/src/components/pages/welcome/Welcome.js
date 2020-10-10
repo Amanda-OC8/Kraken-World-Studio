@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Redirect } from 'react-router-dom'
 
 import { Link } from 'react-router-dom'
 import Logo from './logo-kraken-sfondo.png'
@@ -24,10 +25,7 @@ class Welcome extends Component {
         }
     }
 
-    handleModal = showModal => {
-        console.log(this.setState.showModal, showModal)
-        this.setState({ showModal })
-    }
+    handleModal = showModal => { this.setState({ showModal }) }
 
     render() {
 
@@ -38,8 +36,8 @@ class Welcome extends Component {
                         <Col className="m-auto" md={{ span: 10, offset: 1 }}><img className='hero-logo d-block mx-auto img-fluid ' src={Logo} alt="Golden Kraken"></img>
                             <h1 className='d-flex justify-content-center'>Create, Order, Write, Release the Kraken</h1>
                             <div className='d-flex justify-content-center'>
-                                <Link to='/register' className="btn-link btn-shape btn-dark-mode-config" style={{ marginRight: "30px" }}>Signup</Link>
-                                {!this.props.loggedInUser && <Button className="btn-shape btn-dark-mode-secondary" onClick={() => this.handleModal(true)} style={{ marginBottom: '20px' }} variant="dark" size="sm">Login</Button>}
+                                <Link to='/register' className="btn-link btn-shape btn-dark-mode-config" >Signup</Link>
+                                {!this.props.loggedInUser && <Button className="btn-shape btn-dark-mode-secondary" onClick={() => this.handleModal(true)} variant="dark" size="sm">Login</Button>}
                             </div>
 
                         </Col>

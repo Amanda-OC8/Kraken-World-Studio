@@ -33,7 +33,7 @@ class Login extends Component {
             .login(this.state)
             .then(response => {
                 this.props.setTheUser(response.data)
-                this.props.history.push('/')
+                this.props.history.push('/profile')
             })
             .catch(err => console.log('Error:', { err }))
     }

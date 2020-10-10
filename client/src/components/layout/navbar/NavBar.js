@@ -37,7 +37,7 @@ export default class extends Component {
                             height="55"
                             className="d-inline-block align-top"
                         />
-                </Navbar.Brand>
+                    </Navbar.Brand>
                 </Link>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">

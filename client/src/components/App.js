@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Switch, Route, Redirect } from 'react-router-dom'
+import { Switch, Route } from 'react-router-dom'
 
 import Login from './pages/login/Login'
 // import Signup from './pages/register/Signup'
@@ -69,6 +69,7 @@ class App extends Component {
 
         <>
           <NavBar setTheUser={this.setTheUser} loggedInUser={this.state.loggedInUser} />
+          <Switch />
           <main>
             <Route path="/login" render={props => <Login setTheUser={this.setTheUser} {...props} />} />
             <Route path="/profile" render={props => <Profile theUser={this.state.loggedInUser} {...props} />} />
@@ -77,6 +78,7 @@ class App extends Component {
             <Route path="/projects/new" render={props => <ProjectNew theUser={this.state.loggedInUser} {...props} />} />
             <Route path="/testing" render={props => <Testing theUser={this.state.loggedInUser} {...props} />} />
           </main>
+          <Switch />
           <Footer />
         </>
       );
