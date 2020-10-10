@@ -23,7 +23,6 @@ const archiveSchema = new Schema({
     relatedArchives: {
         type: [Schema.Types.ObjectId],
         ref: "Archive",
-        required: true,
     },
     description: {
         type: String,
