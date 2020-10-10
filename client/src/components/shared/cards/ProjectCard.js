@@ -20,7 +20,7 @@ class ProjectCard extends Component {
     showMoreText = () => this.setState({ showMore: !this.state.showMore })
 
     render() {
-        console.log(this.props)
+        
         let shortSynopsis = this.state.synopsis.slice(0, 100)
         return (
             <Col md={{ span: 4 }} className="justifiy-content-center">
