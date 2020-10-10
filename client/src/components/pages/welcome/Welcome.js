@@ -11,6 +11,8 @@ import Login from '../login/Login'
 import "../../shared/buttons/button.css"
 import './Welcome.css'
 
+import '../modal/Modal.css'
+
 
 
 class Welcome extends Component {
@@ -55,6 +57,9 @@ class Welcome extends Component {
                         <Login setTheUser={this.setTheUser} {...this.props} closeModal={() => this.handleModal(false)} />
                     </Modal.Body>
                 </Modal>
+
+
+
             </>
         )
     }
