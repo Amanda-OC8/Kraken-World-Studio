@@ -20,6 +20,7 @@ class CharacterCard extends Component {
     showMoreText = () => this.setState({ showMore: !this.state.showMore })
 
     render() {
+        console.log(this.props)
         let shortBackground = this.state.background.slice(0, 100)
         return (
             <Col md={{ span: 4 }} className="justifiy-content-center">
@@ -33,7 +34,7 @@ class CharacterCard extends Component {
                             <Card.Text>
                                 <Collapse in={!this.state.showMore}><span>{shortBackground}</span></Collapse>
 
-                                {!this.state.showMore && <NavLink onClick={this.showMoreText} className="show-more">Leer la sinopsis completa </NavLink>}
+                                {!this.state.showMore && <NavLink onClick={this.showMoreText} className="show-more">Leer el trasfondo completo </NavLink>}
                                 {this.state.showMore && <NavLink onClick={this.showMoreText} className="show-more">Leer menos </NavLink>}
 
                                 <Collapse in={this.state.showMore}>

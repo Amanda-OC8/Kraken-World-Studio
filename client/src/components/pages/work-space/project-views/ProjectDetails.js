@@ -48,6 +48,7 @@ class ProjectDetails extends Component {
                         <Row >
                             <Col md={{ span: 4 }}> <p>Taglines: {this.state.tagLines}</p> </Col>
                             <Col md={{ span: 4, offset: 4 }}> <p>Tipo de proyecto: {this.state.type}</p> </Col>
+                            <Link className='btn-shape btn-dark-mode-config' to={`/projects/${this.props.match.params.project_id}/all-characters/`}>Todos los Personajes</Link>
                         </Row>
                         <h3>Sinópsis/resumen</h3>
                         <p>{this.state.synopsis}</p>

@@ -11,6 +11,7 @@ const characterSchema = new Schema({
         ref: "Project",
         required: true,
     },
+    
     name: {
         type: String,
         required: true,
@@ -27,6 +28,7 @@ const characterSchema = new Schema({
     },
     background: {
         type: String,
+        required: true
     },
     rolHistory: {
         type: String,

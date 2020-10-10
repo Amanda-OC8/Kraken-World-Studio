@@ -19,7 +19,8 @@ class AllCharacters extends Component {
 
     loadAllCharacters = () => {
         this.characterService
-            .getAllCharacters()
+            
+            .getAllCharacters(this.props.match.params.project_id)
             .then(response => this.setState({ characters: response.data }))
             .catch(err => console.log('Error:', err))
     }
@@ -30,7 +31,7 @@ class AllCharacters extends Component {
 
             <Container>
                 <Row className="justify-content-md-center">
-                    {this.state.projects.map(elm => <CharacterCard key={elm._id} completeName={elm.name + " " + elm.surname} synopsis={elm.synopsis} id={elm._id} />)}
+                    {this.state.characters.map(elm => <CharacterCard key={elm._id} completeName={elm.name + " " + elm.surname} background={elm.background} id={elm._id} />)}
                 </Row>
             </Container>
 

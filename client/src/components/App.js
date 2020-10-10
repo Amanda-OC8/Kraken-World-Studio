@@ -20,6 +20,7 @@ import ProjectNew from './pages/work-space/project-views/ProjectNew'
 import Testing from './Testing'
 import AllProjects from './pages/work-space/project-views/AllProjects'
 import ProjectDetails from './pages/work-space/project-views/ProjectDetails'
+import AllCharacters from './pages/characters/AllCharacters'
 
 
 
@@ -75,6 +76,8 @@ class App extends Component {
             <Route path="/all-projects" render={props => <AllProjects theUser={this.state.loggedInUser} {...props} />} />
             <Route path="/projects/:project_id/details" render={props => <ProjectDetails theUser={this.state.loggedInUser} {...props} />} />
             <Route path="/projects/new" render={props => <ProjectNew theUser={this.state.loggedInUser} {...props} />} />
+            <Route path="/testing" render={props => <Testing theUser={this.state.loggedInUser} {...props} />} />
+            <Route path="/projects/:project_id/all-characters" render={props => <AllCharacters theUser={this.state.loggedInUser} {...props} />} />
             <Route path="/testing" render={props => <Testing theUser={this.state.loggedInUser} {...props} />} />
           </main>
           <Footer />
