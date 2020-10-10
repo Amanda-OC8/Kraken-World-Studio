@@ -11,22 +11,18 @@ const folderSchema = new Schema({
         ref: "Project",
         required: true,
     },
-    parentFolder: {
-        type: Schema.Types.ObjectId,
-        ref: "Folder",
-        required: true,
-    },
     name: {
         type: String,
         required: true,
     },
-    folders: {
-        type: [Schema.Types.ObjectId],
-        ref: "Folder",
-    },
     archives: {
         type: [Schema.Types.ObjectId],
         ref: "Archive",
+    },
+    owner: {
+        type: Schema.Types.ObjectId,
+        ref: "User",
+        required: true
     },
     isPublic: {
         type: Boolean,

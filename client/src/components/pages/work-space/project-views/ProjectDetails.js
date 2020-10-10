@@ -6,6 +6,7 @@ import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Dropdown from 'react-bootstrap/Dropdown'
+import '../../../App.css'
 
 import { Link } from 'react-router-dom/cjs/react-router-dom.min'
 
@@ -34,7 +35,7 @@ class ProjectDetails extends Component {
     }
 
     render() {
-
+        
         let user = this.state.owner
         let ownProject = false
 
@@ -73,10 +74,11 @@ class ProjectDetails extends Component {
                     ) : <Col md={{ span: 4, offset: 2 }}><Link className="btn-shape btn-dark-mode-config" to={`/all-projects`}>Volver a todos los proyectos</Link> </Col>}
 
                     {ownProject ? (
+                        
                         <Dropdown>
-                            <Dropdown.Toggle variant="dark" >Añadir elementos</Dropdown.Toggle>
-                            <Dropdown.Menu className="drop-link">
-                                <Dropdown.Item><Link className="nav-link link-drop" to="/projects/new">Editar proyecto</Link> </Dropdown.Item>
+                            <Dropdown.Toggle className="btn-shape btn-dark-mode-config">Añadir elementos</Dropdown.Toggle>
+                            <Dropdown.Menu className="drop-toggle">
+                                <Dropdown.Item><Link className="nav-link link-drop" to="/project/new">Editar proyecto</Link> </Dropdown.Item>
                                 <Dropdown.Item><Link className="nav-link link-drop warning-drop" to="/all-projects" onClick={() => this.deleteProject()}>Borrar proyecto</Link> </Dropdown.Item>
                                 <Dropdown.Item><Link className="nav-link link-drop" to="/all-projects">Añadir personaje</Link> </Dropdown.Item>
                                 <Dropdown.Item><Link className="nav-link link-drop" to="/all-projects">Añadir carpeta</Link> </Dropdown.Item>

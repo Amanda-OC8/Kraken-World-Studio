@@ -27,6 +27,7 @@ const characterSchema = new Schema({
     },
     background: {
         type: String,
+        required: true,
     },
     rolHistory: {
         type: String,
@@ -45,6 +46,11 @@ const characterSchema = new Schema({
     },
     notes: {
         type: String,
+    },
+    owner: {
+        type: Schema.Types.ObjectId,
+        ref: "User",
+        required: true
     },
     isPublic: {
         type: Boolean,

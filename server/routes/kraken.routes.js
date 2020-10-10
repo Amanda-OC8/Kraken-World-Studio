@@ -48,7 +48,7 @@ router.get('/own-projects', (req, res) => {
 
 //Endpoints Project
 router.get('/project/:project_id', (req, res) => {
-
+    
     Project.findById(req.params.project_id)
         .populate("owner")
         .then(response => res.json(response))
@@ -78,7 +78,7 @@ router.delete('/project/:project_id/delete', (req, res) => {
 
 //Endpoints Character
 
-router.get('/project/:project_id/allcharacters', (req, res) => {
+router.get('/allcharacters/project/:project_id/', (req, res) => {
 
     Character.find()
         .populate({
@@ -86,6 +86,7 @@ router.get('/project/:project_id/allcharacters', (req, res) => {
             match: { _id: req.params.project_id },
             select: "title genre"
         })
+        .populate("owner")
         .then(response => {
             let filterResponse = response.filter(elm => elm.originProject != null)
             res.json(filterResponse)
@@ -93,34 +94,35 @@ router.get('/project/:project_id/allcharacters', (req, res) => {
         .catch(err => res.status(500).json(err))
 })
 
-router.get('/project/:project_id/:character_id', (req, res) => {
+router.get('/:character_id/project/:project_id/', (req, res) => {
 
     Character.findById(req.params.character_id)
         .populate("originProject")
+        .populate("owner")
         .then(response => res.json(response))
         .catch(err => res.status(500).json(err))
 })
 
-router.post('/project/:project_id/character/new', (req, res) => {
+router.post('/character/new/project/:project_id/', (req, res) => {
 
     const { name, surname, genre, age, background, rolHistory, occupation, physicalDescription, personality, habits, notes, isPublic } = req.body
 
-    Character.create({ originProject: req.params.project_id, name, surname, genre, age, background, rolHistory, occupation, physicalDescription, personality, habits, notes, isPublic })
+    Character.create({ originProject: req.params.project_id, name, surname, genre, age, background, rolHistory, occupation, physicalDescription, personality, habits, notes, owner: req.user._id, isPublic, OriginProject: req.params.project_id})
         .then(response => res.json(response))
         .catch(err => res.status(500).json(err))
 
 })
-router.put('/project/:project_id/:character_id/edit', (req, res) => {
+
+router.put('/:character_id/edit/project/:project_id/', (req, res) => {
     const { name, surname, genre, age, background, rolHistory, occupation, physicalDescription, personality, habits, notes, isPublic } = req.body
 
-    Character.findByIdAndUpdate(req.params.character_id, { name, surname, genre, age, background, rolHistory, occupation, physicalDescription, personality, habits, notes, isPublic, OriginProject: req.params.project_id })
+    Character.findByIdAndUpdate(req.params.character_id, { name, surname, genre, age, background, rolHistory, occupation, physicalDescription, personality, habits, notes, owner: req.user._id, isPublic, OriginProject: req.params.project_id })
         .then(response => res.json(response))
         .catch(err => res.status(500).json(err))
 
 })
 
-
-router.delete('/project/:project_id/:character_id/delete', (req, res) => {
+router.delete('/:character_id/delete/project/:project_id/', (req, res) => {
 
     const projectPromise = Project.findById(req.params.project_id)
     const characterPromise = Character.findByIdAndDelete(req.params.character_id)
@@ -130,51 +132,51 @@ router.delete('/project/:project_id/:character_id/delete', (req, res) => {
         .catch(err => res.status(500).json(err))
 })
 
-// //Endpoints Folder
-// router.get('/project/:project_id/:folder_id', (req, res) => {
+//Endpoints Folder
+router.get('/allfolders/project/:project_id', (req, res) => {
+   
+    Folder.find()
+        .then(response => res.json(response))
+        .catch(err => res.status(500).json(err))
+})
 
-//     Folder.findById(req.params.folder_id)
-//         .populate("parentFolder")
-//         .populate("folders")
-//         .populate("archives")
-//         .then(response => res.json(response))
-//         .catch(err => res.status(500).json(err))
-// })
+router.get('/:folder_id/project/:project_id/', (req, res) => {
+    
+    Folder.findById(req.params.folder_id)
+        .then(response => res.json(response))
+        .catch(err => res.status(500).json(err))
+})
 
-// router.post('/project/:project_id/:folder_id/edit', (req, res) => {
+router.put('/:folder_id/edit/project/:project_id/', (req, res) => {
 
-//         const { name, isPublic } = req.body
+        const { name, isPublic } = req.body
 
-//         Folder.findByIdAndUpdate(req.params.folder_id, { name, isPublic})
-//             .then(response => res.json(response))
-//             .catch(err => res.status(500).json(err))
+        Folder.findByIdAndUpdate(req.params.folder_id, { name, isPublic})
+            .then(response => res.json(response))
+            .catch(err => res.status(500).json(err))
 
-// })
+})
 
-// router.put('/project/:project_id/folder/new', (req, res) => {
+router.post('/folder/new/project/:project_id', (req, res) => {
 
-//     const projectId = req.params.project_id
+    const projectId = req.params.project_id
 
-//     const projectPromise = Project.findById(projectId)
-//     const folderPromise = Folder.find({ "OriginProject": { $in: [projectId] } })
+    const { name, isPublic } = req.body
 
-//     Promise.all([projectPromise, folderPromise])
-//         .then(response => res.json(response))
-//         .catch(err => res.status(500).json(err))
-// })
+    const projectPromise = Project.findById(projectId)
+    const folderPromise = Folder.create({ name, isPublic, OriginProject: projectId, owner: req.user._id })
 
-// router.delete('/project/:project_id/:folder_id/delete', (req, res) => {
+    Promise.all([projectPromise, folderPromise])
+        .then(response => res.json(response))
+        .catch(err => res.status(500).json(err))
+})
 
-//     const projectId = req.params.project_id
-//     const folderId = req.params.folder_id
+router.delete('/:folder_id/delete/project/:project_id', (req, res) => {
 
-//     const projectPromise = Project.findById(projectId)
-//     const folderPromise = Folder.findByIdAndDelete(folderId)
-
-//     Promise.all([projectPromise, folderPromise])
-//         .then(response => res.json(response))
-//         .catch(err => res.status(500).json(err))
-// })
+    Folder.findByIdAndDelete(req.params.folder_id)
+        .then(response => res.json(response))
+        .catch(err => res.status(500).json(err))
+})
 
 // //Endpoints Archive
 // router.get('/project/:project_id/:folder_id/:archive_id', (req, res) => {
@@ -282,19 +284,19 @@ router.delete('/project/:project_id/:character_id/delete', (req, res) => {
 
 // })
 
-// //Endpoints History
-// router.get('/project/:project_id/history', (req, res) => {
+// //Endpoints Story
+// router.get('/project/:project_id/Story', (req, res) => {
 
 //     const projectId = req.params.project_id
 
 
-//     Project.findById(projectId, { history: 1 })
+//     Project.findById(projectId, { story: 1 })
 //         .then(response => res.json(response))
 //         .catch(err => res.status(500).json(err))
 
 // })
 
-// router.put('/project/:project_id/history', (req, res) => {
+// router.put('/project/:project_id/Story', (req, res) => {
 
 //     const projectId = req.params.project_id
 //     const story = req.body
