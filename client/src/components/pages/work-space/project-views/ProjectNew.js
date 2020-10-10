@@ -64,7 +64,7 @@ class ProjectNew extends Component {
                 <Row className="justify-content-center">
                     <Col md={{ span: 8 }}>
                         <h2>Nuevo proyecto</h2>
-                        <h5>Los campos con asterticos con obligatorios</h5>
+                        <h5>Los campos con asteriscos son obligatorios</h5>
                         <Form onSubmit={this.handleFormSubmit}>
                             <Form.Group>
                                 <Form.Label>Nombre del Proyecto*</Form.Label>

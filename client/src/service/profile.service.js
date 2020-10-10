@@ -10,7 +10,7 @@ export default class ProfileService {
         })
     }
 
-    getProfile = () => this.api.get(`/kraken/profile`)
-    editProfile = profile => this.api.put(`/kraken/profile/edit`, profile)
-    getOwnProjects = () => this.api.get(`/kraken/own-projects`)
+    getProfile = () => this.api.get(`/profile`)
+    editProfile = profile => this.api.put(`/profile/edit`, profile)
+    getOwnProjects = () => this.api.get(`/profile/own-projects`)
 }

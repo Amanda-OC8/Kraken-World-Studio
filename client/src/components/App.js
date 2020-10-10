@@ -74,7 +74,7 @@ class App extends Component {
             <Route path="/profile" render={props => <Profile theUser={this.state.loggedInUser} {...props} />} />
             <Route path="/all-projects" render={props => <AllProjects theUser={this.state.loggedInUser} {...props} />} />
             <Route path="/projects/:project_id/details" render={props => <ProjectDetails theUser={this.state.loggedInUser} {...props} />} />
-            <Route path="/projects/new" render={props => <ProjectNew theUser={this.state.loggedInUser} {...props} />} />
+            <Route path="/project/new" render={props => <ProjectNew theUser={this.state.loggedInUser} {...props} />} />
             <Route path="/testing" render={props => <Testing theUser={this.state.loggedInUser} {...props} />} />
           </main>
           <Footer />

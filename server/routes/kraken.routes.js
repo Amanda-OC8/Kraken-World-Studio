@@ -34,7 +34,7 @@ router.put('/profile/edit', (req, res) => {
 })
 
 router.get('/own-projects', (req, res) => {
-
+    
     Project.find()
         .populate({
             path: "owner",
@@ -133,15 +133,24 @@ router.delete('/:character_id/delete/project/:project_id/', (req, res) => {
 })
 
 //Endpoints Folder
-router.get('/allfolders/project/:project_id', (req, res) => {
-   
+router.get('/allfolders/:project_id', (req, res) => {
+    
     Folder.find()
-        .then(response => res.json(response))
-        .catch(err => res.status(500).json(err))
+    .populate({
+        path: "originProject",
+        match: { _id: req.params.project_id },
+        select: "title genre"
+    })
+    .populate("owner")
+    .then(response => {
+        let filterResponse = response.filter(elm => elm.originProject != null)
+        res.json(filterResponse)
+    })
+    .catch(err => res.status(500).json(err))
 })
 
-router.get('/:folder_id/project/:project_id/', (req, res) => {
-    
+router.get('/folder/:folder_id/project/:project_id/', (req, res) => {
+   
     Folder.findById(req.params.folder_id)
         .then(response => res.json(response))
         .catch(err => res.status(500).json(err))
@@ -179,59 +188,54 @@ router.delete('/:folder_id/delete/project/:project_id', (req, res) => {
 })
 
 // //Endpoints Archive
-// router.get('/project/:project_id/:folder_id/:archive_id', (req, res) => {
+// router.get('/:archive_id/project/:project_id/:folder_id', (req, res) => {
 
-//     const projectId = req.params.project_id
-//     const folderId = req.params.folder_id
-//     const archiveId = req.params.archive_id
-
-//     const projectPromise = Project.findById(projectId)
-//     const folderPromise = Folder.findById(folderId)
-//     const archivePromise = Archive.findById(archiveId)
-
-//     Promise.all([projectPromise, folderPromise, archivePromise])
+//     Archive.findById(archiveId)
 //         .then(response => res.json(response))
 //         .catch(err => res.status(500).json(err))
 // })
 
-// router.post('/project/:project_id/:folder_id/:archive_id/edit', (req, res) => {
+// router.get('/allarchives/project/:project_id/:folder_id', (req, res) => {
 
-//     // const projectId = req.params.project_id
-//     // const folderId = req.params.folder_id
-//     // const archiveId = req.params.archive_id
-
-//     // const { name, actType, shortDescription, longDescription, minParticipants, maxParticipants, minAge, maxAge, materials, monuments } = req.body
-
-//     // Folder.findByIdAndUpdate(folderId, { deconstruido, OriginProject: { $in: projectId }, OriginFolder: archiveId })
-//     //     .then(response => res.json(response))
-//     //     .catch(err => res.status(500).json(err))
-
+//     Archive.find(archiveId)
+//         .populate("originProject")
+//         .populate("owner")
+//         .populate({
+//             path: parentFolder,
+//             match: { _id: req.params.folder_id }
+//         })
+//         .then(response => {
+//             let filterResponse = response.filter(elm => elm.originProject != null)
+//             res.json(filterResponse)
+//         })
+//         .then(response => res.json(response))
+//         .catch(err => res.status(500).json(err))
 // })
 
-// router.put('/project/:project_id/:folder_id/archive/new', (req, res) => {
+// router.post('/archive/new/project/:project_id/:folder_id/', (req, res) => {
 
-//     // const projectId = req.params.project_id
 
-//     // const projectId = req.params.project_id
+//     // const { name, description, relatedArchive } = req.body
+//     const { originProject, originFolder, name, relatedArchive, description,  owner, isPublic} = req.body
 
-//     // const { name, actType, shortDescription, longDescription, minParticipants, maxParticipants, minAge, maxAge, materials, monuments } = req.body
-
-//     // Archive.create({ deconstruido, OriginProject: { $in: projectId }, OriginFolder: archiveId })
-//     //     .then(response => res.json(response))
-//     //     .catch(err => res.status(500).json(err))
+//     // Archive.create({ name, description, originProject: req.params.project_id, originFolder: req.params.folder_id, owner: req.user._id })
+//     Archive.create({ originProject, originFolder, name, relatedArchive, description, owner, isPublic })
+//         .then(response => res.json(response))
+//         .catch(err => res.status(500).json(err))
 // })
 
-// router.delete('/project/:project_id/:folder_id/:archive_id/edit', (req, res) => {
+// router.put('/:archive_id/edit/project/:project_id/:folder_id', (req, res) => {
 
-//     const projectId = req.params.project_id
-//     const folderId = req.params.folder_id
-//     const archiveId = req.params.archive_id
+//     const { name, description } = req.body
 
-//     const projectPromise = Project.findById(projectId)
-//     const folderPromise = Folder.findById(folderId)
-//     const archivePromise = Archive.findByIdAndDelete(archiveId)
+//     Archive.findByIdAndUpdate(req.params.archive_id, { name, description, originProject: req.params.project_id, originFolder: req.params.folder_id, owner: req.user._id })
+//         .then(response => res.json(response))
+//         .catch(err => res.status(500).json(err))
+// })
 
-//     Promise.all([projectPromise, folderPromise, archivePromise])
+// router.delete('/:archive_id/edit/project/:project_id/:folder_id', (req, res) => {
+
+//     Archive.findByIdAndDelete(archiveId)
 //         .then(response => res.json(response))
 //         .catch(err => res.status(500).json(err))
 // })

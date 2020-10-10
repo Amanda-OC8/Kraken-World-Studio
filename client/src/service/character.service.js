@@ -10,9 +10,9 @@ export default class CharacterService {
         })
     }
 
-    getAllCharacters = project_id => this.api.get(`/kraken/allcharacters/project/${project_id}`)
-    getCharacter = (project_id, character_id) => this.api.get(`/kraken//${character_id}/project/${project_id}`)
-    newProject = (project_id, character_id, character) => this.appi.post(`/kraken/${character_id}/new/project/${project_id}`, character)
-    editCharacter = (project_id, character_id, character) => this.api.put(`/kraken/${character_id}/edit/project/${project_id}`, character)
-    deleteProject = (project_id, character_id) => this.api.delete(`/kraken/${character_id}/delete/project/${project_id}`)
+    getAllCharacters = project_id => this.api.get(`/character/allcharacters/project/${project_id}`)
+    getCharacter = (project_id, character_id) => this.api.get(`/character/${character_id}/project/${project_id}`)
+    newCharacter = (project_id, character_id, character) => this.appi.post(`/character/${character_id}/new/project/${project_id}`, character)
+    editCharacter = (project_id, character_id, character) => this.api.put(`/character/${character_id}/edit/project/${project_id}`, character)
+    deleteCharacter = (project_id, character_id) => this.api.delete(`/character/${character_id}/delete/project/${project_id}`)
 }
