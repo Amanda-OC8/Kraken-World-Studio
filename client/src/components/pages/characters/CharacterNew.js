@@ -66,6 +66,7 @@ class CharacterNew extends Component {
             background: "",
             rolHistory: "",
             occupation: "",
+            notes: "",
             physicalDescription: "",
             personality: "",
             habits: "",
@@ -96,7 +97,7 @@ class CharacterNew extends Component {
 
                             <Form.Group>
                                 <Form.Label>Género</Form.Label>
-                                <Form.Control type="text" custom name="genre" value={this.state.genre} onChange={this.handleInputChange}/>
+                                <Form.Control type="text" name="genre" value={this.state.genre} onChange={this.handleInputChange}/>
                             </Form.Group>
 
                             <Form.Group>
@@ -105,33 +106,38 @@ class CharacterNew extends Component {
                             </Form.Group>
 
                             <Form.Group>
-                                <Form.Label>Trasfondo</Form.Label>
-                                <Form.Control type="text" custom name="background" value={this.state.background} onChange={this.handleInputChange}/>
+                                <Form.Label>Trasfondo*</Form.Label>
+                                <Form.Control type="text" name="background" value={this.state.background} onChange={this.handleInputChange}/>
                             </Form.Group>
 
                             <Form.Group>
                                 <Form.Label>Rol del Personaje</Form.Label>
-                                <Form.Control type="text" custom name="rolHistory" value={this.state.rolHistory} onChange={this.handleInputChange}/>
+                                <Form.Control type="text" name="rolHistory" value={this.state.rolHistory} onChange={this.handleInputChange}/>
                             </Form.Group>
 
                             <Form.Group>
                                 <Form.Label>Ocupación</Form.Label>
-                                <Form.Control type="text" custom name="occupation" value={this.state.occupation} onChange={this.handleInputChange}/>
+                                <Form.Control type="text" name="occupation" value={this.state.occupation} onChange={this.handleInputChange}/>
+                            </Form.Group>
+
+                            <Form.Group>
+                                <Form.Label>Notas</Form.Label>
+                                <Form.Control type="text" name="notes" value={this.state.notes} onChange={this.handleInputChange}/>
                             </Form.Group>
 
                             <Form.Group>
                                 <Form.Label>Descripción Física, separados por comas (ej: alta, fuerte, hermoso...)</Form.Label>
-                                <Form.Control type="text" custom name="physicalDescription" value={this.state.physicalDescription} onChange={this.handleInputChange}/>
+                                <Form.Control type="text" name="physicalDescription" value={this.state.physicalDescription} onChange={this.handleInputChange}/>
                             </Form.Group>
 
                             <Form.Group>
                                 <Form.Label>Personalidad, separados por comas (ej: cabezota, arrogante, empático...)</Form.Label>
-                                <Form.Control type="text" custom name="personality" value={this.state.personality} onChange={this.handleInputChange}/>
+                                <Form.Control type="text" name="personality" value={this.state.personality} onChange={this.handleInputChange}/>
                             </Form.Group>
 
                             <Form.Group>
                                 <Form.Label>Hábitos y costumbres, separados por comas (ej: Entrenar, pescar, fumar en pipa...)</Form.Label>
-                                <Form.Control type="text" custom name="habits" value={this.state.habits} onChange={this.handleInputChange}/>
+                                <Form.Control type="text" name="habits" value={this.state.habits} onChange={this.handleInputChange}/>
                             </Form.Group>
 
                             <Form.Group>

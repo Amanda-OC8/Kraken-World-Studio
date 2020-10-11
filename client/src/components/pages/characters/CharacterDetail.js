@@ -24,6 +24,13 @@ class CharacterDetail extends Component {
             .catch(err => console.log('Error:', err))
     }
 
+    deleteCharacter = () => {
+        this.characterService
+            .deleteCharacter(this.props.match.params.project_id, this.props.match.params.character_id)
+            .then(response => this.setState(response.data))
+            .catch(err => console.log('Error:', err))
+    }
+
     render() {
         let project = this.state.project
         let ownCharacter = false
@@ -33,6 +40,16 @@ class CharacterDetail extends Component {
 
             ownCharacter = (project === this.props.theProject._id)
            
+        }
+
+        let user = this.state.owner
+        let ownProject = false
+
+        if (user !== undefined) {
+            user = this.state.owner._id
+
+            ownProject = (user === this.props.theUser._id)
+
         }
 
         return (
@@ -48,7 +65,7 @@ class CharacterDetail extends Component {
                         <h4>Descripción física: {this.state.physicalDescription}</h4>
                         <h4>Personalidad: {this.state.personality}</h4>
                         <h4>Hábito: {this.state.habits}</h4>
-                        <h4>Notas: {this.state.notes}</h4>
+                        {ownProject && <h4>Notas: {this.state.notes}</h4>}
                         <h3>Trasfondo</h3>
                         <p>{this.state.background}</p>
 
@@ -58,7 +75,7 @@ class CharacterDetail extends Component {
                 <Row>
                     <Col md={{ span: 4 }}>   <Link className="btn-shape btn-dark-mode-config" to={`/projects/${this.props.match.params.project_id}/all-characters/`}>Volver a todos los personajes</Link> </Col>
                     
-                    <Col md={{ span: 4}}>   <Link className="btn-shape btn-dark-mode-config" to={`/all-projects/`}>Borrar personaje</Link> </Col>
+                    <Col md={{ span: 4}}>   <Link className="btn-shape btn-dark-mode-config" to={`/projects/${this.props.match.params.project_id}/all-characters/`} onClick={() => this.deleteCharacter()}>Borrar personaje</Link> </Col>
                     <Col md={{ span: 4 }}> <Link className="btn-shape btn-dark-mode-config" to={`/profile`}>Volver a tu perfil</Link> </Col>
                 </Row>
 
