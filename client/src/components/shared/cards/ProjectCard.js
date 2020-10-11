@@ -53,55 +53,6 @@ class ProjectCard extends Component {
             </Col>
         );
 
-        /*if (this.state.synopsis.length > 100) {
-            
-            return (
-                <Col md={{ span: 4 }} className="justifiy-content-center">
-                    <Card className="dark-mode">
-                        <Card.Body >
-                            <Card.Title>
-                                <h3>{this.props.title}</h3>
-                                <hr></hr>
-                                <h5>Responsable: {this.props.author}</h5>
-                            </Card.Title>
-
-                            <Card.Text>
-                                <Collapse in={!this.state.showMore}><span>{shortSynopsis}</span></Collapse>
-
-                                {!this.state.showMore && <NavLink onClick={this.showMoreText} className="show-more">Leer la sinopsis completa </NavLink>}
-                                {this.state.showMore && <NavLink onClick={this.showMoreText} className="show-more">Leer menos </NavLink>}
-
-                                <Collapse in={this.state.showMore}>
-                                    <span>{this.state.synopsis}</span>
-                                </Collapse>
-
-                            </Card.Text>
-                            <Link className="btn-shape btn-dark-mode-config" to={`/projects/${this.props.id}/details`}>Detalles</Link>
-                        </Card.Body>
-                    </Card>
-                </Col>
-            )
-
-        } else {
-
-            return (
-                <Col md={{ span: 4 }} className="justifiy-content-center">
-                    <Card className="dark-mode">
-                        <Card.Body >
-                            <Card.Title>
-                                <h3>{this.props.title}</h3>
-                                <hr></hr>
-                                <h5>Responsable: {this.props.author}</h5>
-                            </Card.Title>
-                            <Card.Text>{this.state.synopsis}</Card.Text>
-                            <Link className="btn-shape btn-dark-mode-config" to={`/projects/${this.props.id}/details`}>Detalles</Link>
-                        </Card.Body>
-                    </Card>
-                </Col>
-            )
-
-        }*/
-
     }
 }
 export default ProjectCard

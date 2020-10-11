@@ -6,6 +6,8 @@ import Row from 'react-bootstrap/Row'
 import projectService from "../../../../service/project.service"
 import ProjectCard from "../../../shared/cards/ProjectCard"
 
+import SearchBar from '../../../layout/navbar/SearchBar'
+
 class AllProjects extends Component {
     constructor(props) {
         super(props)
@@ -24,14 +26,25 @@ class AllProjects extends Component {
             .catch(err => console.log('Error:', err))
     }
 
-    render() {
+    // SearchBar de todos los proyectos
+    searchProject = (searchValue) => {
 
+        const expresion = new RegExp(searchValue, 'i')
+
+        this.setState({ projects: this.state.projects.filter(elm => elm.title.match(expresion)) })
+
+    }
+
+    render() {
+        console.log(this.state.projects)
         return (
 
             <Container>
+                <SearchBar searchProject={this.searchProject} />
                 <Row className="justify-content-md-center">
                     {this.state.projects.map(elm => <ProjectCard key={elm._id} author={elm.owner.username} title={elm.title} synopsis={elm.synopsis} id={elm._id} />)}
                 </Row>
+
             </Container>
 
         )

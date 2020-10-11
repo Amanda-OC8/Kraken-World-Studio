@@ -14,6 +14,7 @@ const characterSchema = new Schema({
     name: {
         type: String,
         required: true,
+        default: "Nueva Carpeta"
     },
     surname: {
         type: String,
@@ -27,7 +28,7 @@ const characterSchema = new Schema({
     },
     background: {
         type: String,
-        required: true,
+        required: true
     },
     rolHistory: {
         type: String,
