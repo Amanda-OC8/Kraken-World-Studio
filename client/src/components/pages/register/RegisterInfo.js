@@ -19,7 +19,6 @@ const RegisterInfo = props => {
                     </h3>
                     <p>{props.text}</p>
                 </div>
-
             </Container>
         </>
     )
