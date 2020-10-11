@@ -7,6 +7,8 @@ module.exports = app => {
     app.use('/api/character', require('./character.routes.js'))
     app.use('/api/folder', require('./folder.routes.js'))
     app.use('/api/archive', require('./archive.routes.js'))
+    app.use('/api/common', require('./common.routes.js'))
+
 
 
 

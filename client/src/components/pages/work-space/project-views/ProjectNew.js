@@ -14,7 +14,8 @@ class ProjectNew extends Component {
         this.state = {
             title: "",
             genre: "",
-            tagLines: [],
+            tagLines: "",
+            shareholders: [{ tagLines: "" }],
             type: "",
             synopsis: "",
             owner: props.theUser._id,
@@ -27,10 +28,9 @@ class ProjectNew extends Component {
     }
 
     handleInputChange = e => {
+        
         let { name, value } = e.target
-        if (name === "tagLines") {
-            value = e.target.value.split(",")
-        }
+
         if (name === "isPublic") {
             value = e.target.checked
         }
@@ -38,18 +38,50 @@ class ProjectNew extends Component {
         this.setState({ [name]: value })
     }
 
-    handleFormSubmit = e => {
 
+
+    handleShareholderNameChange = idx => evt => {
+        
+        const newShareholders = this.state.shareholders.map((shareholder, sidx) => {
+            if (idx !== sidx) return shareholder
+            return { ...shareholder, tagLines: evt.target.value }
+        })
+
+        this.setState({ shareholders: newShareholders })
+        this.setState({ tagLines: this.state.shareholders.map(elm => elm.tagLines) })
+  
+    }
+
+
+    handleAddShareholder = () => {
+        this.setState({
+            shareholders: this.state.shareholders.concat([{ tagLines: "" }])
+        })
+    }
+
+    handleRemoveShareholder = idx => () => {
+        this.setState({
+            shareholders: this.state.shareholders.filter((s, sidx) => idx !== sidx)
+        })
+    }
+
+
+    handleFormSubmit = e => {
+       
         e.preventDefault()
 
-        this.project.newProject(this.state)
+        let { title, genre, tagLines, type, synopsis, owner, isPublic } = this.state
+     
+
+        this.project.newProject({ title, genre, tagLines, type, synopsis, owner, isPublic })
             .then(response => console.log(response))
             .catch(err => console.log('Error:', { err }))
 
         this.setState({
             title: "",
             genre: "",
-            tagLines: [],
+            tagLines: "",
+            shareholders: [{ tagLines: "" }],
             type: "",
             synopsis: "",
             owner: this.props.theUser._id,
@@ -80,8 +112,14 @@ class ProjectNew extends Component {
                             </Form.Group>
 
                             <Form.Group>
-                                <Form.Label>Tags separados por comas* (ej: comedia, viajes en el tiempo...)</Form.Label>
-                                <Form.Control required type="text" name="tagLines" value={this.state.tagLines} onChange={this.handleInputChange} />
+                                <Form.Label>Tags (ej: comedia, viajes en el tiempo...)</Form.Label>
+                                {this.state.shareholders.map((shareholder, idx) => (
+                                    <React.Fragment>
+                                    <Form.Control type="text" name="tagLines" value={shareholder.tagLines} onChange={this.handleShareholderNameChange(idx)}/><Button className="btn-shape btn-dark-mode-secondary" onClick={this.handleRemoveShareholder(idx)}> - </Button>
+                                    </React.Fragment>
+                                ))}
+                                <Button className="btn-shape btn-dark-mode-secondary" onClick={this.handleAddShareholder}> + </Button>
+
                             </Form.Group>
 
                             <Form.Group>

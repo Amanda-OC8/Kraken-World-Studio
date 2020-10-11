@@ -51,7 +51,9 @@
     background:linear-gradient(to bottom, #3F3D43 5%, #78756F 100%);
     background-color:#3F3D43;
     color:#f4e3b2ff;
-    text-decoration:none;
+	text-decoration:none;
+	border:2px solid #050517;
+	
 }
 
 btn-link {

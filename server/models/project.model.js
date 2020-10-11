@@ -37,6 +37,9 @@ const projectSchema = new Schema({
     isPublic: {
         type: Boolean,
         default: false,
+    }, 
+    timeline: {
+        type: [String]
     }
 
 }, {
