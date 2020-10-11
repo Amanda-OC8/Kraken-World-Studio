@@ -98,6 +98,8 @@ class ProjectDetails extends Component {
                             </Dropdown>
                         ) : null}
 
+                        <Col md={{ span: 4 }}>   <Link className="btn-shape btn-dark-mode-config" to={`/projects/${this.props.match.params.project_id}/all-characters/`}>Todos los personajes</Link> </Col>
+
                         {ownProject ? (
                             <Col md={{ span: 4 }}> <Link className="btn-shape btn-dark-mode-config" to={`/profile`}>Volver a tu perfil</Link> </Col>
                         ) : <Col md={{ span: 4, offset: 8 }}> <Link className="btn-shape btn-dark-mode-config" to={`/profile`}>Volver a tu perfil</Link> </Col>}
