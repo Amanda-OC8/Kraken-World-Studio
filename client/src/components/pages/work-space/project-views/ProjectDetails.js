@@ -9,14 +9,24 @@ import Dropdown from 'react-bootstrap/Dropdown'
 import '../../../App.css'
 
 import { Link } from 'react-router-dom/cjs/react-router-dom.min'
+import ProjectEdit from './ProjectEdit'
+import Modal from 'react-bootstrap/Modal'
+import '../../modal/Modal.css'
 
 
 
 class ProjectDetails extends Component {
     constructor(props) {
         super(props)
-        this.state = {}
+        this.state = {
+            showModal: false
+        }
+
         this.projectService = new projectService()
+    }
+    handleModal = showModal => {
+        console.log(this.setState.showModal, showModal)
+        this.setState({ showModal })
     }
 
 
@@ -35,7 +45,7 @@ class ProjectDetails extends Component {
     }
 
     render() {
-        
+
         let user = this.state.owner
         let ownProject = false
 
@@ -47,51 +57,64 @@ class ProjectDetails extends Component {
         }
 
         return (
-            <Container>
-                <Row className="justify-content-md-center">
-                    <Col className="m-auto" md={{ span: 8 }} >
-                        <h2>{this.state.title}</h2>
-                        <h4>Género: {this.state.genre}</h4>
-                        <Row >
-                            <Col md={{ span: 4 }}> <p>Taglines: {this.state.tagLines}</p> </Col>
-                            <Col md={{ span: 4, offset: 4 }}> <p>Tipo de proyecto: {this.state.type}</p> </Col>
-                        </Row>
-                        <h3>Sinópsis/resumen</h3>
-                        <p>{this.state.synopsis}</p>
-
-                    </Col>
-                    {ownProject ? (
-                        <Col className="m-auto" md={{ span: 4 }} >
-                            <h2>Árbol contenido</h2>
+            <>
+                <Container>
+                    <Row className="justify-content-md-center">
+                        <Col className="m-auto" md={{ span: 8 }} >
+                            <h2>{this.state.title}</h2>
+                            <h4>Género: {this.state.genre}</h4>
+                            <Row >
+                                <Col md={{ span: 4 }}> <p>Taglines: {this.state.tagLines}</p> </Col>
+                                <Col md={{ span: 4, offset: 4 }}> <p>Tipo de proyecto: {this.state.type}</p> </Col>
+                            </Row>
+                            <h3>Sinópsis/resumen</h3>
+                            <p>{this.state.synopsis}</p>
 
                         </Col>
 
-                    ) : null}
-                </Row>
-                <Row>
-                    {ownProject ? (
-                        <Col md={{ span: 4 }}><Link className="btn-shape btn-dark-mode-config" to={`/all-projects`}>Volver a todos los proyectos</Link> </Col>
-                    ) : <Col md={{ span: 4, offset: 2 }}><Link className="btn-shape btn-dark-mode-config" to={`/all-projects`}>Volver a todos los proyectos</Link> </Col>}
+                        {ownProject ? (
+                            <Col className="m-auto" md={{ span: 4 }} >
+                                <h2>Árbol contenido</h2>
 
-                    {ownProject ? (
-                        
-                        <Dropdown>
-                            <Dropdown.Toggle className="btn-shape btn-dark-mode-config">Añadir elementos</Dropdown.Toggle>
-                            <Dropdown.Menu className="drop-toggle">
-                                <Dropdown.Item><Link className="nav-link link-drop" to="/project/new">Editar proyecto</Link> </Dropdown.Item>
-                                <Dropdown.Item><Link className="nav-link link-drop warning-drop" to="/all-projects" onClick={() => this.deleteProject()}>Borrar proyecto</Link> </Dropdown.Item>
-                                <Dropdown.Item><Link className="nav-link link-drop" to="/all-projects">Añadir personaje</Link> </Dropdown.Item>
-                                <Dropdown.Item><Link className="nav-link link-drop" to="/all-projects">Añadir carpeta</Link> </Dropdown.Item>
-                            </Dropdown.Menu>
-                        </Dropdown>
-                    ) : null}
+                            </Col>
 
-                    {ownProject ? (
-                        <Col md={{ span: 4 }}> <Link className="btn-shape btn-dark-mode-config" to={`/profile`}>Volver a tu perfil</Link> </Col>
-                    ) : <Col md={{ span: 4, offset: 8 }}> <Link className="btn-shape btn-dark-mode-config" to={`/profile`}>Volver a tu perfil</Link> </Col>}
-                </Row>
+                        ) : null}
+                    </Row>
+                    <Row>
+                        {ownProject ? (
+                            <Col md={{ span: 4 }}><Link className="btn-shape btn-dark-mode-config" to={`/all-projects`}>Volver a todos los proyectos</Link> </Col>
+                        ) : <Col md={{ span: 4, offset: 2 }}><Link className="btn-shape btn-dark-mode-config" to={`/all-projects`}>Volver a todos los proyectos</Link> </Col>}
 
-            </Container >
+                        {ownProject ? (
+
+                            <Dropdown>
+                                <Dropdown.Toggle className="btn-shape btn-dark-mode-config">Añadir elementos</Dropdown.Toggle>
+                                <Dropdown.Menu className="drop-toggle">
+                                    <Dropdown.Item><Link className="nav-link link-drop" to="/project/new">Editar proyecto</Link> </Dropdown.Item>
+                                    <Dropdown.Item><Link className="nav-link link-drop warning-drop" to="/all-projects" onClick={() => this.deleteProject()}>Borrar proyecto</Link> </Dropdown.Item>
+                                    <Dropdown.Item><Link className="nav-link link-drop" to="/all-projects">Añadir personaje</Link> </Dropdown.Item>
+                                    <Dropdown.Item><Link className="nav-link link-drop" to="/all-projects">Añadir carpeta</Link> </Dropdown.Item>
+                                </Dropdown.Menu>
+                            </Dropdown>
+                        ) : null}
+
+                        {ownProject ? (
+                            <Col md={{ span: 4 }}> <Link className="btn-shape btn-dark-mode-config" to={`/profile`}>Volver a tu perfil</Link> </Col>
+                        ) : <Col md={{ span: 4, offset: 8 }}> <Link className="btn-shape btn-dark-mode-config" to={`/profile`}>Volver a tu perfil</Link> </Col>}
+                    </Row>
+
+                </Container >
+
+                <Modal show={this.state.showModal} onHide={() => this.handleModal(false)}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>Editar perfil</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <ProjectEdit closeModal={() => this.handleModal(false)} />
+                    </Modal.Body>
+                </Modal>
+            </>
+
         )
     }
 }

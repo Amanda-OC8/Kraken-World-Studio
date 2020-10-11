@@ -33,7 +33,7 @@ class Login extends Component {
             .login(this.state)
             .then(response => {
                 this.props.setTheUser(response.data)
-                this.props.history.push('/')
+                this.props.history.push('/profile')
             })
             .catch(err => console.log('Error:', { err }))
     }
@@ -58,7 +58,7 @@ class Login extends Component {
                                     <Form.Control type="password" name="password" value={this.state.password} onChange={this.handleInputChange} />
                                 </Form.Group>
 
-                                <Button variant='warning' type="submit">Acceder</Button>
+                                <Button className='btn-shape btn-dark-mode-config' type="submit">Acceder</Button>
                             </Form>
                         </Col>
                     </Row>

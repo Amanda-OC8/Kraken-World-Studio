@@ -8,7 +8,7 @@ import Button from 'react-bootstrap/Button'
 
 import projectService from "../../../../service/project.service"
 
-class ProjectNew extends Component {
+class ProjectEdit extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -43,7 +43,7 @@ class ProjectNew extends Component {
             .newProject(this.state)
             .then(response => console.log(response))
             .catch(err => console.log('Error:', { err }))
-        
+
         this.setState({
             title: "",
             genre: "",
@@ -102,4 +102,4 @@ class ProjectNew extends Component {
         )
     }
 }
-export default ProjectNew
+export default ProjectEdit

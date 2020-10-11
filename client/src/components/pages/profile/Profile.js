@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 
 
+
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 
@@ -46,9 +47,7 @@ class Profile extends Component {
             .getProfile()
             .then(response => {
                 console.log(response.data[1])
-                this.setState({ ...this.state, profile: response.data[1] }, () => {
-                    this.loadOwnProjects()
-                })
+                this.setState({ profile: response.data[1] })
             })
 
             .catch(err => console.log('Error:', err))
@@ -74,10 +73,10 @@ class Profile extends Component {
                     <h3>
                         Tu información
                         </h3>
-                    <p>Tu usuario es:{this.props.theUser.username}</p>
+                    <p>Tu usuario es: {this.props.theUser.username}</p>
                     <p>Tu correo es: {this.props.theUser.email}</p>
-                    <p>Tu bio:{this.props.theUser.bio}</p>
-                    <Button onClick={() => this.handleModal(true)} style={{ marginBottom: '20px' }} variant="dark" size="lg">Editar perfil</Button>
+                    <p>Tu bio: {this.props.theUser.bio}</p>
+                    <Button onClick={() => this.handleModal(true)} style={{ marginBottom: '20px' }} className='btn-shape btn-dark-mode-config' size="lg">Editar perfil</Button>
 
                 </Container>
 

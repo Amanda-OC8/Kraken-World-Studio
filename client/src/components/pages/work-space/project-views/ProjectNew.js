@@ -16,7 +16,7 @@ class ProjectNew extends Component {
             genre: "",
             tagLines: [],
             type: "",
-            synopsis:"",
+            synopsis: "",
             owner: props.theUser._id,
             isPublic: false,
         }
@@ -45,7 +45,7 @@ class ProjectNew extends Component {
         this.project.newProject(this.state)
             .then(response => console.log(response))
             .catch(err => console.log('Error:', { err }))
-        
+
         this.setState({
             title: "",
             genre: "",
@@ -94,7 +94,7 @@ class ProjectNew extends Component {
 
                             <Form.Group>
                                 <Form.Label>Sinopsis o resumen*</Form.Label>
-                                <Form.Control required as="textarea" rows="5"  name="synopsis" value={this.state.synopsis} onChange={this.handleInputChange}>
+                                <Form.Control required as="textarea" rows="5" name="synopsis" value={this.state.synopsis} onChange={this.handleInputChange}>
                                 </Form.Control>
                             </Form.Group>
 

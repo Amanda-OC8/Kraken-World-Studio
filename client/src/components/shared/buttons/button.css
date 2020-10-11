@@ -44,6 +44,7 @@
 	border:2px solid #050517;
 	color:#f4e3b2ff;
 	text-shadow:0px 1px 6px#eae4c6ff;
+	margin-bottom: 0;
 }
 
 .btn-dark-mode-secondary:hover {
@@ -56,3 +57,4 @@
 btn-link {
 	padding: 0;
 }
+
