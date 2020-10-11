@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import characterService from "../../../../service/character.service"
+import characterService from "../../../service/character.service"
 
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
@@ -11,26 +11,27 @@ import { Link } from 'react-router-dom/cjs/react-router-dom.min'
 
 class CharacterDetail extends Component {
     constructor(props) {
+        super(props)
         this.state = {}
         this.characterService = new characterService()
     }
 
     componentDidMount = () => {
+        console.log(this.props.match.params.character_id)
         this.characterService
-            .getProject(this.props.match.params.character)
+            .getCharacter(this.props.match.params.project_id, this.props.match.params.character_id)
             .then(response => this.setState(response.data))
             .catch(err => console.log('Error:', err))
     }
 
     render() {
-        
         let project = this.state.project
         let ownCharacter = false
         
         if (project !== undefined) {
             project = this.state.project._id
 
-            ownCharacter = (user === this.props.theProject._id)
+            ownCharacter = (project === this.props.theProject._id)
            
         }
 
@@ -38,33 +39,26 @@ class CharacterDetail extends Component {
             <Container>
                 <Row className="justify-content-md-center">
                     <Col className="m-auto" md={{ span: 8 }} >
-                        {ownCharacter && "Es mi proyecto"}
-                        <h2>{this.state.title}</h2>
+                        {ownCharacter && "Es mi personaje"}
+                        <h2>{this.state.name} {this.state.surname}</h2>
                         <h4>Género: {this.state.genre}</h4>
-                        <Row >
-                            <Col md={{ span: 4 }}> <p>Taglines: {this.state.tagLines}</p> </Col>
-                            <Col md={{ span: 4, offset: 4 }}> <p>Tipo de proyecto: {this.state.type}</p> </Col>
-                            <Link className='btn-shape btn-dark-mode-config' to={`/projects/${this.props.match.params.project_id}/all-characters/`}>Todos los Personajes</Link>
-                        </Row>
-                        <h3>Sinópsis/resumen</h3>
-                        <p>{this.state.synopsis}</p>
+                        <h4>Edad: {this.state.age}</h4>
+                        <h4>Rol: {this.state.rolHistory}</h4>
+                        <h4>Ocupación: {this.state.occupation}</h4>
+                        <h4>Descripción física: {this.state.physicalDescription}</h4>
+                        <h4>Personalidad: {this.state.personality}</h4>
+                        <h4>Hábito: {this.state.habits}</h4>
+                        <h4>Notas: {this.state.notes}</h4>
+                        <h3>Trasfondo</h3>
+                        <p>{this.state.background}</p>
 
                     </Col>
-                    <Col className="m-auto" md={{ span: 4 }} >
-                        <h2>Árbol contenido</h2>
-                        
-                    </Col>
+                    
                 </Row>
                 <Row>
-                    <Col md={{ span: 4 }}>   <Link className="btn-shape btn-dark-mode-config" to={`/all-projects/`}>Volver a todos los proyectos</Link> </Col>
-                    <Dropdown>
-                        <Dropdown.Toggle variant="dark" >Añadir elementos</Dropdown.Toggle>
-                        <Dropdown.Menu className="drop-link">
-                            <Dropdown.Item><Link className="nav-link" to="/projects/new">Nuevo Proyecto</Link> </Dropdown.Item>
-                            <Dropdown.Item><Link className="nav-link" to="/all-projects/">Todos los Proyectos</Link> </Dropdown.Item>
-                        </Dropdown.Menu>
-                    </Dropdown>
-                    <Col md={{ span: 4}}>   <Link className="btn-shape btn-dark-mode-config" to={`/all-projects/`}>Borrar proyecto</Link> </Col>
+                    <Col md={{ span: 4 }}>   <Link className="btn-shape btn-dark-mode-config" to={`/projects/${this.props.match.params.project_id}/all-characters/`}>Volver a todos los personajes</Link> </Col>
+                    
+                    <Col md={{ span: 4}}>   <Link className="btn-shape btn-dark-mode-config" to={`/all-projects/`}>Borrar personaje</Link> </Col>
                     <Col md={{ span: 4 }}> <Link className="btn-shape btn-dark-mode-config" to={`/profile`}>Volver a tu perfil</Link> </Col>
                 </Row>
 

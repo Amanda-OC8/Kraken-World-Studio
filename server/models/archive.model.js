@@ -14,16 +14,15 @@ const archiveSchema = new Schema({
     parentFolder: {
         type: Schema.Types.ObjectId,
         ref: "Folder",
-        required: true,
     },
     name: {
         type: String,
         required: true,
+        
     },
     relatedArchives: {
         type: [Schema.Types.ObjectId],
         ref: "Archive",
-        required: true,
     },
     description: {
         type: String,

@@ -11,10 +11,10 @@ const characterSchema = new Schema({
         ref: "Project",
         required: true,
     },
-    
     name: {
         type: String,
         required: true,
+        default: "Nueva Carpeta"
     },
     surname: {
         type: String,

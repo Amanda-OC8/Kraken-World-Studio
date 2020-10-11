@@ -31,7 +31,7 @@ class AllCharacters extends Component {
 
             <Container>
                 <Row className="justify-content-md-center">
-                    {this.state.characters.map(elm => <CharacterCard key={elm._id} completeName={elm.name + " " + elm.surname} background={elm.background} id={elm._id} />)}
+                    {this.state.characters.map(elm => <CharacterCard key={elm._id} completeName={elm.name + " " + elm.surname} background={elm.background} id={elm._id} projectId={elm.originProject._id} />)}
                 </Row>
             </Container>
 

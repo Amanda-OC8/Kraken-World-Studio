@@ -61,18 +61,22 @@ class ProjectDetails extends Component {
                 </Row>
                 <Row>
                     <Col md={{ span: 4 }}>   <Link className="btn-shape btn-dark-mode-config" to={`/all-projects/`}>Volver a todos los proyectos</Link> </Col>
-                    <Dropdown>
-                        <Dropdown.Toggle variant="dark" >Añadir elementos</Dropdown.Toggle>
-                        <Dropdown.Menu className="drop-link">
-                            <Dropdown.Item><Link className="nav-link" to="/projects/new">Nuevo Proyecto</Link> </Dropdown.Item>
-                            <Dropdown.Item><Link className="nav-link" to="/all-projects/">Todos los Proyectos</Link> </Dropdown.Item>
-                        </Dropdown.Menu>
-                    </Dropdown>
+                    {ownProject ? (
+                            <Dropdown>
+                                <Dropdown.Toggle className="btn-shape btn-dark-mode-config">Añadir elementos</Dropdown.Toggle>
+                                <Dropdown.Menu className="drop-toggle">
+                                    <Dropdown.Item><Link className="nav-link link-drop" to="/project/new">Editar proyecto</Link> </Dropdown.Item>
+                                    <Dropdown.Item><Link className="nav-link link-drop warning-drop" to="/all-projects" onClick={() => this.deleteProject()}>Borrar proyecto</Link> </Dropdown.Item>
+                                    <Dropdown.Item><Link className="nav-link link-drop" to={`/projects/${this.props.match.params.project_id}/character-new`}>Añadir personaje</Link> </Dropdown.Item>
+                                    <Dropdown.Item><Link className="nav-link link-drop" to="/all-projects">Añadir carpeta</Link> </Dropdown.Item>
+                                </Dropdown.Menu>
+                            </Dropdown>
+                        ) : null}
                     <Col md={{ span: 4}}>   <Link className="btn-shape btn-dark-mode-config" to={`/all-projects/`}>Borrar proyecto</Link> </Col>
                     <Col md={{ span: 4 }}> <Link className="btn-shape btn-dark-mode-config" to={`/profile`}>Volver a tu perfil</Link> </Col>
                 </Row>
 
-            </Container >
+            </Container>
         )
     }
 }

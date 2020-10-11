@@ -12,7 +12,7 @@ export default class CharacterService {
 
     getAllCharacters = project_id => this.api.get(`/kraken/project/${project_id}/allcharacters`)
     getCharacter = (project_id, character_id) => this.api.get(`/kraken/project/${project_id}/${character_id}`)
-    newProject = (project_id, character_id, character) => this.appi.post(`/kraken/project/${project_id}/${character_id}/new`, character)
+    newCharacter = (project_id, character) => this.api.post(`/kraken/project/${project_id}/new`, character)
     editCharacter = (project_id, character_id, character) => this.api.put(`/kraken/project/${project_id}/${character_id}/edit`, character)
-    deleteProject = (project_id, character_id) => this.api.delete(`/kraken/project/${project_id}/${character_id}/delete`)
+    deleteCharacter = (project_id, character_id) => this.api.delete(`/kraken/project/${project_id}/${character_id}/delete`)
 }
