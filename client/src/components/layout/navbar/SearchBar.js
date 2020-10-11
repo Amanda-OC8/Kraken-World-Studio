@@ -4,7 +4,7 @@ class SearchBar extends Component {
 
     handleSearch = e => {
 
-        this.props.searchProject(e.target.value)
+        this.props.searchProjects(e.target.value)
     }
 
     render() {
@@ -18,3 +18,4 @@ class SearchBar extends Component {
 }
 
 export default SearchBar;
+

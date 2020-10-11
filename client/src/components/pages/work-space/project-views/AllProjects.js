@@ -12,6 +12,7 @@ class AllProjects extends Component {
     constructor(props) {
         super(props)
         this.state = {
+            search: '',
             projects: []
         }
         this.projectService = new projectService()
@@ -27,11 +28,12 @@ class AllProjects extends Component {
     }
 
     // SearchBar de todos los proyectos
-    searchProject = (searchValue) => {
+    searchProjects = (searchValue) => {
 
         const expresion = new RegExp(searchValue, 'i')
 
-        this.setState({ projects: this.state.projects.filter(elm => elm.title.match(expresion)) })
+        let filterProjects = this.state.projects.filter(elm => elm.title.match(expresion))
+        this.setState({ projects: filterProjects })
 
     }
 
@@ -40,7 +42,7 @@ class AllProjects extends Component {
         return (
 
             <Container>
-                <SearchBar searchProject={this.searchProject} />
+                <SearchBar search={this.state.search} searchProjects={this.searchProjects} />
                 <Row className="justify-content-md-center">
                     {this.state.projects.map(elm => <ProjectCard key={elm._id} author={elm.owner.username} title={elm.title} synopsis={elm.synopsis} id={elm._id} />)}
                 </Row>

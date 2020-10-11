@@ -13,7 +13,7 @@ class Signup extends Component {
         super(props)
         this.state = {
             username: '',
-            email:'',
+            email: '',
             password: ''
         }
         this.authService = new authService()
@@ -48,10 +48,6 @@ class Signup extends Component {
                         <Col md={{ span: 5 }}>
                             <h1>Registro de usuario</h1>
                             <Form onSubmit={this.handleFormSubmit}>
-                                <Form.Group>
-                                    <Form.Label>Correo electrónico</Form.Label>
-                                    <Form.Control type="text" name="email" value={this.state.email} onChange={this.handleInputChange} />
-                                </Form.Group>
                                 <Form.Group>
                                     <Form.Label>Nombre de usuario</Form.Label>
                                     <Form.Control type="text" name="username" value={this.state.username} onChange={this.handleInputChange} />

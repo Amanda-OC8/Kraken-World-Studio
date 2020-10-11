@@ -22,13 +22,13 @@ class CharacterNew extends Component {
             physicalDescription: [],
             personality: [],
             habits: [],
-            
+
             owner: props.theUser._id,
             isPublic: false,
         }
 
         this.character = new characterService()
-        
+
     }
 
     handleInputChange = e => {
@@ -57,7 +57,7 @@ class CharacterNew extends Component {
         this.character.newCharacter(this.props.match.params.project_id, this.state)
             .then(response => console.log(response))
             .catch(err => console.log('Error:', { err }))
-        
+
         this.setState({
             name: "",
             surname: "",
@@ -95,49 +95,49 @@ class CharacterNew extends Component {
                             </Form.Group>
 
                             <Form.Group>
-                                <Form.Label>Género</Form.Label>
-                                <Form.Control type="text" custom name="genre" value={this.state.genre} onChange={this.handleInputChange}/>
+                                <Form.Label>Género </Form.Label>
+                                <Form.Control type="text" custom name="genre" value={this.state.genre} onChange={this.handleInputChange} />
                             </Form.Group>
 
                             <Form.Group>
-                                <Form.Label>Edad*</Form.Label>
+                                <Form.Label>Edad* </Form.Label>
                                 <Form.Control required type="number" name="age" value={this.state.age} onChange={this.handleInputChange} />
                             </Form.Group>
 
                             <Form.Group>
-                                <Form.Label>Trasfondo</Form.Label>
-                                <Form.Control type="text" custom name="background" value={this.state.background} onChange={this.handleInputChange}/>
+                                <Form.Label>Trasfondo </Form.Label>
+                                <Form.Control type="text" custom name="background" value={this.state.background} onChange={this.handleInputChange} />
                             </Form.Group>
 
                             <Form.Group>
-                                <Form.Label>Rol del Personaje</Form.Label>
-                                <Form.Control type="text" custom name="rolHistory" value={this.state.rolHistory} onChange={this.handleInputChange}/>
+                                <Form.Label>Rol del Personaje </Form.Label>
+                                <Form.Control type="text" custom name="rolHistory" value={this.state.rolHistory} onChange={this.handleInputChange} />
                             </Form.Group>
 
                             <Form.Group>
-                                <Form.Label>Ocupación</Form.Label>
-                                <Form.Control type="text" custom name="occupation" value={this.state.occupation} onChange={this.handleInputChange}/>
+                                <Form.Label>Ocupación </Form.Label>
+                                <Form.Control type="text" custom name="occupation" value={this.state.occupation} onChange={this.handleInputChange} />
                             </Form.Group>
 
                             <Form.Group>
-                                <Form.Label>Descripción Física, separados por comas (ej: alta, fuerte, hermoso...)</Form.Label>
-                                <Form.Control type="text" custom name="physicalDescription" value={this.state.physicalDescription} onChange={this.handleInputChange}/>
+                                <Form.Label>Descripción Física, separados por comas (ej: alta, fuerte, hermoso...) </Form.Label>
+                                <Form.Control type="text" custom name="physicalDescription" value={this.state.physicalDescription} onChange={this.handleInputChange} />
                             </Form.Group>
 
                             <Form.Group>
-                                <Form.Label>Personalidad, separados por comas (ej: cabezota, arrogante, empático...)</Form.Label>
-                                <Form.Control type="text" custom name="personality" value={this.state.personality} onChange={this.handleInputChange}/>
+                                <Form.Label>Personalidad, separados por comas (ej: cabezota, arrogante, empático...) </Form.Label>
+                                <Form.Control type="text" custom name="personality" value={this.state.personality} onChange={this.handleInputChange} />
                             </Form.Group>
 
                             <Form.Group>
-                                <Form.Label>Hábitos y costumbres, separados por comas (ej: Entrenar, pescar, fumar en pipa...)</Form.Label>
-                                <Form.Control type="text" custom name="habits" value={this.state.habits} onChange={this.handleInputChange}/>
+                                <Form.Label>Hábitos y costumbres, separados por comas (ej: Entrenar, pescar, fumar en pipa...) </Form.Label>
+                                <Form.Control type="text" custom name="habits" value={this.state.habits} onChange={this.handleInputChange} />
                             </Form.Group>
 
                             <Form.Group>
                                 <Form.Check name="isPublic" value={this.state.isPublic} onChange={this.handleInputChange} label="¿Deseas que el proyecto sea público?">
                                 </Form.Check>
-                                <Form.Label> Podrás cambiarlo en cualquier momento.</Form.Label>
+                                <Form.Label> Podrás cambiarlo en cualquier momento. </Form.Label>
                             </Form.Group>
 
                             <Button variant="dark" type="submit">Crear</Button>
