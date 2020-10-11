@@ -37,7 +37,8 @@ class Welcome extends Component {
                             <h1 className='d-flex justify-content-center'>Create, Order, Write, Release the Kraken</h1>
                             <div className='d-flex justify-content-center'>
                                 <Link to='/register' className="btn-link btn-shape btn-dark-mode-config" >Signup</Link>
-                                {!this.props.loggedInUser && <Button className="btn-shape btn-dark-mode-secondary" onClick={() => this.handleModal(true)} variant="dark" size="sm">Login</Button>}
+                                <Link to='/login' className="btn-shape btn-dark-mode-secondary" >Login</Link>
+                                {/* {!this.props.loggedInUser && <Button className="btn-shape btn-dark-mode-secondary" onClick={() => this.handleModal(true)} size="sm">Login</Button>} */}
                             </div>
 
                         </Col>

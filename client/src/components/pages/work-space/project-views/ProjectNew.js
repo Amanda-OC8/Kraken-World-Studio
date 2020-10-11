@@ -16,7 +16,7 @@ class ProjectNew extends Component {
             genre: "",
             tagLines: [],
             type: "",
-            synopsis:"",
+            synopsis: "",
             owner: props.theUser._id,
             isPublic: false,
         }
@@ -45,7 +45,7 @@ class ProjectNew extends Component {
         this.project.newProject(this.state)
             .then(response => console.log(response))
             .catch(err => console.log('Error:', { err }))
-        
+
         this.setState({
             title: "",
             genre: "",
@@ -64,7 +64,7 @@ class ProjectNew extends Component {
                 <Row className="justify-content-center">
                     <Col md={{ span: 8 }}>
                         <h2>Nuevo proyecto</h2>
-                        <h5>Los campos con asterticos con obligatorios</h5>
+                        <h5>Los campos con asteriscos con obligatorios</h5>
                         <Form onSubmit={this.handleFormSubmit}>
                             <Form.Group>
                                 <Form.Label>Nombre del Proyecto*</Form.Label>
@@ -94,7 +94,7 @@ class ProjectNew extends Component {
 
                             <Form.Group>
                                 <Form.Label>Sinopsis o resumen*</Form.Label>
-                                <Form.Control required as="textarea" rows="5"  name="synopsis" value={this.state.synopsis} onChange={this.handleInputChange}>
+                                <Form.Control required as="textarea" rows="5" name="synopsis" value={this.state.synopsis} onChange={this.handleInputChange}>
                                 </Form.Control>
                             </Form.Group>
 

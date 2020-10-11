@@ -43,7 +43,7 @@ export default class extends Component {
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="ml-auto">
                         <Link className="nav-link" to="/">Inicio</Link>
-                        {!this.props.loggedInUser && <Link className="nav-link" to="#">Registro</Link>}
+                        {!this.props.loggedInUser && <Link className="nav-link" to="/register">Registro</Link>}
                         {!this.props.loggedInUser && <Link className="nav-link" to="/login">Acceso</Link>}
                         {this.props.loggedInUser && <Link className="nav-link" to="/all-projects">Explorar</Link>}
                         {this.props.loggedInUser && <Link className="nav-link" to="/projects/new">Nuevo proyecto</Link>}
