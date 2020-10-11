@@ -58,11 +58,6 @@ class Signup extends Component {
                                 </Form.Group>
 
                                 <Form.Group>
-                                    <Form.Label>Correo electrónico</Form.Label>
-                                    <Form.Control type="text" name="email" value={this.state.email} onChange={this.handleInputChange} />
-                                </Form.Group>
-
-                                <Form.Group>
                                     <Form.Label>Contraseña</Form.Label>
                                     <Form.Control type="password" name="password" value={this.state.password} onChange={this.handleInputChange} />
                                 </Form.Group>
