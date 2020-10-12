@@ -3,10 +3,6 @@ import React from 'react'
 import Container from 'react-bootstrap/Container'
 import './Register.css'
 
-
-
-
-
 const RegisterInfo = props => {
 
     return (
@@ -23,7 +19,5 @@ const RegisterInfo = props => {
         </>
     )
 }
-
-
 
 export default RegisterInfo

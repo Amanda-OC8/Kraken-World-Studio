@@ -8,8 +8,9 @@ const Folder = require('../models/folder.model')
 
 
 //Endpoints Folder
-router.get('/allfolders/:project_id', (req, res) => {
-    
+router.get('/allfolders/project/:project_id', (req, res) => {
+    console.log(req.params.project_id)
+
     Folder.find()
     .populate({
         path: "originProject",

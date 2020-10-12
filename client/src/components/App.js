@@ -16,13 +16,17 @@ import profileService from './../service/profile.service'
 
 import './App.css'
 import Welcome from './pages/welcome/Welcome'
-import ProjectNew from './pages/work-space/project-views/ProjectNew'
 import Testing from './Testing'
+
 import AllProjects from './pages/work-space/project-views/AllProjects'
 import ProjectDetails from './pages/work-space/project-views/ProjectDetails'
+import ProjectNew from './pages/work-space/project-views/ProjectNew'
+import ProjectEdit from './pages/work-space/project-views/ProjectEdit'
+
 import AllCharacters from './pages/characters/AllCharacters'
 import CharacterDetail from './pages/characters/CharacterDetail'
 import CharacterNew from './pages/characters/CharacterNew'
+import FoldersInProyect from './pages/folders/FoldersInProyect'
 
 
 
@@ -78,14 +82,17 @@ class App extends Component {
             <Route path="/profile" render={props => <Profile theUser={this.state.loggedInUser} {...props} />} />
             
             <Route path="/all-projects" render={props => <AllProjects theUser={this.state.loggedInUser} {...props} />} />
-            <Route path="/projects/:project_id/details" render={props => <ProjectDetails theUser={this.state.loggedInUser} {...props} />} />
+            <Route path="/projects/:project_id/details" exact render={props => <ProjectDetails theUser={this.state.loggedInUser} {...props} />} />
             <Route path="/project/new" render={props => <ProjectNew theUser={this.state.loggedInUser} {...props} />} />
+            <Route path="/project/:project_id/edit" exact render={props => <ProjectEdit theUser={this.state.loggedInUser} {...props} />} />
 
             <Route path="/testing" render={props => <Testing theUser={this.state.loggedInUser} {...props} />} />
 
             <Route path="/projects/:project_id/all-characters" render={props => <AllCharacters theUser={this.state.loggedInUser} {...props} />} />
             <Route path="/projects/:project_id/:character_id/details" render={props => <CharacterDetail theUser={this.state.loggedInUser} {...props} />} />
             <Route path="/projects/:project_id/character-new" render={props => <CharacterNew theUser={this.state.loggedInUser} {...props} />} />
+
+            <Route path="/projects/:project_id/folders-in-project" render={props => <FoldersInProyect theUser={this.state.loggedInUser} {...props} />} />
             
             <Route path="/testing" render={props => <Testing theUser={this.state.loggedInUser} {...props} />} />
           </main>

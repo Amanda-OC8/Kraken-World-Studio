@@ -23,8 +23,8 @@ class ProjectNew extends Component {
         }
 
         this.project = new projectService()
-        this.genreList = ["Fantasy", "Horror", "Science-Fiction", "Space Opera", "Romance", "Adventure", "Erotic", "FanFiction", "Historical", "Mistery", "Religious/Spiritual", "Satire/Humour", "Thriller/Suspense", "Others (Tell us more in the synopsis)"]
-        this.typeList = ["World-Building", "Novel", "Tabletop RPG", "Video Game Script", "Movie/Series Script", "Cómic Script", "Short-Stories"]
+        this.genreList = ["Fantasía", "Terror", "Ciencia-Ficción", "Space Opera", "Romance", "Aventura", "Erótico", "FanFiction", "Histórico", "Misterio", "Religioso/Espiritual", "Sátira/Humor", "Suspense", "Otro (Cuéntanos más en la sinopsis"]
+        this.typeList = ["World-Building", "Novela", "Juego de Rol", "Guión de Viddeojuego", "Guión para Cómic", "Guión de Serie/Película", "Guión de Teatro", "Relato/s"]
     }
 
     handleInputChange = e => {
@@ -142,7 +142,7 @@ class ProjectNew extends Component {
                                 <Form.Label> Podrás cambiarlo en cualquier momento.</Form.Label>
                             </Form.Group>
 
-                            <Button variant="dark" type="submit">Crear</Button>
+                            <Button className="btn-shape btn-dark-mode-config" variant="dark" type="submit">Crear</Button>
                         </Form>
                     </Col>
                 </Row>

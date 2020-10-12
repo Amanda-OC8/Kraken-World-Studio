@@ -11,16 +11,16 @@ import projectService from "../../../../service/project.service"
 class ProjectEdit extends Component {
     constructor(props) {
         super(props)
-        this.state = {
-            title: "",
-            genre: "",
-            tagLines: [],
-            type: "",
-            owner: props.theUser._id,
-            isPublic: false,
-        }
+        this.state = {}
 
-        this.project = new projectService()
+        this.projectService = new projectService()
+    }
+
+    componentDidMount = () => {
+        this.projectService
+            .getProject(this.props.match.params.project_id)
+            .then(response => this.setState(response.data))
+            .catch(err => console.log('Error:', err))
     }
 
     handleInputChange = e => {
@@ -38,38 +38,32 @@ class ProjectEdit extends Component {
     handleFormSubmit = e => {
 
         e.preventDefault()
-
-        this.project
-            .newProject(this.state)
+        this.setState({owner: this.props.theUser._id})
+        this.projectService
+            .editProject(this.props.match.params.project_id, this.state)
             .then(response => console.log(response))
             .catch(err => console.log('Error:', { err }))
-
-        this.setState({
-            title: "",
-            genre: "",
-            tagLines: [],
-            type: "",
-            owner: this.props.theUser._id,
-            isPublic: false,
-        })
     }
 
     render() {
-        const genreList = ["Fantasy", "Horror", "Science-Fiction", "Space Opera", "Romance", "Adventure", "Erotic", "FanFiction", "Historical", "Mistery", "Religious/Spiritual", "Satire/Humour", "Thriller/Suspense", "Others (Tell us more in the synopsis)"]
-        const typeList = ["World-Building", "Novel", "Tabletop RPG", "Video Game Script", "Movie/Series Script", "Cómic Script", "Short-Stories"]
+        console.log(this.state)
+        const genreList = ["Fantasía", "Terror", "Ciencia-Ficción", "Space Opera", "Romance", "Aventura", "Erótico", "FanFiction", "Histórico", "Misterio", "Religioso/Espiritual", "Sátira/Humor", "Suspense", "Otro (Cuéntanos más en la sinopsis"]
+        const typeList = ["World-Building", "Novela", "Juego de Rol", "Guión de Viddeojuego", "Guión para Cómic", "Guión de Serie/Película", "Guión de Teatro", "Relato/s"]
         return (
             <Container>
                 <Row className="justify-content-center">
                     <Col md={{ span: 5 }}>
+                        <h2>Editar proyecto</h2>
+                        <h5>Los campos con asteriscos son obligatorios</h5>
                         <Form onSubmit={this.handleFormSubmit}>
                             <Form.Group>
                                 <Form.Label>Nombre del Proyecto*</Form.Label>
-                                <Form.Control required type="text" name="title" value={this.state.title} onChange={this.handleInputChange} />
+                                <Form.Control required type="text" name="title" value={this.state.title} placeholder={this.state.title} onChange={this.handleInputChange} />
                             </Form.Group>
 
                             <Form.Group>
                                 <Form.Label>Género*</Form.Label>
-                                <Form.Control required as="select" custom name="genre" value={this.state.genre} onChange={this.handleInputChange}>
+                                <Form.Control required as="select" custom name="genre" value={this.state.genre} placeholder={this.state.genre} onChange={this.handleInputChange}>
                                     <option>---Selecciona</option>
                                     {genreList.map(elm => <option value={elm} > {elm} </option>)}
                                 </Form.Control>
@@ -77,14 +71,20 @@ class ProjectEdit extends Component {
 
                             <Form.Group>
                                 <Form.Label>Tags separados por comas* (ej: comedia, viajes en el tiempo...)</Form.Label>
-                                <Form.Control required type="text" name="tagLines" value={this.state.tagLines} onChange={this.handleInputChange} />
+                                <Form.Control required type="text" name="tagLines" value={this.state.tagLines} placeholder={this.state.tagLines} onChange={this.handleInputChange} />
                             </Form.Group>
 
                             <Form.Group>
                                 <Form.Label>Tipo de proyecto*</Form.Label>
-                                <Form.Control required as="select" custom name="type" value={this.state.type} onChange={this.handleInputChange}>
+                                <Form.Control required as="select" custom name="type" value={this.state.type} placeholder={this.state.type} onChange={this.handleInputChange}>
                                     <option>---Selecciona</option>
                                     {typeList.map(elm => <option value={elm} > {elm} </option>)}
+                                </Form.Control>
+                            </Form.Group>
+
+                            <Form.Group>
+                                <Form.Label>Sinopsis o resumen*</Form.Label>
+                                <Form.Control required as="textarea" rows="5" name="synopsis" value={this.state.synopsis} placeholder={this.state.synopsis} onChange={this.handleInputChange}>
                                 </Form.Control>
                             </Form.Group>
 
@@ -94,7 +94,7 @@ class ProjectEdit extends Component {
                                 <Form.Label> Podrás cambiarlo en cualquier momento.</Form.Label>
                             </Form.Group>
 
-                            <Button variant="dark" type="submit">Crear</Button>
+                            <Button className="btn-shape btn-dark-mode-config" variant="dark" type="submit">Editar</Button>
                         </Form>
                     </Col>
                 </Row>

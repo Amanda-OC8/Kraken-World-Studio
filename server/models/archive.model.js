@@ -6,6 +6,10 @@ const archiveSchema = new Schema({
         type: String,
         default: "Archive"
     },
+    isStory: {
+        type: Boolean,
+        default: false
+    },
     originProject: {
         type: Schema.Types.ObjectId,
         ref: "Project",
