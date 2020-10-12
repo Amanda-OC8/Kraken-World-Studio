@@ -5,6 +5,7 @@ class SearchBar extends Component {
     handleSearch = e => {
 
         this.props.searchProjects(e.target.value)
+
     }
 
     render() {

@@ -15,10 +15,10 @@ const folderSchema = new Schema({
         type: String,
         required: true,
     },
-    archives: {
-        type: [Schema.Types.ObjectId],
+    archives: [{
+        type: Schema.Types.ObjectId,
         ref: "Archive",
-    },
+    }],
     owner: {
         type: Schema.Types.ObjectId,
         ref: "User",
