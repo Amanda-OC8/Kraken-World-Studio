@@ -144,7 +144,7 @@ class ProjectNew extends Component {
                                 <Form.Label> Podrás cambiarlo en cualquier momento.</Form.Label>
                             </Form.Group>
 
-                            <Button variant="dark" type="submit">Crear</Button>
+                            <Button className="btn-shape btn-dark-mode-config" variant="dark" type="submit">Crear</Button>
                         </Form>
                     </Col>
                 </Row>

@@ -56,7 +56,7 @@ class ProjectDetails extends Component {
             ownProject = (user === this.props.theUser._id)
 
         }
-
+        
         return (
             <>
                 <Container>
@@ -91,7 +91,7 @@ class ProjectDetails extends Component {
                             <Dropdown>
                                 <Dropdown.Toggle className="btn-shape btn-dark-mode-config">Añadir elementos</Dropdown.Toggle>
                                 <Dropdown.Menu className="drop-toggle">
-                                    <Dropdown.Item><Link className="nav-link link-drop" to="/project/new">Editar proyecto</Link> </Dropdown.Item>
+                                    <Dropdown.Item><Link className="nav-link link-drop" to={`/project/${this.props.match.params.project_id}/edit`}>Editar proyecto</Link> </Dropdown.Item>
                                     <Dropdown.Item><Link className="nav-link link-drop warning-drop" to="/all-projects" onClick={() => this.deleteProject()}>Borrar proyecto</Link> </Dropdown.Item>
                                     <Dropdown.Item><Link className="nav-link link-drop" to={`/projects/${this.props.match.params.project_id}/character-new`}>Añadir personaje</Link> </Dropdown.Item>
                                     <Dropdown.Item><Link className="nav-link link-drop" to="/all-projects">Añadir carpeta</Link> </Dropdown.Item>
@@ -100,6 +100,7 @@ class ProjectDetails extends Component {
                         ) : null}
 
                         <Col md={{ span: 4 }}>   <Link className="btn-shape btn-dark-mode-config" to={`/projects/${this.props.match.params.project_id}/all-characters/`}>Todos los personajes</Link> </Col>
+                        <Col md={{ span: 4 }}>   <Link className="btn-shape btn-dark-mode-config" to={`/projects/${this.props.match.params.project_id}/folders-in-project/`}>Carpetas</Link> </Col>
 
                         {ownProject ? (
                             <Col md={{ span: 4 }}> <Link className="btn-shape btn-dark-mode-config" to={`/profile`}>Volver a tu perfil</Link> </Col>
