@@ -19,11 +19,16 @@ router.get('/tree/:project_id', (req, res) => {
         match: { _id: req.params.project_id },
         select: "title"
     }))
-    const folderPromise = (Folder.find({}, { name: 1, model: 1 }).populate({
+    const folderPromise = (Folder.find({}, { name: 1, model: 1 })
+        .populate({
         path: "originProject",
         match: { _id: req.params.project_id },
         select: "title"
-    }))
+        }).populate({
+            path: "archives",
+            select: "name parentFolder"
+        })
+    )
 
     const archivePromise = (Archive.find({}, {name: 1, model: 1}).populate({
         path: "originProject",
@@ -36,7 +41,7 @@ router.get('/tree/:project_id', (req, res) => {
 
    
 
-    Promise.all([characterPromise, archivePromise,  folderPromise])
+    Promise.all([characterPromise, folderPromise, archivePromise])
         .then(response => {
             let filterResponse = response.map(elm => elm.filter(elm => elm.originProject != null))
             res.json(filterResponse)

@@ -8,7 +8,7 @@ const Folder = require('../models/folder.model')
 
 
 //Endpoints Folder
-router.get('/allfolders/projects/:project_id', (req, res) => {
+router.get('/allfolders/project/:project_id', (req, res) => {
     
     Folder.find()
     .populate({
@@ -47,9 +47,9 @@ router.post('/new/project/:project_id', (req, res) => {
 
 router.put('/:folder_id/edit/project/:project_id/', (req, res) => {
 
-        const { name, isPublic } = req.body
+        const { name, isPublic, archives } = req.body
 
-        Folder.findByIdAndUpdate(req.params.folder_id, { name, isPublic})
+        Folder.findByIdAndUpdate(req.params.folder_id, { name, isPublic, archives})
             .then(response => res.json(response))
             .catch(err => res.status(500).json(err))
 
