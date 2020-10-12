@@ -1,33 +1,22 @@
 import React, { Component } from 'react';
 
-import Form from 'react-bootstrap/Form'
-
 class SearchBar extends Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            search: this.props.search
-        }
-    }
 
+    handleSearch = e => {
 
-    handleInputChange = e => {
-        e.preventDefault()
-        let newSearch = e.target.value
-        this.props.filterProjects(newSearch)
+        this.props.searchProjects(e.target.value)
 
     }
+
     render() {
 
         return (
-            <Form >
-                <Form.Group>                    
-                   <input type="text" name="search" value={this.state.search} onChange={this.handleInputChange} />
-                </Form.Group>
-            </Form>
+
+            < input className="input searcher" type="text" placeholder='Buscador' onChange={this.handleSearch} />
         )
     }
 
 }
 
 export default SearchBar;
+

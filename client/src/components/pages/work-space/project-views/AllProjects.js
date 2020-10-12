@@ -13,39 +13,44 @@ class AllProjects extends Component {
         super(props)
         this.state = {
             projects: [],
-            search: "",
+            searchValue: null
         }
         this.projectService = new projectService()
     }
 
-    componentDidMount = () => this.loadAllProjects()
+    componentDidMount = () => {
+
+        this.loadAllProjects()
+    }
 
     loadAllProjects = () => {
         this.projectService
             .getAllProjects()
-            .then(response => this.setState({ projects: response.data }))
+            .then(response => this.setState({ projects: response.data, filterProjects: response.data }))
             .catch(err => console.log('Error:', err))
     }
 
     // SearchBar de todos los proyectos
-    searchProject = searchValue => {
-        this.setState({ search: searchValue })
+    searchProjects = (searchValue) => {
+        this.setState({ searchValue });
+    }
 
-        let expresion = new RegExp(searchValue, 'i')
-        let filterProject = this.state.projects.filter(elm => elm.title.match(expresion))
-        this.setState({ projects: filterProject })
-        
-        console.log(searchValue)
+    getFilterProjects = () => {
+        const { projects, searchValue } = this.state;
+        const expresion = new RegExp(searchValue, 'i')
+        return searchValue ? projects.filter(elm => elm.title.match(expresion)) : projects;
     }
 
     render() {
-        
+
+        const filterProjects = this.getFilterProjects();
+
         return (
 
             <Container>
-                <SearchBar search={this.state.search} filterProjects={this.searchProject}/>
+                <SearchBar searchProjects={this.searchProjects} />
                 <Row className="justify-content-md-center">
-                    {this.state.projects.map(elm => <ProjectCard key={elm._id} author={elm.owner.username} title={elm.title} synopsis={elm.synopsis} id={elm._id} />)}
+                    {filterProjects.map(elm => <ProjectCard key={elm._id} author={elm.owner.username} title={elm.title} synopsis={elm.synopsis} id={elm._id} />)}
                 </Row>
 
             </Container>
