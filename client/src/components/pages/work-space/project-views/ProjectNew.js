@@ -23,7 +23,7 @@ class ProjectNew extends Component {
         }
 
         this.project = new projectService()
-        this.genreList = ["Fantasía", "Terror", "Ciencia-Ficción", "Space Opera", "Romance", "Aventura", "Erótico", "FanFiction", "Histórico", "Misterio", "Religioso/Espiritual", "Sátira/Humor", "Suspense", "Otro (Cuéntanos más en la sinopsis"]
+        this.genreList = ["Fantasía", "Terror", "Ciencia-Ficción", "Space Opera", "Romance", "Aventura", "Erótico", "FanFiction", "Histórico", "Misterio", "Religioso/Espiritual", "Sátira/Humor", "Suspense", "Otro (Cuéntanos más en la sinopsis)"]
         this.typeList = ["World-Building", "Novela", "Juego de Rol", "Guión de Viddeojuego", "Guión para Cómic", "Guión de Serie/Película", "Guión de Teatro", "Relato/s"]
     }
 
@@ -34,6 +34,7 @@ class ProjectNew extends Component {
         if (name === "isPublic") {
             value = e.target.checked
         }
+
 
         this.setState({ [name]: value })
     }
@@ -111,6 +112,7 @@ class ProjectNew extends Component {
                                 </Form.Control>
                             </Form.Group>
 
+ 
                             <Form.Group>
                                 <Form.Label>Tags (ej: comedia, viajes en el tiempo...)</Form.Label>
                                 {this.state.shareholders.map((shareholder, idx) => (

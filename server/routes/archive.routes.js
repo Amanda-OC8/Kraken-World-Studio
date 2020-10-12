@@ -38,10 +38,8 @@ router.get('/:archive_id/project/:project_id/:folder_id', (req, res) => {
 
 router.post('/new/project/:project_id/:folder_id/', (req, res) => {
 
-
     const { name, relatedArchives, description,  isPublic } = req.body
  
-
     Archive.create({ name, relatedArchives, description, originProject: req.params.project_id, parentFolder: req.params.folder_id, owner: req.user._id, isPublic })
         .then(response => res.json(response))
         .catch(err => res.status(500).json(err))
@@ -51,7 +49,6 @@ router.put('/:archive_id/edit/project/:project_id/:folder_id', (req, res) => {
 
     const { name,relatedArchives, description, isPublic } = req.body
    
-
     Archive.findByIdAndUpdate(req.params.archive_id, { name, relatedArchives, description, originProject: req.params.project_id, originFolder: req.params.folder_id, owner: req.user._id, isPublic })
         .then(response => res.json(response))
         .catch(err => res.status(500).json(err))
@@ -63,7 +60,6 @@ router.delete('/:archive_id/delete/project/:project_id/:folder_id', (req, res) =
         .then(response => res.json(response))
         .catch(err => res.status(500).json(err))
 })
-
 
 
 module.exports = router

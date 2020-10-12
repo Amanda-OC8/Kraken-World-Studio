@@ -4,12 +4,6 @@ const router = express.Router()
 
 const Project = require('../models/project.model')
 
-const Character = require('../models/character.model')
-const Folder = require('../models/folder.model')
-const Archive = require('../models/archive.model')
-
-
-
 
 // Endpoint Public view projects
 
@@ -52,7 +46,7 @@ router.delete('/:project_id/delete', (req, res) => {
 })
 
 //Endpoints Timeline
-router.get('/:project_id/timeline', (req, res) => {
+router.get('/timeline/:project_id', (req, res) => {
 
     const projectId = req.params.project_id
 
@@ -63,7 +57,7 @@ router.get('/:project_id/timeline', (req, res) => {
 
 })
 
-router.put('/:project_id/timeline/edit', (req, res) => {
+router.put('/timeline/edit/:project_id', (req, res) => {
 
     const timeline = req.body
 
@@ -74,7 +68,7 @@ router.put('/:project_id/timeline/edit', (req, res) => {
 
 })
 
-router.post('/:project_id/timeline/new', (req, res) => {
+router.post('/timeline/new/:project_id', (req, res) => {
 
     const projectId = req.params.project_id
     const timeline = req.body

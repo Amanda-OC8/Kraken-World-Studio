@@ -29,7 +29,7 @@
     text-decoration:none;
 }
 
-.btn-dark-mode-config:focus {
+.btn-dark-mode-config:focus .btn-dark-mode-config:active  {
 	border-color:#333029;
     box-shadow: 2px 2px 4px 0px #1c1b18;
 	border:4px solid #333029;
