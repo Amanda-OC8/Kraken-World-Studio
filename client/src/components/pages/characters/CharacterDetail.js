@@ -17,7 +17,7 @@ class CharacterDetail extends Component {
     }
 
     componentDidMount = () => {
-        console.log(this.props.match.params.character_id)
+        
         this.characterService
             .getCharacter(this.props.match.params.project_id, this.props.match.params.character_id)
             .then(response => this.setState(response.data))

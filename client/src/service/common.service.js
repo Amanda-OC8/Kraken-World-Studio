@@ -11,6 +11,5 @@ export default class ProjectService {
     }
 
     getTree = project_id => this.api.get(`/common/tree/${project_id}`)
-    getWiki = project_id => this.api.get(`/common/wiki-elements/${project_id}`)
-    
+    getWiki = project_id => this.api.get(`/common/wiki-elements/${project_id}`)  
 }
