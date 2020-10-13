@@ -42,7 +42,7 @@ class Profile extends Component {
     }
 
     loadProfile = () => {
-        console.log('holaaaaaaaaaaaaaaaa')
+        
         this.profileService
             .getProfile()
             .then(response => {
@@ -61,7 +61,7 @@ class Profile extends Component {
     }
 
     render() {
-        console.log(this.state)
+        
         return (
 
             <>

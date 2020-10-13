@@ -3,6 +3,7 @@ const router = express.Router()
 
 
 const Project = require('../models/project.model')
+const Archive = require('../models/archive.model')
 
 
 // Endpoint Public view projects
@@ -27,8 +28,21 @@ router.get('/:project_id', (req, res) => {
 router.post('/new', (req, res) => {
 
     Project.create(req.body)
-        .then(response => res.json(response))
+        .then(response => {
+            res.json(response)
+            
+            return Archive.create({ isStory: true, originProject: response._id, name: "Historia", description: "Aquí va tu historia", owner: req.user._id})
+           
+        })
+        .then(response => {
+            console.log(response)
+            res.json(response)
+        })
         .catch(err => res.status(500).json(err))
+    
+    // Archive.create({ isStory: true, originProject: "5f8407c4b51cd8075c6c5e04", name: "Historia", description: "Aquí va tu historia", owner: "5f7b53b5944e520f18fc1e4e" })
+    //     .then(response => res.json(response))
+    //     .catch(err => res.status(500).json(err))
 })
 
 router.put('/:project_id/edit', (req, res) => {
@@ -45,88 +59,83 @@ router.delete('/:project_id/delete', (req, res) => {
         .catch(err => res.status(500).json(err))
 })
 
-//Endpoints Timeline
-router.get('/timeline/:project_id', (req, res) => {
-
-    const projectId = req.params.project_id
-
-
-    Project.findById(projectId, { timeline: 1 })
-        .then(response => res.json(response))
-        .catch(err => res.status(500).json(err))
-
-})
-
-router.put('/timeline/edit/:project_id', (req, res) => {
-
-    const timeline = req.body
-
-
-    Project.findByIdAndUpdate(req.params.project_id, { timeline })
-        .then(response => res.json(response))
-        .catch(err => res.status(500).json(err))
-
-})
-
-router.post('/timeline/new/:project_id', (req, res) => {
-
-    const projectId = req.params.project_id
-    const timeline = req.body
-
-
-    Project.findByIdAndUpdate(projectId, { timeline })
-        .then(response => res.json(response))
-        .catch(err => res.status(500).json(err))
-
-})
-
-// //Endpoints Glossary
-// router.get('/project/:project_id/glossary', (req, res) => {
+// //Endpoints Timeline
+// router.get('/timeline/:project_id', (req, res) => {
 
 //     const projectId = req.params.project_id
 
 
-//     Project.findById(projectId, { glossary: 1 })
+//     Project.findById(projectId, { timeline: 1 })
 //         .then(response => res.json(response))
 //         .catch(err => res.status(500).json(err))
 
 // })
 
-// router.put('/project/:project_id/glossary', (req, res) => {
+// router.put('/timeline/edit/:project_id', (req, res) => {
 
-//     const projectId = req.params.project_id
-//     const glossary = req.body
+//     const timeline = req.body
 
 
-//     Project.findByIdAndUpdate(projectId, { glossary })
+//     Project.findByIdAndUpdate(req.params.project_id, { timeline })
 //         .then(response => res.json(response))
 //         .catch(err => res.status(500).json(err))
 
 // })
+
+// router.post('/timeline/new/:project_id', (req, res) => {
+
+//     const projectId = req.params.project_id
+//     const timeline = req.body
+
+
+//     Project.findByIdAndUpdate(projectId, { timeline })
+//         .then(response => res.json(response))
+//         .catch(err => res.status(500).json(err))
+
+// })
+
+
 
 // //Endpoints Story
-// router.get('/project/:project_id/story', (req, res) => {
+router.get('/story/:project_id', (req, res) => {
 
-//     const projectId = req.params.project_id
+    Archive.find({}, { description: 1, name: 1 })
+        .populate({
+            path: "originProject",
+            match: { _id: req.params.project_id },
+            select: "title"
+        })
+        .populate("owner")
+        .then(response => {
+            let filterResponse = response.filter(elm => elm.originProject != null)
+            res.json(filterResponse)
+        })
+        .catch(err => res.status(500).json(err))
 
+})
 
-//     Project.findById(projectId, { story: 1 })
-//         .then(response => res.json(response))
-//         .catch(err => res.status(500).json(err))
+router.put('/story/:project_id/edit', (req, res) => {
 
-// })
+    const {description} = req.body
 
-// router.put('/project/:project_id/story', (req, res) => {
+    Archive.find({}, { description: 1, name: 1 })
+        .populate({
+            path: "originProject",
+            match: { _id: req.params.project_id },
+            select: "title"
+        })
+        .populate("owner")
+        .then(response => {
+            let filterResponse = response.filter(elm => elm.originProject != null)
+            res.json(filterResponse)
+            
+            return Archive.findByIdAndUpdate(filterResponse[0]._id, { description })
+        })
+        .then(response => res.json(response))
+        .catch(err => res.status(500).json(err))
+   
 
-//     const projectId = req.params.project_id
-//     const story = req.body
-
-
-//     Project.findByIdAndUpdate(projectId, { story })
-//         .then(response => res.json(response))
-//         .catch(err => res.status(500).json(err))
-
-// })
+})
 
 
 
