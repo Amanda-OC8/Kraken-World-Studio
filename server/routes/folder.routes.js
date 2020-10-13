@@ -33,14 +33,12 @@ router.get('/:folder_id/project/:project_id/', (req, res) => {
 
 router.post('/new/project/:project_id', (req, res) => {
 
-    const projectId = req.params.project_id
+    
 
-    const { name, isPublic } = req.body
-
-    const projectPromise = Project.findById(projectId)
-    const folderPromise = Folder.create({ name, isPublic, OriginProject: projectId, owner: req.user._id })
-
-    Promise.all([projectPromise, folderPromise])
+    const { name, isPublic, owner, originProject } = req.body
+    console.log({ name, isPublic, owner, originProject })
+ 
+   Folder.create({ name, isPublic, owner, originProject})   
         .then(response => res.json(response))
         .catch(err => res.status(500).json(err))
 })
