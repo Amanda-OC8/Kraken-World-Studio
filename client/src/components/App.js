@@ -26,9 +26,6 @@ import ProjectEdit from './pages/work-space/project-views/ProjectEdit'
 import AllCharacters from './pages/characters/AllCharacters'
 import CharacterDetail from './pages/characters/CharacterDetail'
 import CharacterNew from './pages/characters/CharacterNew'
-import FoldersInProyect from './pages/folders/FoldersInProyect'
-
-
 
 class App extends Component {
 
@@ -92,7 +89,6 @@ class App extends Component {
             <Route path="/projects/:project_id/:character_id/details" render={props => <CharacterDetail theUser={this.state.loggedInUser} {...props} />} />
             <Route path="/projects/:project_id/character-new" render={props => <CharacterNew theUser={this.state.loggedInUser} {...props} />} />
 
-            <Route path="/projects/:project_id/folders-in-project" render={props => <FoldersInProyect theUser={this.state.loggedInUser} {...props} />} />
             
             <Route path="/testing" render={props => <Testing theUser={this.state.loggedInUser} {...props} />} />
           </main>

@@ -13,7 +13,7 @@ const projectSchema = new Schema({
     },
     genre: {
         type: String,
-        enum: ["Fantasía", "Terror", "Ciencia-Ficción", "Space Opera", "Romance", "Aventura", "Erótico", "FanFiction", "Histórico", "Misterio", "Religioso/Espiritual", "Sátira/Humor", "Suspense", "Otro (Cuéntanos más en la sinopsis"],
+        enum: ["Fantasía", "Terror", "Ciencia-Ficción", "Space Opera", "Romance", "Aventura", "Erótico", "FanFiction", "Histórico", "Misterio", "Religioso/Espiritual", "Sátira/Humor", "Suspense", "Otro (Cuéntanos más en la sinopsis)"],
         required: true,
     },
     tagLines: {

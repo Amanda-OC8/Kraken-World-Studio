@@ -4,7 +4,7 @@ import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 
 import archiveService from '../../../service/archive.service'
-import ArchiveCard from '../../shared/cards/ArchiveCard'
+import CharacterCard from '../../shared/cards/CharacterCard'
 
 class AllCharacters extends Component {
     constructor(props) {

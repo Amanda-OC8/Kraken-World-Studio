@@ -1,41 +1,41 @@
 import React, { Component } from 'react'
 
-import characterService from "../../../service/character.service"
+import archiveService from '../../../service/archive.service'
 
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import { Link } from 'react-router-dom/cjs/react-router-dom.min'
 
-class CharacterDetail extends Component {
+class ArchiveDetail extends Component {
     constructor(props) {
         super(props)
         this.state = {}
-        this.characterService = new characterService()
+        this.archiveService = new archiveService()
     }
 
     componentDidMount = () => {
-        this.characterService
-            .getCharacter(this.props.match.params.project_id, this.props.match.params.character_id)
+        this.archiveService
+            .getArchive(this.props.match.params.project_id, this.props.match.params.archive_id)
             .then(response => this.setState(response.data))
             .catch(err => console.log('Error:', err))
     }
 
     deleteCharacter = () => {
-        this.characterService
-            .deleteCharacter(this.props.match.params.project_id, this.props.match.params.character_id)
+        this.archiveService
+            .deleteArchive(this.props.match.params.project_id, this.props.match.params.archive_id)
             .then(response => this.setState(response.data))
             .catch(err => console.log('Error:', err))
     }
 
     render() {
         let project = this.state.project
-        let ownCharacter = false
+        let ownArchive = false
         
         if (project !== undefined) {
             project = this.state.project._id
 
-            ownCharacter = (project === this.props.theProject._id)
+            ownArchive = (project === this.props.theProject._id)
            
         }
 
@@ -54,17 +54,9 @@ class CharacterDetail extends Component {
                 <Row className="justify-content-md-center">
                     <Col className="m-auto" md={{ span: 8 }} >
                         {ownCharacter && "Es mi personaje"}
-                        <h2>{this.state.name} {this.state.surname}</h2>
-                        <h4>Género: </h4><p>{this.state.genre}</p>
-                        <h4>Edad: </h4><p>{this.state.age}</p>
-                        <h4>Rol: </h4><p>{this.state.rolHistory}</p>
-                        <h4>Ocupación: </h4><p>{this.state.occupation}</p>
-                        <h4>Descripción física: </h4><p>{this.state.physicalDescription}</p>
-                        <h4>Personalidad: </h4><p>{this.state.personality}</p>
-                        <h4>Hábito: </h4><p>{this.state.habits}</p>
-                        {ownProject && (<div><h4>Notas: </h4><p>{this.state.notes}</p></div>)}
-                        <h3>Trasfondo</h3>
-                        <p>{this.state.background}</p>
+                        <h2>{this.state.name}</h2>
+                        {/* {ownProject && (<div><h4>Archivos Relacionados: </h4><p>{this.state.relatedArchives}</p></div>)} */}
+                        <p>{this.state.description}</p>
 
                     </Col>
                     
