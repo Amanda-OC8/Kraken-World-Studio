@@ -18,7 +18,7 @@ const projectSchema = new Schema({
     },
     tagLines: {
         type: [String],
-        required: false,
+        required: true,
     },
     type: {
         type: String,

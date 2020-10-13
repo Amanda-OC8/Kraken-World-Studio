@@ -16,7 +16,7 @@ class CharacterDetail extends Component {
         super(props)
         this.state = {
             character: {},
-            showModal: false
+            showModal: this.props.showModal
         }
         this.characterService = new characterService()
     }

@@ -89,7 +89,7 @@ class ProjectDetails extends Component {
                         {ownProject ? (
 
                             <Dropdown>
-                                <Dropdown.Toggle className="btn-shape btn-dark-mode-config">Añadir elementos</Dropdown.Toggle>
+                                <Dropdown.Toggle className="btn-shape btn-dark-mode-config" variant="dark">Añadir elementos</Dropdown.Toggle>
                                 <Dropdown.Menu className="drop-toggle">
                                     <Dropdown.Item><Link className="nav-link link-drop" to={`/project/${this.props.match.params.project_id}/edit`}>Editar proyecto</Link> </Dropdown.Item>
                                     <Dropdown.Item><Link className="nav-link link-drop warning-drop" to="/all-projects" onClick={() => this.deleteProject()}>Borrar proyecto</Link> </Dropdown.Item>

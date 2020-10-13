@@ -35,12 +35,13 @@ $gradient-radial: radial-gradient(#050517ff, #3f3d43ff, #78756fff, #eae4c6ff, #e
 body {
     font-weight: 300;
     font-family: 'Nunito', sans-serif;
-    color: #f4e3b2ff;
+    color: #eae4c6ff;
 }
 
 h1, h2, h3, h4, h5, h6 {
     margin-bottom: 30px;
     font-family: 'Dosis';
+    color: #EFC88B
 }
 
 main {
