@@ -19,7 +19,6 @@ class AllCharacters extends Component {
 
     loadAllCharacters = () => {
         this.characterService
-            
             .getAllCharacters(this.props.match.params.project_id)
             .then(response => this.setState({ characters: response.data }))
             .catch(err => console.log('Error:', err))

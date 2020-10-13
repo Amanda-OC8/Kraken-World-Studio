@@ -47,7 +47,7 @@ export default class extends Component {
                         {!this.props.loggedInUser && <Link className="nav-link" to="/login">Acceso</Link>}
                         {this.props.loggedInUser && <Link className="nav-link" to="/all-projects">Explorar</Link>}
                         {this.props.loggedInUser && <Link className="nav-link" to="/project/new">Nuevo proyecto</Link>}
-                        <Link className="nav-link" to="/profile">Hola, {this.props.loggedInUser ? this.props.loggedInUser.username : 'little kraken'}</Link>
+                        <Link className="nav-link" to="/profile" > Hola, {this.props.loggedInUser ? this.props.loggedInUser.username : 'little kraken'}</Link>
                         {this.props.loggedInUser && <Link to="/logout" className="nav-link" onClick={this.logoutUser}>Cerrar sesión</Link>}
                     </Nav>
                 </Navbar.Collapse>

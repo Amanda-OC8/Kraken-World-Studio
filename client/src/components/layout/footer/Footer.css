@@ -2,7 +2,7 @@ footer {
     background: #c9bc7a;
     margin-top: 50px;
     color: white;
-    font-size: .6em;
+    font-size: 1em;
     text-align: center;
     padding: 4px;
     position: fixed;
@@ -14,4 +14,17 @@ footer {
 footer p {
     margin: 0;
     color: black;
+}
+
+.ext-link {
+    color: #050517ff;
+}
+
+.ext-link:hover {
+    color:#78756F;
+    text-decoration: none;
+}
+
+.ext-link:visited {
+    color: #d3d5d7ff
 }

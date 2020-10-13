@@ -1,12 +1,8 @@
 const express = require('express')
 const router = express.Router()
-const mongoose = require('mongoose')
 
-const User = require('../models/user.model')
 const Project = require('../models/project.model')
 const Character = require('../models/character.model')
-const Folder = require('../models/folder.model')
-const Archive = require('../models/archive.model')
 
 
 

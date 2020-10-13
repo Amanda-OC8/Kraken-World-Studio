@@ -12,37 +12,45 @@ class AllProjects extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            projects: []
+            projects: [],
+            searchValue: null
         }
         this.projectService = new projectService()
     }
 
-    componentDidMount = () => this.loadAllProjects()
+    componentDidMount = () => {
+
+        this.loadAllProjects()
+    }
 
     loadAllProjects = () => {
         this.projectService
             .getAllProjects()
-            .then(response => this.setState({ projects: response.data }))
+            .then(response => this.setState({ projects: response.data, filterProjects: response.data }))
             .catch(err => console.log('Error:', err))
     }
 
     // SearchBar de todos los proyectos
-    searchProject = (searchValue) => {
+    searchProjects = (searchValue) => {
+        this.setState({ searchValue });
+    }
 
+    getFilterProjects = () => {
+        const { projects, searchValue } = this.state;
         const expresion = new RegExp(searchValue, 'i')
-
-        this.setState({ projects: this.state.projects.filter(elm => elm.title.match(expresion)) })
-
+        return searchValue ? projects.filter(elm => elm.title.match(expresion)) : projects;
     }
 
     render() {
-        console.log(this.state.projects)
+
+        const filterProjects = this.getFilterProjects();
+
         return (
 
             <Container>
-                <SearchBar searchProject={this.searchProject} />
+                <SearchBar searchProjects={this.searchProjects} />
                 <Row className="justify-content-md-center">
-                    {this.state.projects.map(elm => <ProjectCard key={elm._id} author={elm.owner.username} title={elm.title} synopsis={elm.synopsis} id={elm._id} />)}
+                    {filterProjects.map(elm => <ProjectCard key={elm._id} author={elm.owner.username} title={elm.title} synopsis={elm.synopsis} id={elm._id} />)}
                 </Row>
 
             </Container>

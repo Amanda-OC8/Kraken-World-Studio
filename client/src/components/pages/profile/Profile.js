@@ -42,12 +42,12 @@ class Profile extends Component {
     }
 
     loadProfile = () => {
-
+        console.log('holaaaaaaaaaaaaaaaa')
         this.profileService
             .getProfile()
             .then(response => {
-                console.log(response.data[1])
-                this.setState({ profile: response.data[1] })
+                // console.log(response.data[1])
+                this.setState({ ...this.state, profile: response.data[1] })
             })
 
             .catch(err => console.log('Error:', err))
@@ -61,11 +61,12 @@ class Profile extends Component {
     }
 
     render() {
+        console.log(this.state)
         return (
 
             <>
                 <Container>
-                    <h1>Estás en tu perfil {this.props.theUser.username}</h1>
+                    <h1>Estás en tu perfil {this.state.profile.username}</h1>
                 </Container>
 
                 <Container>
@@ -73,9 +74,9 @@ class Profile extends Component {
                     <h3>
                         Tu información
                         </h3>
-                    <p>Tu usuario es: {this.props.theUser.username}</p>
-                    <p>Tu correo es: {this.props.theUser.email}</p>
-                    <p>Tu bio: {this.props.theUser.bio}</p>
+                    <p>Tu usuario es: {this.state.profile.username}</p>
+                    <p>Tu correo es: {this.state.profile.email}</p>
+                    <p>Tu bio: {this.state.profile.bio}</p>
                     <Button onClick={() => this.handleModal(true)} style={{ marginBottom: '20px' }} className='btn-shape btn-dark-mode-config' size="lg">Editar perfil</Button>
 
                 </Container>
