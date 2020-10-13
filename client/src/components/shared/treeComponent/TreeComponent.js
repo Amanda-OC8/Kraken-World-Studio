@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 
 import commonService from '../../../service/common.service'
+import characterService from '../../../service/character.service'
+import folderService from '../../../service/folder.service'
 
 import { Link } from 'react-router-dom/cjs/react-router-dom.min'
 
@@ -17,13 +19,44 @@ class TreeComponent extends Component {
             components: []
         }
         this.commonService = new commonService()
+        this.characterService = new characterService()
+        this.folderService = new folderService()
+
     }
 
     componentDidMount = () => {
+       this.loadCommon()
+    }
+
+
+    loadCommon = () => {
+        
         this.commonService
             .getTree(this.props.match.params.project_id)
             .then(response => this.setState({ components: response.data }))
             .catch(err => console.log('Error:', err))
+        
+    }
+
+
+    deleteCharacter = (character_id) => {
+        
+        this.characterService
+            .deleteCharacter(this.props.match.params.project_id, character_id)
+            .then(()=> console.log("borrado"))
+            .catch(err => console.log('Error:', err))
+        
+        this.loadCommon()
+    }
+
+    deleteFolder = (folder_id) => {
+
+        this.folderService
+            .deleteFolder(this.props.match.params.project_id, folder_id)
+            .then(() => console.log("borrado"))
+            .catch(err => console.log('Error:', err))
+
+        this.loadCommon()
     }
 
     createNode = () => {
@@ -66,7 +99,7 @@ class TreeComponent extends Component {
             existTree = true
 
             if (treeC.nested) {
-                console.log(treeC.nested)
+               
                 children = (
                     <ul>
                         {treeC.nested.map(elm => elm.nested ? elm.nested.map((subelm, index) => <li key={index}><Link className="tree-link" to={`/projects/${this.props.match.params.project_id}/${elm.parent.id}/${subelm.id}/details`}>{subelm.name}</Link> <img className="image" src={Add} alt="Añadir"></img>
@@ -85,15 +118,16 @@ class TreeComponent extends Component {
 
                 <ul>
                     <h4><Link className="tree-link" to={`/projects/${this.props.match.params.project_id}/all-characters`}>Personajes</Link></h4>
-                    {existTree && treeC.characters.map((elm, index) => <li key={index}><Link className="tree-link" to={`/projects/${this.props.match.params.project_id}/${elm.id}/details`}>{elm.name}</Link>
-                        <Link to={`/projects/${this.props.match.params.project_id}/${elm.id}/character-new`}><img className="image" src={Add} alt="Añadir"></img></Link>
-                        <Link to={`/projects/${this.props.match.params.project_id}/${elm.id}/edit`}><img className="image" src={Edit} alt="Editar" /></Link>
-                        <Link to={`/projects/${this.props.match.params.project_id}/${elm.id}/delete`}><img className="image" src={Delete} alt="Eliminar"></img></Link></li>)}
+                    {existTree && treeC.characters.map((elm, index) => <li key={index}><Link className="tree-link" to={`/projects/${this.props.match.params.project_id}/${elm.id}/character/details`}>{elm.name}</Link>
+                        <Link to={`/projects/${this.props.match.params.project_id}/${elm.id}/character/new`}><img className="image" src={Add} alt="Añadir"></img></Link>
+                        <Link to={`/projects/${this.props.match.params.project_id}/${elm.id}/character/edit`}><img className="image" src={Edit} alt="Editar" /></Link>
+                        <Link onClick={() => this.deleteCharacter(elm.id)}><img className="image" src={Delete} alt="Eliminar"></img></Link></li>)}
                     <br/>
                     <h4>Carpetas y archivos</h4>
-                    {existTree && treeC.folders.map((elm, index) => <li key={index}><Link className="tree-link" to={`/projects/${this.props.match.params.project_id}/${elm.id}/details`}>{elm.name}</Link> <img className="image" src={Add} alt="Añadir"></img>
-                        <img className="image" src={Edit} alt="Editar"></img>
-                        <img className="image" src={Delete} alt="Eliminar"></img></li>)}
+                    {existTree && treeC.folders.map((elm, index) => <li key={index}><Link className="tree-link" to={`/projects/${this.props.match.params.project_id}/${elm.id}/details`}>{elm.name}</Link> 
+                        <Link to={`/projects/${this.props.match.params.project_id}/${elm.id}/folder/new`}><img className="image" src={Add} alt="Añadir"></img></Link>
+                        <Link to={`/projects/${this.props.match.params.project_id}/${elm.id}/folder/edit`}><img className="image" src={Edit} alt="Editar" /></Link>
+                        <Link onClick={() => this.deleteFolder(elm.id)}><img className="image" src={Delete} alt="Eliminar"></img></Link></li>)}
                     {existTree && treeC.nested.map((elm, index) => <li key={index}><Link className="tree-link" to={`/projects/${this.props.match.params.project_id}/${elm.parent.id}/details`}>{elm.parent.name}</Link><img className="image" src={Add} alt="Añadir"></img>
                         <img className="image" src={Edit} alt="Editar"></img>
                         <img className="image" src={Delete} alt="Eliminar"></img></li>)}
@@ -105,4 +139,5 @@ class TreeComponent extends Component {
         )
     }
 }
+
 export default TreeComponent

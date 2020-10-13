@@ -5,13 +5,12 @@ import characterService from "../../../service/character.service"
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
-import { Link } from 'react-router-dom/cjs/react-router-dom.min'
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
-
-
 import { Link } from 'react-router-dom/cjs/react-router-dom.min'
+
 import CharacterEdit from './CharacterEdit'
+
 class CharacterDetail extends Component {
     constructor(props) {
         super(props)

@@ -16,12 +16,12 @@ class ArchiveDetail extends Component {
 
     componentDidMount = () => {
         this.archiveService
-            .getArchive(this.props.match.params.project_id, this.props.match.params.archive_id)
+            .getArchive(this.props.match.params.project_id, this.props.match.params.folder_id, this.props.match.params.archive_id)
             .then(response => this.setState(response.data))
             .catch(err => console.log('Error:', err))
     }
 
-    deleteCharacter = () => {
+    deleteArchive = () => {
         this.archiveService
             .deleteArchive(this.props.match.params.project_id, this.props.match.params.archive_id)
             .then(response => this.setState(response.data))
@@ -53,7 +53,7 @@ class ArchiveDetail extends Component {
             <Container>
                 <Row className="justify-content-md-center">
                     <Col className="m-auto" md={{ span: 8 }} >
-                        {ownCharacter && "Es mi personaje"}
+                        {ownArchive && "Es mi personaje"}
                         <h2>{this.state.name}</h2>
                         {/* {ownProject && (<div><h4>Archivos Relacionados: </h4><p>{this.state.relatedArchives}</p></div>)} */}
                         <p>{this.state.description}</p>
@@ -62,9 +62,9 @@ class ArchiveDetail extends Component {
                     
                 </Row>
                 <Row>
-                    <Col md={{ span: 4 }}>   <Link className="btn-shape btn-dark-mode-config" to={`/projects/${this.props.match.params.project_id}/all-characters/`}>Volver a todos los personajes</Link> </Col>
+                    <Col md={{ span: 4 }}>   <Link className="btn-shape btn-dark-mode-config" to={`/projects/${this.props.match.params.project_id}/all-characters/`}>Volver a todos los archivos</Link> </Col>
                     
-                    <Col md={{ span: 4}}>   <Link className="btn-shape btn-dark-mode-config" to={`/projects/${this.props.match.params.project_id}/all-characters/`} onClick={() => this.deleteCharacter()}>Borrar personaje</Link> </Col>
+                    <Col md={{ span: 4}}>   <Link className="btn-shape btn-dark-mode-config" to={`/projects/${this.props.match.params.project_id}/all-characters/`} onClick={() => this.deleteArchive()}>Borrar archivo</Link> </Col>
                     <Col md={{ span: 4 }}> <Link className="btn-shape btn-dark-mode-config" to={`/profile`}>Volver a tu perfil</Link> </Col>
                 </Row>
 
@@ -73,4 +73,4 @@ class ArchiveDetail extends Component {
     }
 }
 
-export default CharacterDetail
+export default ArchiveDetail
