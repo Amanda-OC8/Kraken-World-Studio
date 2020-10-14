@@ -13,24 +13,24 @@ router.post('/signup', (req, res, next) => {
     const email = req.body.email
 
     if (!username || !password) {
-        res.status(400).json({ message: 'Empty fields' });
+        res.status(400).json({ message: 'Campo vacío' });
         return;
     }
 
     if (password.length < 2) {
-        res.status(400).json({ message: 'Weak password' });
+        res.status(400).json({ message: 'Contraseña muy corta' });
         return;
     }
 
     User.findOne({ username }, (err, foundUser) => {
 
         if (err) {
-            res.status(500).json({ message: "Username check error" });
+            res.status(500).json({ message: "Error" });
             return;
         }
 
         if (foundUser) {
-            res.status(400).json({ message: 'Username taken' });
+            res.status(400).json({ message: 'Usuario no disponible' });
             return;
         }
 
@@ -45,7 +45,7 @@ router.post('/signup', (req, res, next) => {
 
         aNewUser.save(err => {
             if (err) {
-                res.status(500).json({ message: 'Error saving user to DB' });
+                res.status(500).json({ message: 'Error guardando nombre de usuario' });
                 return;
             }
 
@@ -54,7 +54,7 @@ router.post('/signup', (req, res, next) => {
             req.login(aNewUser, (err) => {
 
                 if (err) {
-                    res.status(500).json({ message: 'Login error' });
+                    res.status(500).json({ message: 'Error de login' });
                     return;
                 }
 
@@ -71,7 +71,7 @@ router.post('/login', (req, res, next) => {
 
     passport.authenticate('local', (err, theUser, failureDetails) => {
         if (err) {
-            res.status(500).json({ message: 'Error authenticating user' });
+            res.status(500).json({ message: 'Error de autenticación del usuario' });
             return;
         }
 
@@ -85,7 +85,7 @@ router.post('/login', (req, res, next) => {
         // save user in session
         req.login(theUser, (err) => {
             if (err) {
-                res.status(500).json({ message: 'Session error' });
+                res.status(500).json({ message: 'Error en la sesión' });
                 return;
             }
 

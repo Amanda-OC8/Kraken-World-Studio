@@ -73,3 +73,8 @@ strong {
     border-radius: 5px;
  }
 
+.warning-message {
+    margin-bottom: 15px;
+    color:  #D00000;
+    font-weight: 700;
+}
