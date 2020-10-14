@@ -4,7 +4,8 @@ import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 
 import projectService from "../../../../service/project.service"
-import ProjectCard from "../../../shared/cards/ProjectCard"
+import BaseCard from "../../../shared/cards/BaseCard"
+
 
 import SearchBar from '../../../layout/navbar/SearchBar'
 
@@ -50,7 +51,7 @@ class AllProjects extends Component {
             <Container>
                 <SearchBar searchProjects={this.searchProjects} />
                 <Row className="justify-content-md-center">
-                    {filterProjects.map(elm => <ProjectCard key={elm._id} author={elm.owner.username} title={elm.title} synopsis={elm.synopsis} id={elm._id} />)}
+                    {filterProjects.map(elm => <BaseCard key={elm._id} author={elm.owner.username} title={elm.title} description={elm.synopsis} id={elm._id} typeCard="project"/>)}
                 </Row>
 
             </Container>

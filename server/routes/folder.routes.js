@@ -58,6 +58,8 @@ router.delete('/:folder_id/delete/project/:project_id', (req, res) => {
     Folder.findByIdAndDelete(req.params.folder_id)
         .then(response => res.json(response))
         .catch(err => res.status(500).json(err))
+    
+    
 })
 
 

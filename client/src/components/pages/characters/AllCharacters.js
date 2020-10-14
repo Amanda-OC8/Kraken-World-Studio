@@ -4,7 +4,8 @@ import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 
 import characterService from '../../../service/character.service'
-import CharacterCard from '../../shared/cards/CharacterCard'
+import BaseCard from "../../shared/cards/BaseCard"
+
 
 class AllCharacters extends Component {
     constructor(props) {
@@ -30,7 +31,7 @@ class AllCharacters extends Component {
 
             <Container>
                 <Row className="justify-content-md-center">
-                    {this.state.characters.map(elm => <CharacterCard key={elm._id} completeName={elm.name + " " + elm.surname} background={elm.background} id={elm._id} projectId={elm.originProject._id} />)}
+                    {this.state.characters.map(elm => <BaseCard key={elm._id} title={elm.name + " " + elm.surname} description={elm.background} id={elm._id} projectId={elm.originProject._id} typeCard="character" />)}
                 </Row>
             </Container>
 
