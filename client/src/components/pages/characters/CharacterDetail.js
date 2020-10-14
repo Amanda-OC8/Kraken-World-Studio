@@ -58,11 +58,11 @@ class CharacterDetail extends Component {
 
         }
 
-        let user = this.state.owner
+        let user = this.state.character.owner
         let ownProject = false
 
         if (user !== undefined) {
-            user = this.state.owner._id
+            user = this.state.character.owner._id
 
             ownProject = (user === this.props.theUser._id)
 
@@ -78,20 +78,20 @@ class CharacterDetail extends Component {
                 <Container>
                     <Row className="justify-content-md-center">
                         <Col className="m-auto" md={{ span: 8 }} >
-                        {ownCharacter && "Es mi personaje"}
-                        <h2>{this.state.name} {this.state.surname}</h2>
-                        <h4>Género: </h4><p>{this.state.genre}</p>
-                        <h4>Edad: </h4><p>{this.state.age}</p>
-                        <h4>Rol: </h4><p>{this.state.rolHistory}</p>
-                        <h4>Ocupación: </h4><p>{this.state.occupation}</p>
-                        <h4>Descripción física: </h4><p>{this.state.physicalDescription}</p>
-                        <h4>Personalidad: </h4><p>{this.state.personality}</p>
-                        <h4>Hábito: </h4><p>{this.state.habits}</p>
-                        {ownProject && (<div><h4>Notas: </h4><p>{this.state.notes}</p></div>)}
-                        <h3>Trasfondo</h3>
-                        <p>{this.state.background}</p>
+                            {ownCharacter && "Es mi personaje"}
+                            <h2>{this.state.name} {this.state.character.surname}</h2>
+                            <h4>Género: </h4><p>{this.state.character.genre}</p>
+                            <h4>Edad: </h4><p>{this.state.character.age}</p>
+                            <h4>Rol: </h4><p>{this.state.character.rolHistory}</p>
+                            <h4>Ocupación: </h4><p>{this.state.character.occupation}</p>
+                            <h4>Descripción física: </h4><p>{this.state.character.physicalDescription}</p>
+                            <h4>Personalidad: </h4><p>{this.state.character.personality}</p>
+                            <h4>Hábito: </h4><p>{this.state.character.habits}</p>
+                            {ownProject && (<div><h4>Notas: </h4><p>{this.state.character.notes}</p></div>)}
+                            <h3>Trasfondo</h3>
+                            <p>{this.state.character.background}</p>
 
-                    </Col>
+                        </Col>
 
                     </Row>
                     <Row>
