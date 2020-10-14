@@ -24,7 +24,7 @@ router.get('/all/project/:project_id/:folder_id', (req, res) => {
             select: "name "
         })
         .then(response => {
-            let filterResponse = response.filter(elm => elm.originProject != null)
+            let filterResponse = response.filter(elm => elm.originProject != null && elm.parentFolder != null)
             res.json(filterResponse)
         })
         .then(response => res.json(response))

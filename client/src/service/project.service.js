@@ -16,6 +16,7 @@ export default class ProjectService {
     deleteProject = id => this.api.delete(`/project/${id}/delete`)
     getAllProjects = () => this.api.get('/project/all')
     getTimeline = id => this.api.get(`/timeline/project/${id}`)
-    editTimeline = id => this.api.put(`/timeline/edit/project/${id}`)
-    addTimeline = id => this.api.post(`/timeline/new/project/${id}`)
+    // editTimeline = id => this.api.put(`/timeline/edit/project/${id}`)
+    // addTimeline = id => this.api.post(`/timeline/new/project/${id}`)
+    getStory = id => this.api.get(`/project/story/${id}`)
 }
