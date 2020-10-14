@@ -29,6 +29,7 @@ import CharacterNew from './pages/characters/CharacterNew'
 import CharacterEdit from './pages/characters/CharacterEdit'
 
 import ArchiveDetails from './pages/archives/ArchiveDetails'
+import ArchiveNew from './pages/archives/ArchiveNew'
 
 
 
@@ -101,6 +102,7 @@ class App extends Component {
             <Route path="/projects/:project_id/:character_id/edit" exact render={props => <CharacterEdit theUser={this.state.loggedInUser} {...props} />} />
 
             <Route path="/projects/:project_id/:folder_id/:archive_id/details" exact render={props => <ArchiveDetails theUser={this.state.loggedInUser} {...props} />} />
+            <Route path="/projects/:project_id/:folder_id/archive/new" exact render={props => <ArchiveNew theUser={this.state.loggedInUser} {...props} />} />
 
             <Route path="/testing" render={props => <Testing theUser={this.state.loggedInUser} {...props} />} />
           </main>

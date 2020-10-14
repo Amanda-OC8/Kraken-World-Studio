@@ -56,7 +56,7 @@ class ArchiveDetail extends Component {
                         {ownArchive && "Es mi personaje"}
                         <h2>{this.state.name}</h2>
                         {/* {ownProject && (<div><h4>Archivos Relacionados: </h4><p>{this.state.relatedArchives}</p></div>)} */}
-                        <p>{this.state.description}</p>
+                        <div dangerouslySetInnerHTML={{__html: this.state.description}}></div>
 
                     </Col>
                     
