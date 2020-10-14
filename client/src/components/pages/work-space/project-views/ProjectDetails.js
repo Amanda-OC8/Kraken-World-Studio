@@ -20,21 +20,28 @@ class ProjectDetails extends Component {
     constructor(props) {
         super(props)
         this.state = {
+            projects: {},
             showModal: false
         }
 
         this.projectService = new projectService()
     }
     handleModal = showModal => {
-        console.log(this.setState.showModal, showModal)
         this.setState({ showModal })
     }
 
 
     componentDidMount = () => {
+
+        this.loadProject()
+    }
+
+    loadProject = () => {
         this.projectService
             .getProject(this.props.match.params.project_id)
-            .then(response => this.setState(response.data))
+            .then(response => {
+                this.setState({ projects: response.data })
+            })
             .catch(err => console.log('Error:', err))
     }
 
@@ -47,36 +54,36 @@ class ProjectDetails extends Component {
 
     render() {
 
-        let user = this.state.owner
+        let user = this.state.projects.owner
         let ownProject = false
 
         if (user !== undefined) {
-            user = this.state.owner._id
+            user = this.state.projects.owner._id
 
             ownProject = (user === this.props.theUser._id)
 
         }
-        
+
         return (
             <>
                 <Container>
                     <Row className="justify-content-md-center">
                         <Col className="m-auto" md={{ span: 8 }} >
-                            <h2>{this.state.title}</h2>
-                            <h4>Género: {this.state.genre}</h4>
+                            <h2>{this.state.projects.title}</h2>
+                            <h4>Género: {this.state.projects.genre}</h4>
                             <Row >
-                                <Col md={{ span: 4 }}> <p>Taglines: {this.state.tagLines}</p> </Col>
-                                <Col md={{ span: 4, offset: 4 }}> <p>Tipo de proyecto: {this.state.type}</p> </Col>
+                                <Col md={{ span: 4 }}> <p>Taglines: {this.state.projects.tagLines}</p> </Col>
+                                <Col md={{ span: 4, offset: 4 }}> <p>Tipo de proyecto: {this.state.projects.type}</p> </Col>
                             </Row>
                             <h3>Sinópsis/resumen</h3>
-                            <p>{this.state.synopsis}</p>
+                            <p>{this.state.projects.synopsis}</p>
 
                         </Col>
 
                         {ownProject ? (
                             <Col className="m-auto" md={{ span: 4 }} >
                                 <h2>Árbol contenido</h2>
-                                <TreeComponent {...this.props}/>
+                                <TreeComponent {...this.props} />
                             </Col>
 
                         ) : null}
@@ -89,9 +96,11 @@ class ProjectDetails extends Component {
                         {ownProject ? (
 
                             <Dropdown>
-                                <Dropdown.Toggle className="btn-shape btn-dark-mode-config">Añadir elementos</Dropdown.Toggle>
+                                <Dropdown.Toggle variant='dark' className="btn-shape btn-dark-mode-config">Añadir elementos</Dropdown.Toggle>
                                 <Dropdown.Menu className="drop-toggle">
-                                    <Dropdown.Item><Link className="nav-link link-drop" to={`/project/${this.props.match.params.project_id}/edit`}>Editar proyecto</Link> </Dropdown.Item>
+
+                                    <Dropdown.Item><Link className="nav-link link-drop" onClick={() => this.handleModal(true)}  >Editar proyecto</Link></Dropdown.Item>
+
                                     <Dropdown.Item><Link className="nav-link link-drop warning-drop" to="/all-projects" onClick={() => this.deleteProject()}>Borrar proyecto</Link> </Dropdown.Item>
                                     <Dropdown.Item><Link className="nav-link link-drop" to={`/projects/${this.props.match.params.project_id}/character-new`}>Añadir personaje</Link> </Dropdown.Item>
                                     <Dropdown.Item><Link className="nav-link link-drop" to="/all-projects">Añadir carpeta</Link> </Dropdown.Item>
@@ -114,7 +123,7 @@ class ProjectDetails extends Component {
                         <Modal.Title>Editar perfil</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        <ProjectEdit closeModal={() => this.handleModal(false)} />
+                        <ProjectEdit {...this.props} closeModal={() => this.handleModal(false)} refreshList={this.loadProject} />
                     </Modal.Body>
                 </Modal>
             </>

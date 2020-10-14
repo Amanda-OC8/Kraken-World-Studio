@@ -19,7 +19,7 @@ class CharacterEdit extends Component {
     }
 
     componentDidMount = () => {
-        console.log('hola')
+
         this.characterService
             .getCharacter(this.props.match.params.project_id, this.props.match.params.character_id)
             .then(response => this.setState(response.data))
@@ -69,7 +69,7 @@ class CharacterEdit extends Component {
         return (
             <Container>
                 <Row className="justify-content-center">
-                    <Col md={{ span: 8 }}>
+                    <Col md={{ span: 12 }}>
                         <h2>Editar Personaje</h2>
                         <h5>Los campos con asteriscos con obligatorios</h5>
                         <Form onSubmit={this.handleFormSubmit}>

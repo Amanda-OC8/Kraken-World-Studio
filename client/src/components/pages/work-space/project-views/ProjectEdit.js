@@ -38,10 +38,15 @@ class ProjectEdit extends Component {
     handleFormSubmit = e => {
 
         e.preventDefault()
-        this.setState({owner: this.props.theUser._id})
+
+        this.setState({ owner: this.props.theUser._id })
         this.projectService
             .editProject(this.props.match.params.project_id, this.state)
-            .then(response => console.log(response))
+            .then(() => {
+                console.log(this.props)
+                this.props.closeModal()
+                this.props.refreshList()
+            })
             .catch(err => console.log('Error:', { err }))
     }
 
@@ -52,7 +57,7 @@ class ProjectEdit extends Component {
         return (
             <Container>
                 <Row className="justify-content-center">
-                    <Col md={{ span: 5 }}>
+                    <Col md={{ span: 12 }}>
                         <h2>Editar proyecto</h2>
                         <h5>Los campos con asteriscos son obligatorios</h5>
                         <Form onSubmit={this.handleFormSubmit}>

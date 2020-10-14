@@ -63,7 +63,7 @@ class ProfileEdit extends Component {
                     <Form.Control type="text" name="image" onChange={this.handleInputChange} />
                 </Form.Group>
 
-                <Button className='btn-shape btn-dark-mode-config' type="submit">Editar</Button>
+                <Button variant='dark' className='btn-shape btn-dark-mode-config' type="submit">Editar</Button>
             </Form>
         )
     }

@@ -26,7 +26,7 @@ import ProjectEdit from './pages/work-space/project-views/ProjectEdit'
 import AllCharacters from './pages/characters/AllCharacters'
 import CharacterDetail from './pages/characters/CharacterDetail'
 import CharacterNew from './pages/characters/CharacterNew'
-import FoldersInProyect from './pages/folders/FoldersInProyect'
+// import FoldersInProyect from './pages/folders/FoldersInProyect'
 import CharacterEdit from './pages/characters/CharacterEdit'
 
 
@@ -93,7 +93,7 @@ class App extends Component {
             <Route path="/projects/:project_id/:character_id/details" exact render={props => <CharacterDetail theUser={this.state.loggedInUser} {...props} />} />
             <Route path="/projects/:project_id/character-new" render={props => <CharacterNew theUser={this.state.loggedInUser} {...props} />} />
 
-            <Route path="/projects/:project_id/folders-in-project" render={props => <FoldersInProyect theUser={this.state.loggedInUser} {...props} />} />
+            {/* <Route path="/projects/:project_id/folders-in-project" render={props => <FoldersInProyect theUser={this.state.loggedInUser} {...props} />} /> */}
 
             <Route path="/projects/:project_id/:character_id/edit" exact render={props => <CharacterEdit theUser={this.state.loggedInUser} {...props} />} />
 

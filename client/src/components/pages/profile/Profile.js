@@ -77,7 +77,7 @@ class Profile extends Component {
                     <p>Tu usuario es: {this.state.profile.username}</p>
                     <p>Tu correo es: {this.state.profile.email}</p>
                     <p>Tu bio: {this.state.profile.bio}</p>
-                    <Button onClick={() => this.handleModal(true)} style={{ marginBottom: '20px' }} className='btn-shape btn-dark-mode-config' size="lg">Editar perfil</Button>
+                    <Button variant='dark' onClick={() => this.handleModal(true)} style={{ marginBottom: '20px' }} className='btn-shape btn-dark-mode-config' size="lg">Editar perfil</Button>
 
                 </Container>
 
