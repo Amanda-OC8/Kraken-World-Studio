@@ -11,6 +11,7 @@ import '../../../App.css'
 import { Link } from 'react-router-dom/cjs/react-router-dom.min'
 import ProjectEdit from './ProjectEdit'
 import TreeComponent from '../../../shared/treeComponent/TreeComponent'
+import TreeComponentLector from '../../../shared/treeComponent/TreeComponentLector'
 import Modal from 'react-bootstrap/Modal'
 import '../../modal/Modal.css'
 
@@ -72,14 +73,15 @@ class ProjectDetails extends Component {
                             <p>{this.state.synopsis}</p>
 
                         </Col>
-
-                        {ownProject ? (
+                      
                             <Col className="m-auto" md={{ span: 4 }} >
-                                <h2>Árbol contenido</h2>
-                                <TreeComponent {...this.props}/>
+                            <h2>Árbol contenido</h2>
+                            {ownProject && < TreeComponent {...this.props} />}
+                            {!ownProject && < TreeComponentLector {...this.props} />}
+
+                                
                             </Col>
 
-                        ) : null}
                     </Row>
                     <Row>
                         {ownProject ? (

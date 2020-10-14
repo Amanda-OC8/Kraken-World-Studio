@@ -56,14 +56,13 @@ router.put('/:folder_id/edit/project/:project_id/', (req, res) => {
 
 router.delete('/:folder_id/delete/project/:project_id', (req, res) => {
 
-    Folder.findByIdAndDelete(req.params.folder_id)
+    const folderPromise = Folder.findByIdAndDelete(req.params.folder_id)
+    const archivePromise = Archive.deleteMany({ parentFolder: { $in: req.params.folder_id } })
+   
+    Promise.all([folderPromise, archivePromise])
         .then(response => res.json(response))
         .catch(err => res.status(500).json(err))
     
-    Archive.deleteMany({ originProject: { $in: req.params.folder_id } })
-        .then(response => res.json(response))
-        .catch(err => res.status(500).json(err))
-
 })
 
 

@@ -14,7 +14,9 @@ class Login extends Component {
         super(props)
         this.state = {
             username: '',
-            password: ''
+            password: '', 
+            errorMessage: ""
+
         }
         this.authService = new authService()
 
@@ -35,7 +37,9 @@ class Login extends Component {
                 this.props.setTheUser(response.data)
                 this.props.history.push('/profile')
             })
-            .catch(err => console.log('Error:', { err }))
+            .catch(err => {
+                this.setState({errorMessage: err})
+            })
     }
 
 
@@ -46,7 +50,9 @@ class Login extends Component {
             <Container>
                 <main>
                     <Row className="justify-content-center">
+                       
                         <Col md={{ span: 5 }}>
+                            <h2 className="warning-message"> {this.state.errorMessage && this.state.errorMessage.response.data.message}</h2>
                             <Form onSubmit={this.handleFormSubmit}>
                                 <Form.Group>
                                     <Form.Label>Nombre de usuario</Form.Label>
@@ -58,7 +64,7 @@ class Login extends Component {
                                     <Form.Control type="password" name="password" value={this.state.password} onChange={this.handleInputChange} />
                                 </Form.Group>
 
-                                <Button className='btn-shape btn-dark-mode-config' type="submit">Acceder</Button>
+                                <Button variant="dark" className='btn-shape btn-dark-mode-config' type="submit">Acceder</Button>
                             </Form>
                         </Col>
                     </Row>

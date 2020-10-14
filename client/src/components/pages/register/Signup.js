@@ -14,7 +14,8 @@ class Signup extends Component {
         this.state = {
             username: '',
             email: '',
-            password: ''
+            password: '', 
+            errorMessage: ""
         }
         this.authService = new authService()
     }
@@ -34,18 +35,21 @@ class Signup extends Component {
                 this.props.setTheUser(response.data)
                 this.props.history.push('/')
             })
-            .catch(err => console.log('Error:', { err }))
+            .catch(err => {
+                this.setState({ errorMessage: err.message })
+            })
     }
 
 
     render() {
-
+        console.log(this.state.errorMessage)
         return (
 
             <Container>
                 <main>
                     <Row className="justify-content-center">
                         <Col md={{ span: 5 }}>
+                            {/* <h2 className="warning-message"> {this.state.errorMessage && this.state.errorMessage.response.data.message}</h2> */}
                             <h1>Registro de usuario</h1>
                             <Form onSubmit={this.handleFormSubmit}>
                                 <Form.Group>
