@@ -12,7 +12,8 @@ import ProfileEdit from './ProfileEdit'
 
 
 import ProfileService from "../../../service/profile.service"
-import ProjectCard from "../../shared/cards/ProjectCard"
+import BaseCard from "../../shared/cards/BaseCard"
+
 
 
 import '../../App.css'
@@ -42,7 +43,7 @@ class Profile extends Component {
     }
 
     loadProfile = () => {
-        console.log('holaaaaaaaaaaaaaaaa')
+        
         this.profileService
             .getProfile()
             .then(response => {
@@ -61,7 +62,7 @@ class Profile extends Component {
     }
 
     render() {
-        console.log(this.state)
+        
         return (
 
             <>
@@ -85,7 +86,7 @@ class Profile extends Component {
                     <h3>Tus proyectos</h3>
 
                     <Row className="justify-content-md-center">
-                        {this.state.ownProjects.map(elm => <ProjectCard key={elm._id} author={elm.owner.username} title={elm.title} synopsis={elm.synopsis} id={elm._id} />)}
+                        {this.state.ownProjects.map(elm => <BaseCard key={elm._id} author={elm.owner.username} title={elm.title} description={elm.synopsis} id={elm._id} typeCard="project" />)}
                     </Row>
                 </Container>
 

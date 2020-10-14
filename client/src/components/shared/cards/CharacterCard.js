@@ -46,7 +46,7 @@ class CharacterCard extends Component {
                         }
 
                       
-                        <Link className="btn-shape btn-dark-mode-config" to={`/projects/${this.props.projectId}/${this.props.id}/details`}>Detalles</Link>
+                        <Link className="btn-shape btn-dark-mode-config" to={`/projects/${this.props.projectId}/${this.props.id}/character/details`}>Detalles</Link>
                     </Card.Body>
                 </Card>
             </Col>

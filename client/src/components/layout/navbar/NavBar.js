@@ -27,7 +27,7 @@ export default class extends Component {
 
     render() {
         return (
-            <Navbar bg="dark" variant="dark" expand="lg" style={{ marginBottom: '30px' }}>
+            <Navbar variant="dark" expand="lg" className="nav-bar" >
                 <Link to="/">
                     <Navbar.Brand>
                         <img

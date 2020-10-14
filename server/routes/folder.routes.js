@@ -3,8 +3,9 @@ const router = express.Router()
 
 
 
-const Project = require('../models/project.model')
+
 const Folder = require('../models/folder.model')
+const Archive = require('../models/archive.model')
 
 
 //Endpoints Folder
@@ -33,14 +34,12 @@ router.get('/:folder_id/project/:project_id/', (req, res) => {
 
 router.post('/new/project/:project_id', (req, res) => {
 
-    const projectId = req.params.project_id
+    
 
-    const { name, isPublic } = req.body
-
-    const projectPromise = Project.findById(projectId)
-    const folderPromise = Folder.create({ name, isPublic, OriginProject: projectId, owner: req.user._id })
-
-    Promise.all([projectPromise, folderPromise])
+    const { name, isPublic, owner, originProject } = req.body
+    console.log({ name, isPublic, owner, originProject })
+ 
+   Folder.create({ name, isPublic, owner, originProject})   
         .then(response => res.json(response))
         .catch(err => res.status(500).json(err))
 })
@@ -60,6 +59,11 @@ router.delete('/:folder_id/delete/project/:project_id', (req, res) => {
     Folder.findByIdAndDelete(req.params.folder_id)
         .then(response => res.json(response))
         .catch(err => res.status(500).json(err))
+    
+    Archive.deleteMany({ originProject: { $in: req.params.folder_id } })
+        .then(response => res.json(response))
+        .catch(err => res.status(500).json(err))
+
 })
 
 

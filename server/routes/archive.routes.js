@@ -3,6 +3,8 @@ const router = express.Router()
 
 
 const Archive = require('../models/archive.model')
+const Folder = require('../models/folder.model')
+
 
 
 
@@ -41,13 +43,19 @@ router.post('/new/project/:project_id/:folder_id/', (req, res) => {
     const { name, relatedArchives, description,  isPublic } = req.body
  
     Archive.create({ name, relatedArchives, description, originProject: req.params.project_id, parentFolder: req.params.folder_id, owner: req.user._id, isPublic })
-        .then(response => res.json(response))
+        .then(response => {
+            res.json(response)
+            return Folder.findByIdAndUpdate(req.params.folder_id, { $push: { archives: response._id } })
+        })
+        .then(()=> console.log("add"))
         .catch(err => res.status(500).json(err))
+    
+     
 })
 
 router.put('/:archive_id/edit/project/:project_id/:folder_id', (req, res) => {
 
-    const { name,relatedArchives, description, isPublic } = req.body
+    const { name, relatedArchives, description, isPublic } = req.body
    
     Archive.findByIdAndUpdate(req.params.archive_id, { name, relatedArchives, description, originProject: req.params.project_id, originFolder: req.params.folder_id, owner: req.user._id, isPublic })
         .then(response => res.json(response))

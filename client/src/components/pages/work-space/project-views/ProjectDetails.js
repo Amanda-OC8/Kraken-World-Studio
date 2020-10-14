@@ -96,7 +96,7 @@ class ProjectDetails extends Component {
                         {ownProject ? (
 
                             <Dropdown>
-                                <Dropdown.Toggle variant='dark' className="btn-shape btn-dark-mode-config">Añadir elementos</Dropdown.Toggle>
+                                <Dropdown.Toggle className="btn-shape btn-dark-mode-config" variant="dark">Añadir elementos</Dropdown.Toggle>
                                 <Dropdown.Menu className="drop-toggle">
 
                                     <Dropdown.Item><Link className="nav-link link-drop" onClick={() => this.handleModal(true)}  >Editar proyecto</Link></Dropdown.Item>

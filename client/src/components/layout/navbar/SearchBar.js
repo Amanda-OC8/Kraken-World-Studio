@@ -19,6 +19,8 @@ class SearchBar extends Component {
                         < input className="form-control my-0 py-1 form-control form-control-sm ml-3 w-75" type="text" placeholder='Buscador' onChange={this.handleSearch} />
                     </div>
                 </MDBCol>
+
+                < input className="input searcher" type="text" placeholder='Buscador' onChange={this.handleSearch} />
             </>
 
         )
