@@ -1,42 +1,42 @@
-import React, { Component } from 'react'
+// import React, { Component } from 'react'
 
-import Container from 'react-bootstrap/Container'
-import Row from 'react-bootstrap/Row'
+// import Container from 'react-bootstrap/Container'
+// import Row from 'react-bootstrap/Row'
 
-import archiveService from '../../../service/archive.service'
-import CharacterCard from '../../shared/cards/CharacterCard'
+// import archiveService from '../../../service/archive.service'
+// import CharacterCard from '../../shared/cards/CharacterCard'
 
-class AllCharacters extends Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            characters: []
-        }
-        this.characterService = new characterService()
-    }
+// class AllCharacters extends Component {
+//     constructor(props) {
+//         super(props)
+//         this.state = {
+//             characters: []
+//         }
+//         this.characterService = new characterService()
+//     }
 
-    componentDidMount = () => this.loadAllCharacters()
+//     componentDidMount = () => this.loadAllCharacters()
 
-    loadAllCharacters = () => {
-        this.characterService
+//     loadAllCharacters = () => {
+//         this.characterService
             
-            .getAllCharacters(this.props.match.params.project_id)
-            .then(response => this.setState({ characters: response.data }))
-            .catch(err => console.log('Error:', err))
-    }
+//             .getAllCharacters(this.props.match.params.project_id)
+//             .then(response => this.setState({ characters: response.data }))
+//             .catch(err => console.log('Error:', err))
+//     }
 
-    render() {
+//     render() {
 
-        return (
+//         return (
 
-            <Container>
-                <Row className="justify-content-md-center">
-                    {this.state.characters.map(elm => <CharacterCard key={elm._id} completeName={elm.name + " " + elm.surname} background={elm.background} id={elm._id} projectId={elm.originProject._id} />)}
-                </Row>
-            </Container>
+//             <Container>
+//                 <Row className="justify-content-md-center">
+//                     {this.state.characters.map(elm => <CharacterCard key={elm._id} completeName={elm.name + " " + elm.surname} background={elm.background} id={elm._id} projectId={elm.originProject._id} />)}
+//                 </Row>
+//             </Container>
 
-        )
-    }
-}
+//         )
+//     }
+// }
 
-export default AllCharacters
+// export default AllCharacters

@@ -19,7 +19,7 @@ class CharacterEdit extends Component {
     }
 
     componentDidMount = () => {
-        console.log('hola')
+       
         this.characterService
             .getCharacter(this.props.match.params.project_id, this.props.match.params.character_id)
             .then(response => this.setState(response.data))
