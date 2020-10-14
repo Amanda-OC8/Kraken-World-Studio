@@ -51,7 +51,28 @@ class TreeComponent extends Component {
             .getTree(this.props.match.params.project_id)
             .then(response => this.setState({ components: response.data }))
             .catch(err => console.log('Error:', err))
+        
+    }
 
+
+    deleteCharacter = (character_id) => {
+        
+        this.characterService
+            .deleteCharacter(this.props.match.params.project_id, character_id)
+            .then(()=> console.log("borrado"))
+            .catch(err => console.log('Error:', err))
+        
+        this.loadCommon()
+    }
+
+    deleteFolder = (folder_id) => {
+
+        this.folderService
+            .deleteFolder(this.props.match.params.project_id, folder_id)
+            .then(() => console.log("borrado"))
+            .catch(err => console.log('Error:', err))
+
+        this.loadCommon()
     }
 
     deleteCharacter = (character_id) => {
@@ -213,4 +234,5 @@ class TreeComponent extends Component {
         )
     }
 }
+
 export default TreeComponent

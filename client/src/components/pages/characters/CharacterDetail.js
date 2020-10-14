@@ -7,10 +7,10 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
-
-
 import { Link } from 'react-router-dom/cjs/react-router-dom.min'
+
 import CharacterEdit from './CharacterEdit'
+
 class CharacterDetail extends Component {
     constructor(props) {
         super(props)
@@ -82,20 +82,20 @@ class CharacterDetail extends Component {
                 <Container>
                     <Row className="justify-content-md-center">
                         <Col className="m-auto" md={{ span: 8 }} >
-                            {ownCharacter && "Es mi personaje"}
-                            <h2>Nombre:{this.state.character.name} Apellido: {this.state.character.surname}</h2>
-                            <h4>Género: {this.state.character.genre}</h4>
-                            <h4>Edad: {this.state.character.age}</h4>
-                            <h4>Rol: {this.state.character.rolHistory}</h4>
-                            <h4>Ocupación: {this.state.character.occupation}</h4>
-                            <h4>Descripción física: {this.state.character.physicalDescription}</h4>
-                            <h4>Personalidad: {this.state.character.personality}</h4>
-                            <h4>Hábito: {this.state.character.habits}</h4>
-                            {ownProject && <h4>Notas: {this.state.character.notes}</h4>}
-                            <h3>Trasfondo</h3>
-                            <p>{this.state.character.background}</p>
+                        {ownCharacter && "Es mi personaje"}
+                        <h2>{this.state.name} {this.state.surname}</h2>
+                        <h4>Género: </h4><p>{this.state.genre}</p>
+                        <h4>Edad: </h4><p>{this.state.age}</p>
+                        <h4>Rol: </h4><p>{this.state.rolHistory}</p>
+                        <h4>Ocupación: </h4><p>{this.state.occupation}</p>
+                        <h4>Descripción física: </h4><p>{this.state.physicalDescription}</p>
+                        <h4>Personalidad: </h4><p>{this.state.personality}</p>
+                        <h4>Hábito: </h4><p>{this.state.habits}</p>
+                        {ownProject && (<div><h4>Notas: </h4><p>{this.state.notes}</p></div>)}
+                        <h3>Trasfondo</h3>
+                        <p>{this.state.background}</p>
 
-                        </Col>
+                    </Col>
 
                     </Row>
                     <Row>
