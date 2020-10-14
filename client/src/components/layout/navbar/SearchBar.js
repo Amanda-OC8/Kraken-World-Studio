@@ -11,8 +11,9 @@ class SearchBar extends Component {
     render() {
 
         return (
-
+            
             < input className="input searcher" type="text" placeholder='Buscador' onChange={this.handleSearch} />
+
         )
     }
 

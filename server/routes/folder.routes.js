@@ -3,8 +3,9 @@ const router = express.Router()
 
 
 
-const Project = require('../models/project.model')
+
 const Folder = require('../models/folder.model')
+const Archive = require('../models/archive.model')
 
 
 //Endpoints Folder
@@ -59,7 +60,10 @@ router.delete('/:folder_id/delete/project/:project_id', (req, res) => {
         .then(response => res.json(response))
         .catch(err => res.status(500).json(err))
     
-    
+    Archive.deleteMany({ originProject: { $in: req.params.folder_id } })
+        .then(response => res.json(response))
+        .catch(err => res.status(500).json(err))
+
 })
 
 

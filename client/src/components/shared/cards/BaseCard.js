@@ -33,7 +33,7 @@ class ProjectCard extends Component {
                         </Card.Title>
                         {this.state.description.length > 100 ? (
                             <Card.Text>
-                                <Collapse in={!this.state.showMore}><span>{shortDescription}</span></Collapse>
+                                <Collapse in={!this.state.showMore}><div>{shortDescription}</div></Collapse>
 
                                 {!this.state.showMore && <NavLink onClick={this.showMoreText} className="show-more">Leer más </NavLink>}
                                 {this.state.showMore && <NavLink onClick={this.showMoreText} className="show-more">Leer menos </NavLink>}

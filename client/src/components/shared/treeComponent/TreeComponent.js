@@ -27,7 +27,8 @@ class TreeComponent extends Component {
             treeComponent: [],
             components: [],
             showMoreCharac: false,
-            showMoreFolders: false, 
+            showMoreFolders: false,
+            showMoreArchives: false,
             showModalNewFolder: false,
             showModalEditFolder: false,
             selectFolder: ""
@@ -85,6 +86,8 @@ class TreeComponent extends Component {
 
     showMoreTextCharac = () => this.setState({ showMoreCharac: !this.state.showMoreCharac })
     showMoreTextFolders = () => this.setState({ showMoreFolders: !this.state.showMoreFolders })
+    showMoreTextArchives = () => this.setState({ showMoreArchives: !this.state.showMoreArchives })
+
 
     handleModalNewFolder = showModalNewFolder => this.setState({ showModalNewFolder })
 
@@ -103,7 +106,7 @@ class TreeComponent extends Component {
             } else if (subelm.model === "Folder") {
 
                 if (subelm.archives.length) {
-                    
+
                     subelm.archives.map(arElm => arElm.parentFolder === subelm._id ? tree.archives.push({ name: arElm.name, id: arElm._id }) : null)
                 }
 
@@ -116,7 +119,7 @@ class TreeComponent extends Component {
             }
 
         }))
-        
+
         return tree
 
 
@@ -126,22 +129,10 @@ class TreeComponent extends Component {
     render() {
         let treeC = {}
         let existTree = false
-        let children = null;
         if (this.state.components.length !== 0) {
             treeC = this.createNode()
             existTree = true
 
-            if (treeC.nested) {
-
-                children = (
-                    <ul>
-                        {treeC.nested.map(elm => elm.nested ? elm.nested.map((subelm, index) => <li key={index}><Link className="tree-link" to={`/projects/${this.props.match.params.project_id}/${elm.parent.id}/${subelm.id}/details`}>{subelm.name}</Link>
-
-                            <Link to={`/projects/${this.props.match.params.project_id}/${elm.parent.id}/${subelm.id}/archive/edit`}><img className="image" src={Edit} alt="Editar" /></Link>
-                            <Link onClick={() => this.deleteArchive(elm.parent.id, subelm.id)}><img className="image" src={Delete} alt="Eliminar"></img></Link></li>) : null)}
-                    </ul>
-                )
-            }
 
         }
 
@@ -153,8 +144,8 @@ class TreeComponent extends Component {
                 <ul>
                     <h4><Link className="tree-link" to={`/projects/${this.props.match.params.project_id}/all-characters`}>Personajes</Link>
                         <Link to={`/projects/${this.props.match.params.project_id}/character/new`}><img className="image" src={Add} alt="Añadir"></img></Link></h4>
-                    {!this.state.showMoreCharac && <NavLink onClick={this.showMoreTextCharac} className="show-more">Mostrar todos los personajes</NavLink>}
-                    {this.state.showMoreCharac && <NavLink onClick={this.showMoreTextCharac} className="show-more">Ocultar todos los personajes </NavLink>}
+                    {!this.state.showMoreCharac && <NavLink onClick={this.showMoreTextCharac} className="show-more">Mostrar todos</NavLink>}
+                    {this.state.showMoreCharac && <NavLink onClick={this.showMoreTextCharac} className="show-more">Ocultar todos</NavLink>}
                     <Collapse in={this.state.showMoreCharac}>
                         <span>
                             {existTree && treeC.characters.map((elm, index) => <li key={index}><Link className="tree-link" to={`/projects/${this.props.match.params.project_id}/${elm.id}/character/details`}>{elm.name}</Link>
@@ -165,12 +156,10 @@ class TreeComponent extends Component {
                     </Collapse>
 
 
-
-
                     <br />
-                    <h4>Carpetas y archivos<Link onClick={() => this.handleModalNewFolder(true)}><img className="image" src={Add} alt="Añadir"></img></Link></h4>
-                    {!this.state.showMoreFolders && <NavLink onClick={this.showMoreTextFolders} className="show-more">Mostrar todas las carpetas y archivos</NavLink>}
-                    {this.state.showMoreFolders && <NavLink onClick={this.showMoreTextFolders} className="show-more">Mostrar todas las carpetas y archivos</NavLink>}
+                    <h4>Carpetas<Link onClick={() => this.handleModalNewFolder(true)}><img className="image" src={Add} alt="Añadir"></img></Link></h4>
+                    {!this.state.showMoreFolders && <NavLink onClick={this.showMoreTextFolders} className="show-more">Mostrar todas</NavLink>}
+                    {this.state.showMoreFolders && <NavLink onClick={this.showMoreTextFolders} className="show-more">Ocultar todas</NavLink>}
 
                     <Collapse in={this.state.showMoreFolders}>
                         <span>
@@ -183,7 +172,22 @@ class TreeComponent extends Component {
                             {existTree && treeC.nested.map((elm, index) => <li key={index}><Link className="tree-link" to={`/projects/${this.props.match.params.project_id}/${elm.parent.id}/details`}>{elm.parent.name}</Link> <Link to={`/projects/${this.props.match.params.project_id}/${elm.parent.id}/archive/new`}><img className="image" src={Add} alt="Añadir"></img></Link>
                                 <Link to={`/projects/${this.props.match.params.project_id}/${elm.parent.id}/folder/edit`}><img className="image" src={Edit} alt="Editar" /></Link>
                                 <Link onClick={() => this.deleteFolder(elm.parent.id)}><img className="image" src={Delete} alt="Eliminar"></img></Link></li>)}
-                            {existTree && children}
+
+                        </span>
+                    </Collapse>
+                    <br />
+                    <h4>Archivos</h4>
+                    {!this.state.showMoreArchives && <NavLink onClick={this.showMoreTextArchives} className="show-more">Mostrar todos</NavLink>}
+                    {this.state.showMoreArchives && <NavLink onClick={this.showMoreTextArchives} className="show-more">Ocultar todos</NavLink>}
+                    <Collapse in={this.state.showMoreArchives}>
+                        <span>
+                            {existTree &&
+                                <ul>
+                                    {treeC.nested.map(elm => elm.nested ? elm.nested.map((subelm, index) => <li key={index}>{elm.parent.name}: <Link className="tree-link" to={`/projects/${this.props.match.params.project_id}/${elm.parent.id}/${subelm.id}/details`}>{subelm.name}</Link>
+
+                                        <Link to={`/projects/${this.props.match.params.project_id}/${elm.parent.id}/${subelm.id}/archive/edit`}><img className="image" src={Edit} alt="Editar" /></Link>
+                                        <Link onClick={() => this.deleteArchive(elm.parent.id, subelm.id)}><img className="image" src={Delete} alt="Eliminar"></img></Link></li>) : null)}
+                                </ul>}
                         </span>
                     </Collapse>
                 </ul>

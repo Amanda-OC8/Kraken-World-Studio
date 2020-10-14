@@ -32,15 +32,15 @@ class AllProjects extends Component {
     }
 
     // SearchBar de todos los proyectos
-    searchProjects = (searchValue) => {
-        this.setState({ searchValue });
-    }
+    searchProjects = (searchValue) => this.setState({ searchValue })
 
     getFilterProjects = () => {
-        const { projects, searchValue } = this.state;
+        const { projects, searchValue } = this.state
         const expresion = new RegExp(searchValue, 'i')
-        return searchValue ? projects.filter(elm => elm.title.match(expresion)) : projects;
+        return searchValue ? projects.filter(elm => elm.title.match(expresion)) : projects
     }
+
+
 
     render() {
 
