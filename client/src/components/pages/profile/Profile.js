@@ -26,7 +26,8 @@ class Profile extends Component {
         this.state = {
             profile: {},
             showModal: false,
-            ownProjects: []
+            ownProjects: [],
+            errorMessage: ""
         }
         this.profileService = new ProfileService()
     }
@@ -47,11 +48,12 @@ class Profile extends Component {
         this.profileService
             .getProfile()
             .then(response => {
-                // console.log(response.data[1])
                 this.setState({ ...this.state, profile: response.data[1] })
             })
 
-            .catch(err => console.log('Error:', err))
+            .catch(err => {
+                this.setState({ errorMessage: err.message })
+            })
     }
 
     loadOwnProjects = () => {
