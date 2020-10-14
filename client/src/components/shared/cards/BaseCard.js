@@ -20,7 +20,7 @@ class ProjectCard extends Component {
     showMoreText = () => this.setState({ showMore: !this.state.showMore })
 
     render() {
-        
+
         let shortDescription = this.state.description.slice(0, 100)
         return (
             <Col md={{ span: 4 }} className="justifiy-content-center">
@@ -46,12 +46,12 @@ class ProjectCard extends Component {
                         ) : (<Card.Text>{this.state.description}</Card.Text>)
                         }
 
-                      
+
                         {this.props.typeCard === "project" && <Link className="btn-shape btn-dark-mode-config" to={`/projects/${this.props.id}/details`}>Detalles</Link>}
                         {this.props.typeCard === "character" && <Link className="btn-shape btn-dark-mode-config" to={`/projects/${this.props.projectId}/character/${this.props.id}/details`}>Detalles</Link>}
                         {this.props.typeCard === "archive" && <Link className="btn-shape btn-dark-mode-config" to={`/projects/${this.props.projectId}/folder/${this.props.folderId}/archive/${this.props.archiveId}/details`}>Detalles</Link>}
 
-                        
+
                     </Card.Body>
                 </Card>
             </Col>
