@@ -6,6 +6,8 @@ import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Dropdown from 'react-bootstrap/Dropdown'
+import ButtonGroup from 'react-bootstrap/ButtonGroup'
+import Button from 'react-bootstrap/Button'
 import '../../../App.css'
 
 import { Link } from 'react-router-dom/cjs/react-router-dom.min'
@@ -76,7 +78,34 @@ class ProjectDetails extends Component {
             <>
                 <Container>
                     <Row className="justify-content-md-center">
-                        <Col className="m-auto" md={{ span: 8 }} >
+
+                        <Col md={{ span: 2 }}>
+
+
+                            {ownProject ? (
+
+                                <Dropdown>
+                                    <Dropdown.Toggle className="btn-shape btn-dark-mode-config" variant="dark">Añadir elementos</Dropdown.Toggle>
+                                    <Dropdown.Menu className="drop-toggle">
+
+                                        <Dropdown.Item><Link className="nav-link link-drop" onClick={() => this.handleModal(true)}  >Editar proyecto</Link></Dropdown.Item>
+
+                                        <Dropdown.Item><Link className="nav-link link-drop warning-drop" to="/all-projects" onClick={() => this.deleteProject()}>Borrar proyecto</Link> </Dropdown.Item>
+                                        <Dropdown.Item><Link className="nav-link link-drop" to={`/all-projects`}>Volver a todos los proyectos</Link> </Dropdown.Item>
+                                        <Dropdown.Item><Link className="nav-link link-drop" to={`/profile`}>Volver a tu perfil</Link> </Dropdown.Item>
+                                    </Dropdown.Menu>
+                                </Dropdown>
+                            ) : null}
+                        </Col>
+                        {/* <Col md={{ span: 4 }}>   <Link className="btn-shape btn-dark-mode-config" to={`/projects/${this.props.match.params.project_id}/all-characters/`}>Todos los personajes</Link> </Col> */}
+
+
+                        {/* {ownProject ? (
+                            <Col md={{ span: 4 }}> <Link className="btn-shape btn-dark-mode-config" to={`/profile`}>Volver a tu perfil</Link> </Col>
+                        ) : <Col md={{ span: 4, offset: 8 }}> <Link className="btn-shape btn-dark-mode-config" to={`/profile`}>Volver a tu perfil</Link> </Col>} */}
+
+
+                        <Col md={{ span: 8 }} >
                             <h2>{this.state.projects.title}</h2>
                             <h4>Género: {this.state.projects.genre}</h4>
                             <Row >
@@ -85,10 +114,10 @@ class ProjectDetails extends Component {
                             </Row>
                             <h3>Sinópsis/resumen</h3>
                             <p>{this.state.projects.synopsis}</p>
-
+                            <Link className="btn-shape btn-dark-mode-config" to={`/projects/story/${this.props.match.params.project_id}`}>VER HISTORIA</Link>
                         </Col>
 
-                        <Col className="m-auto" md={{ span: 4 }} >
+                        <Col className="m-auto" md={{ span: 2 }} >
                             <h2>Árbol contenido</h2>
                             {ownProject && < TreeComponent {...this.props} />}
                             {!ownProject && < TreeComponentLector {...this.props} />}
@@ -96,33 +125,6 @@ class ProjectDetails extends Component {
 
                         </Col>
 
-                    </Row>
-                    <Row>
-                        {ownProject ? (
-                            <Col md={{ span: 4 }}><Link className="btn-shape btn-dark-mode-config" to={`/all-projects`}>Volver a todos los proyectos</Link> </Col>
-                        ) : <Col md={{ span: 4, offset: 2 }}><Link className="btn-shape btn-dark-mode-config" to={`/all-projects`}>Volver a todos los proyectos</Link> </Col>}
-
-                        {ownProject ? (
-
-                            <Dropdown>
-                                <Dropdown.Toggle className="btn-shape btn-dark-mode-config" variant="dark">Añadir elementos</Dropdown.Toggle>
-                                <Dropdown.Menu className="drop-toggle">
-
-                                    <Dropdown.Item><Link className="nav-link link-drop" onClick={() => this.handleModal(true)}  >Editar proyecto</Link></Dropdown.Item>
-
-                                    <Dropdown.Item><Link className="nav-link link-drop warning-drop" to="/all-projects" onClick={() => this.deleteProject()}>Borrar proyecto</Link> </Dropdown.Item>
-                                    <Dropdown.Item><Link className="nav-link link-drop" to={`/projects/${this.props.match.params.project_id}/character-new`}>Añadir personaje</Link> </Dropdown.Item>
-                                    <Dropdown.Item><Link className="nav-link link-drop" to="/all-projects">Añadir carpeta</Link> </Dropdown.Item>
-                                </Dropdown.Menu>
-                            </Dropdown>
-                        ) : null}
-
-                        <Col md={{ span: 4 }}>   <Link className="btn-shape btn-dark-mode-config" to={`/projects/${this.props.match.params.project_id}/all-characters/`}>Todos los personajes</Link> </Col>
-                        <Col md={{ span: 4 }}>   <Link className="btn-shape btn-dark-mode-config" to={`/projects/${this.props.match.params.project_id}/folders-in-project/`}>Carpetas</Link> </Col>
-
-                        {ownProject ? (
-                            <Col md={{ span: 4 }}> <Link className="btn-shape btn-dark-mode-config" to={`/profile`}>Volver a tu perfil</Link> </Col>
-                        ) : <Col md={{ span: 4, offset: 8 }}> <Link className="btn-shape btn-dark-mode-config" to={`/profile`}>Volver a tu perfil</Link> </Col>}
                     </Row>
 
                 </Container >

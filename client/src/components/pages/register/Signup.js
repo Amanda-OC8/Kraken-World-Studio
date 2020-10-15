@@ -48,7 +48,7 @@ class Signup extends Component {
             <Container>
                 <main>
                     <Row className="justify-content-center">
-                        <Col md={{ span: 5 }}>
+                        <Col md={{ span: 12 }}>
                             {/* <h2 className="warning-message"> {this.state.errorMessage && this.state.errorMessage.response.data.message}</h2> */}
                             <h1>Registro de usuario</h1>
                             <Form onSubmit={this.handleFormSubmit}>
@@ -67,7 +67,7 @@ class Signup extends Component {
                                     <Form.Control type="password" name="password" value={this.state.password} onChange={this.handleInputChange} />
                                 </Form.Group>
 
-                                <Button className="btn-shape btn-dark-mode-secondary" type="submit">Registrarme</Button>
+                                <Button variant="dark" className="reg-btn btn-shape btn-dark-mode-secondary" type="submit">Registrarme</Button>
                             </Form>
                         </Col>
                     </Row>

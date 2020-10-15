@@ -4,6 +4,7 @@ import React, { Component } from 'react'
 
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
 
 
 import Modal from 'react-bootstrap/Modal'
@@ -19,6 +20,7 @@ import Spinner from "../../shared/spinner/Spinner"
 
 import '../../App.css'
 import '../modal/Modal.css'
+import './Profile.css'
 
 class Profile extends Component {
 
@@ -71,16 +73,24 @@ class Profile extends Component {
             <>
                 {!this.state.profile.username && <Spinner />}
                 <Container>
-                    <h1>Estás en tu perfil {this.state.profile.username}</h1>
+                    <Row className="align-items-center justify-content-center ">
+                        <Col md={{ span: 6 }}>
+                            <h1 className="profile-title">Estás en tu perfil {this.state.profile.username}</h1>
+                        </Col>
+                        <Col md={{ span: 6 }}>
+                            <Button variant='dark' onClick={() => this.handleModal(true)} className='btn-shape btn-dark-mode-config' size="lg">Editar perfil</Button>
+                        </Col>
+                        <Col md={{ span: 12 }} style={{ marginTop: '20px' }}>
+                            <p className="profile-title">Email: <span className="profile-p">{this.state.profile.email}</span></p>
+                        </Col>
+                    </Row>
 
-
-                    <h3>
-                        Tu información
-                        </h3>
-                    <p>Tu usuario es: {this.state.profile.username}</p>
-                    <p>Tu correo es: {this.state.profile.email}</p>
-                    <p>Tu bio: {this.state.profile.bio}</p>
-                    <Button variant='dark' onClick={() => this.handleModal(true)} style={{ marginBottom: '20px' }} className='btn-shape btn-dark-mode-config' size="lg">Editar perfil</Button>
+                    <Row>
+                        <Col>
+                            <p className="bio profile-title">Bio: <span className="profile-p">{this.state.profile.bio}</span></p>
+                        </Col>
+                    </Row>
+               
 
                 </Container>
 

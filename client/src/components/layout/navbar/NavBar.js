@@ -28,7 +28,7 @@ export default class extends Component {
     render() {
         return (
             <Navbar variant="dark" expand="lg" className="nav-bar" >
-                <Link to="/">
+                <Link to="/profile">
                     <Navbar.Brand>
                         <img
                             alt="Logotipo"
@@ -42,7 +42,6 @@ export default class extends Component {
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="ml-auto">
-                        {!this.props.loggedInUser && <Link className="nav-link" to="/">Inicio</Link>}
                         {!this.props.loggedInUser && <Link className="nav-link" to="/register">Registro</Link>}
                         {!this.props.loggedInUser && <Link className="nav-link" to="/login">Acceso</Link>}
                         {this.props.loggedInUser && <Link className="nav-link" to="/all-projects">Explorar</Link>}
@@ -51,7 +50,7 @@ export default class extends Component {
                         {this.props.loggedInUser && <Link to="/logout" className="nav-link" onClick={this.logoutUser}>Cerrar sesión</Link>}
                     </Nav>
                 </Navbar.Collapse>
-            </Navbar >
+            </Navbar>
         )
     }
 }

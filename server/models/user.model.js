@@ -22,10 +22,6 @@ const userSchema = new Schema({
         type: String,
         maxlength: 200,
     },
-    image: {
-        type: String,
-        default: "../images/default-profile.png"
-    },
     role: {
         type: String,
         enum: ["ADMIN", "AUTHOR", "READER"]

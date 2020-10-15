@@ -20,8 +20,8 @@ const Register = props => {
                         <RegisterInfo title={'Gran cantidad de mundos para explorar'} text={['Kraken Worlds Studio es una comunidad en constante crecimiento, repleta de talentosos escritores y', < i > worldbuilders </i>, 'dispuestos a deleitarte con lo que se fragua entre sus sienes, tan solo explora un poco o busca tu género favorito y en seguida encontrarás algo que te fascine.']} />
                         <RegisterInfo title={'Un espacio pensado para tu arte, sea cual sea'} text={'Como desarrollador te ofrecemos un espacio polivalente que no sólo hará maravillas con tus novelas y mundos, también con tus guiones, obras de teatro, manuales de rol e incluso proyectos para videojuegos, crea un kraken a gusto de tus necesidades.'} />
                     </Col>
-                    <Col>
-                        <Signup setTheUser={props.setTheUser} {...props}/>
+                    <Col className="signup">
+                        <Signup/>
                     </Col>
                 </Row>
             </Container>

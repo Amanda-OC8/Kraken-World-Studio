@@ -1,34 +1,30 @@
 import React, { Component } from 'react'
 
-import archiveService from '../../../service/archive.service'
+import projectService from '../../../../service/project.service'
 
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import { Link } from 'react-router-dom/cjs/react-router-dom.min'
 
-class ArchiveDetail extends Component {
+class StoryDetails extends Component {
     constructor(props) {
         super(props)
-        this.state = {}
-        this.archiveService = new archiveService()
+        this.state = {
+            story: []
+        }
+        this.projectService = new projectService()
     }
 
     componentDidMount = () => {
-        this.archiveService
-            .getArchive(this.props.match.params.project_id, this.props.match.params.folder_id, this.props.match.params.archive_id)
-            .then(response => this.setState(response.data))
-            .catch(err => console.log('Error:', err))
-    }
-
-    deleteArchive = () => {
-        this.archiveService
-            .deleteArchive(this.props.match.params.project_id, this.props.match.params.archive_id)
-            .then(response => this.setState(response.data))
+        this.projectService
+            .getStory(this.props.match.params.project_id)
+            .then(response => this.setState({ story: response.data[0] }))
             .catch(err => console.log('Error:', err))
     }
 
     render() {
+        console.log(this.state)
         let project = this.state.project
         let ownArchive = false
 
@@ -54,17 +50,16 @@ class ArchiveDetail extends Component {
                 <Row className="justify-content-md-center">
                     <Col className="m-auto" md={{ span: 8 }} >
                         {ownArchive && "Es mi personaje"}
-                        <h2>{this.state.name}</h2>
+                        <h2>{this.state.story.name}</h2>
                         {/* {ownProject && (<div><h4>Archivos Relacionados: </h4><p>{this.state.relatedArchives}</p></div>)} */}
-                        <div dangerouslySetInnerHTML={{ __html: this.state.description }}></div>
+                        <div dangerouslySetInnerHTML={{ __html: this.state.story.description }}></div>
 
                     </Col>
 
                 </Row>
                 <Row>
-                    <Col md={{ span: 3 }}>   <Link className="btn-shape btn-dark-mode-config" to={`/projects/${this.props.match.params.project_id}/folder/${this.props.match.params.folder_id}/details/`}>Volver a todos los archivos</Link> </Col>
+                    <Col md={{ span: 3 }}>   <Link className="btn-shape btn-dark-mode-config" to={`/projects/${this.props.match.params.project_id}`}>Volver al proyecto</Link> </Col>
                     <Col md={{ span: 3 }}>   <Link className="btn-shape btn-dark-mode-config" to={`/projects/${this.props.match.params.project_id}/${this.props.match.params.folder_id}/${this.props.match.params.archive_id}/archive/edit`}>Editar archivo</Link> </Col>
-                    <Col md={{ span: 3 }}>   <Link className="btn-shape btn-dark-mode-config" to={`/projects/${this.props.match.params.project_id}/all-characters/`} onClick={() => this.deleteArchive()}>Borrar archivo</Link> </Col>
                     <Col md={{ span: 3 }}> <Link className="btn-shape btn-dark-mode-config" to={`/profile`}>Volver a tu perfil</Link> </Col>
                 </Row>
 
@@ -72,6 +67,5 @@ class ArchiveDetail extends Component {
         )
     }
 }
-{/* <Link to={`/projects/${this.props.match.params.project_id}/${elm.parent.id}/${subelm.id}/archive/edit`}><img className="image" src={Edit} alt="Editar" /></Link> */ }
 
-export default ArchiveDetail
+export default StoryDetails

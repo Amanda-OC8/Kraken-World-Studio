@@ -1,9 +1,12 @@
 import React, { Component } from 'react'
+import { withRouter } from 'react-router-dom';
+
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
+
 
 import { Editor } from "@tinymce/tinymce-react"
 
@@ -14,7 +17,11 @@ class ArchiveEdit extends Component {
         super(props)
         this.state = {}
         this.archiveService = new archiveService()
+
+
     }
+
+
 
     componentDidMount = () => {
 
@@ -41,6 +48,7 @@ class ArchiveEdit extends Component {
             owner: this.props.match.params.user_id,
             isPublic: false,
         })
+        this.props.history.push("/projects/5f7f221e7cd378045a145123/folder/5f845fd3500c7311e89ff217/archive/5f86c1f1d81694209ee68033/details")
     }
 
     handleInputChange = e => {
@@ -82,7 +90,12 @@ class ArchiveEdit extends Component {
 
                                 />
                                 <br />
-                                <input className="btn-shape btn-dark-mode-config" type="submit" value="Submit" />
+
+
+
+                                <Button variant='dark' className='btn-shape btn-dark-mode-config' type="submit">Editar</Button>
+
+
                             </Form.Group>
                         </Form>
                     </Col>
@@ -92,4 +105,4 @@ class ArchiveEdit extends Component {
     }
 }
 
-export default ArchiveEdit
+export default withRouter(ArchiveEdit)
