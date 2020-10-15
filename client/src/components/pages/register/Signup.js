@@ -14,7 +14,7 @@ class Signup extends Component {
         this.state = {
             username: '',
             email: '',
-            password: '', 
+            password: '',
             errorMessage: ""
         }
         this.authService = new authService()
@@ -62,7 +62,7 @@ class Signup extends Component {
                                     <Form.Control type="password" name="password" value={this.state.password} onChange={this.handleInputChange} />
                                 </Form.Group>
 
-                                <Button className="btn-shape btn-dark-mode-secondary" type="submit">Registrarme</Button>
+                                <Button variant='dark' className="btn-shape btn-dark-mode-secondary" type="submit">Registrarme</Button>
                             </Form>
                         </Col>
                     </Row>

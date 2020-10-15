@@ -33,6 +33,8 @@ import ArchiveNew from './pages/archives/ArchiveNew'
 import AllArchivesInFolder from './pages/archives/AllArchivesInFolder'
 import ArchiveEdit from './pages/archives/ArchiveEdit'
 
+import StoryDetails from './pages/work-space/project-views/StoryDetails'
+
 
 
 class App extends Component {
@@ -103,6 +105,8 @@ class App extends Component {
             <Route path="/projects/:project_id/folder/:folder_id/archive/:archive_id/details" exact render={props => <ArchiveDetails theUser={this.state.loggedInUser} {...props} />} />
             <Route path="/projects/:project_id/:folder_id/archive/new" exact render={props => <ArchiveNew theUser={this.state.loggedInUser} {...props} />} />
             <Route path="/projects/:project_id/:folder_id/:archive_id/archive/edit" exact render={props => <ArchiveEdit theUser={this.state.loggedInUser} {...props} />} />
+
+            <Route path="/projects/story/:project_id" exact render={props => <StoryDetails theUser={this.state.loggedInUser} {...props} />} />
 
             <Route path="/testing" render={props => <Testing theUser={this.state.loggedInUser} {...props} />} />
           </main>
