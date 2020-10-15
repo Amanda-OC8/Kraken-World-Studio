@@ -13,6 +13,7 @@ import ProfileEdit from './ProfileEdit'
 
 import ProfileService from "../../../service/profile.service"
 import BaseCard from "../../shared/cards/BaseCard"
+import Spinner from "../../shared/spinner/Spinner"
 
 
 
@@ -68,11 +69,10 @@ class Profile extends Component {
         return (
 
             <>
+                {!this.state.profile.username && <Spinner />}
                 <Container>
                     <h1>Estás en tu perfil {this.state.profile.username}</h1>
-                </Container>
 
-                <Container>
 
                     <h3>
                         Tu información

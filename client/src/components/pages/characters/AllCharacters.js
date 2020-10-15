@@ -5,6 +5,7 @@ import Row from 'react-bootstrap/Row'
 
 import characterService from '../../../service/character.service'
 import BaseCard from "../../shared/cards/BaseCard"
+import Spinner from "../../shared/spinner/Spinner"
 
 
 class AllCharacters extends Component {
@@ -30,6 +31,8 @@ class AllCharacters extends Component {
         return (
 
             <Container>
+                {!this.state.characters.length && <Spinner />}
+
                 <Row className="justify-content-md-center">
                     {this.state.characters.map(elm => <BaseCard key={elm._id} title={elm.name + " " + elm.surname} description={elm.background} id={elm._id} projectId={elm.originProject._id} typeCard="character" />)}
                 </Row>
