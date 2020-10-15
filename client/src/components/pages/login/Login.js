@@ -5,6 +5,7 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
+import { Link } from 'react-router-dom'
 
 import authService from '../../../service/auth.service'
 
@@ -64,7 +65,14 @@ class Login extends Component {
                                     <Form.Control type="password" name="password" value={this.state.password} onChange={this.handleInputChange} />
                                 </Form.Group>
 
-                                <Button variant="dark" className='btn-shape btn-dark-mode-config' type="submit">Acceder</Button>
+                                <Row className="log-in-btns">
+                                    <Col md={{ span: 9 }}>
+                                        <Link variant="dark" className="btn-shape btn-dark-mode-secondary" to="/register">¿No tienes cuenta? Regístrate</Link>
+                                    </Col>
+                                    <Col md={{ span: 3 }}>
+                                        <Button variant="dark" className='btn-shape btn-dark-mode-config' type="submit">Acceder</Button>
+                                    </Col>
+                                </Row>
                             </Form>
                         </Col>
                     </Row>
