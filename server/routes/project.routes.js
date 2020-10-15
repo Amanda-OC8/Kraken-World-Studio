@@ -109,7 +109,7 @@ router.delete('/:project_id/delete', (req, res) => {
 // //Endpoints Story
 router.get('/story/:project_id', (req, res) => {
 
-    Archive.find({}, { description: 1, name: 1 })
+    Archive.find({ isStory: { $eq: true } }, { description: 1, name: 1 })
         .populate({
             path: "originProject",
             match: { _id: req.params.project_id },
