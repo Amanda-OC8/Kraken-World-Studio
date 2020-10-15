@@ -95,7 +95,6 @@ class App extends Component {
 
             <Route path="/projects/story/:project_id" exact render={props => <StoryDetails theUser={this.state.loggedInUser} {...props} />} />
 
-            <Route path="/testing" render={props => <Testing theUser={this.state.loggedInUser} {...props} />} />
           </main>
           <Switch />
           <Footer />

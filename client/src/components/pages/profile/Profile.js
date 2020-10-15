@@ -53,7 +53,6 @@ class Profile extends Component {
             .then(response => {
                 this.setState({ ...this.state, profile: response.data[1] })
             })
-
             .catch(err => {
                 this.setState({ errorMessage: err.message })
             })

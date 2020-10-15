@@ -33,7 +33,7 @@ class Welcome extends Component {
                 <Container className='hero'>
                     <Row className="justify-content-md-center">
                         <Col className="m-auto" md={{ span: 10, offset: 1 }}><img className='hero-logo d-block mx-auto img-fluid ' src={Logo} alt="Golden Kraken"></img>
-                            <h1 className='d-flex justify-content-center'>Create, Order, Write, Release the Kraken</h1>
+                            <h1 className='d-flex justify-content-center h1-welcome'>Create, Order, Write, Release the Kraken</h1>
                             <div className='d-flex justify-content-center'>
                                 <Link to='/register' className="btn-link btn-shape btn-dark-mode-config" >Signup</Link>
                                 <Link to='/login' className="btn-shape btn-dark-mode-secondary" >Login</Link>

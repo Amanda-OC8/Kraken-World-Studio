@@ -77,6 +77,7 @@ class ProjectDetails extends Component {
         return (
             <>
                 <Container>
+                    
                     <Row className="justify-content-md-center">
 
                         <Col md={{ span: 2 }}>
