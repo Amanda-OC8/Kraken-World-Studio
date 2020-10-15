@@ -126,13 +126,13 @@ class CharacterDetail extends Component {
                             {ownProject ? (
 
                                 <Dropdown>
-                                    <Dropdown.Toggle className="btn-shape btn-dark-mode-config" variant="dark">Añadir elementos</Dropdown.Toggle>
+                                    <Dropdown.Toggle className="btn-shape btn-dark-mode-config fixed" variant="dark">Añadir elementos</Dropdown.Toggle>
                                     <Dropdown.Menu className="drop-toggle">
 
-                                        <Dropdown.Item><Link className="nav-link link-drop" onClick={() => this.handleModal(true)}  >Editar proyecto</Link></Dropdown.Item>
+                                        <Dropdown.Item><Link onClick={() => this.handleModal(true)} className='nav-link link-drop' >Editar personajes</Link></Dropdown.Item>
 
-                                        <Dropdown.Item><Link className="nav-link link-drop warning-drop" to="/all-projects" onClick={() => this.deleteProject()}>Borrar proyecto</Link> </Dropdown.Item>
-                                        <Dropdown.Item><Link className="nav-link link-drop" to={`/all-projects`}>Volver a todos los proyectos</Link> </Dropdown.Item>
+                                        <Dropdown.Item><Link className="nav-link link-drop warning-drop" to={`/projects/${this.props.match.params.project_id}/all-characters/`} onClick={() => this.deleteCharacter()}>Borrar personaje</Link> </Dropdown.Item>
+                                        <Dropdown.Item><Link className="nav-link link-drop" to={`/projects/${this.props.match.params.project_id}/all-characters/`}>Volver a todos los personajes</Link> </Dropdown.Item>
                                         <Dropdown.Item><Link className="nav-link link-drop" to={`/profile`}>Volver a tu perfil</Link> </Dropdown.Item>
                                     </Dropdown.Menu>
                                 </Dropdown>
@@ -140,13 +140,6 @@ class CharacterDetail extends Component {
                         </Col>
 
                     </Row>
-                    <Row>
-                        <Col md={{ span: 3 }}>   <Link className="nav-link link-drop" to={`/projects/${this.props.match.params.project_id}/all-characters/`}>Volver a todos los personajes</Link> </Col>
-                        <Col md={{ span: 3 }}>   <Link onClick={() => this.handleModal(true)} style={{ marginBottom: '20px' }} className='btn-shape btn-dark-mode-config' size="lg">Editar personajes</Link> </Col>
-                        <Col md={{ span: 3 }}>   <Link className="btn-shape btn-dark-mode-config" to={`/projects/${this.props.match.params.project_id}/all-characters/`} onClick={() => this.deleteCharacter()}>Borrar personaje</Link> </Col>
-                        <Col md={{ span: 3 }}>   <Link className="btn-shape btn-dark-mode-config" to={`/profile`}>Volver a tu perfil</Link> </Col>
-                    </Row>
-
                 </Container>
                 <Modal show={this.state.showModal} onHide={() => this.handleModal(false)}>
                     <Modal.Header closeButton>

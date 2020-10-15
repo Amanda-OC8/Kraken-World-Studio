@@ -47,7 +47,7 @@ class Profile extends Component {
     }
 
     loadProfile = () => {
-        
+
         this.profileService
             .getProfile()
             .then(response => {
@@ -66,7 +66,7 @@ class Profile extends Component {
     }
 
     render() {
-        
+
         return (
 
             <>
@@ -106,7 +106,7 @@ class Profile extends Component {
                         <Modal.Title>Editar perfil</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        <ProfileEdit closeModal={() => this.handleModal(false)} refreshList={this.loadProfile} />
+                        <ProfileEdit {...this.props} closeModal={() => this.handleModal(false)} refreshList={this.loadProfile} />
                     </Modal.Body>
                 </Modal>
             </>

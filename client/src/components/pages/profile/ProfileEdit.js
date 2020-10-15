@@ -9,13 +9,16 @@ import profileService from '../../../service/profile.service'
 class ProfileEdit extends Component {
     constructor(props) {
         super(props)
-        this.state = {
-            username: '',
-            email: '',
-            bio: '',
-            image: '',
-        }
+        this.state = {}
         this.profileService = new profileService()
+    }
+
+    componentDidMount = () => {
+
+        this.profileService
+            .getProfile()
+            .then(response => this.setState(response.data[1]))
+            .catch(err => console.log('Error:', err))
     }
 
     handleInputChange = e => {
@@ -39,7 +42,7 @@ class ProfileEdit extends Component {
 
 
     render() {
-
+        console.log(this.state)
         return (
 
             <Form onSubmit={this.handleFormSubmit}>
