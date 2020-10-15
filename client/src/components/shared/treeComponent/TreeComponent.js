@@ -67,7 +67,7 @@ class TreeComponent extends Component {
 
         this.loadCommon()
         this.handleModalDeleteAlert(false)
-        this.setState({ firstDeleteId: "", secondtDeleteId: ""})
+        this.setState({ firstDeleteId: "", secondtDeleteId: "" })
     }
 
     deleteFolder = (folder_id) => {
@@ -194,12 +194,12 @@ class TreeComponent extends Component {
                             {existTree && treeC.folders.map((elm, index) => <li key={index}><Link className="tree-link" to={`/projects/${this.props.match.params.project_id}/folder/${elm.id}/details`}>{elm.name}</Link>
                                 <Link to={`/projects/${this.props.match.params.project_id}/${elm.id}/archive/new`}><img className="image" src={Add} alt="Añadir"></img></Link>
                                 <Link onClick={() => this.handleModalEditFolder(true, elm.id)}><img className="image" src={Edit} alt="Editar" /></Link>
-                                
+
                                 <Link onClick={() => this.handleModalDeleteAlert(true, "character", elm.id, null)}><img className="image" src={Delete} alt="Eliminar"></img></Link></li>)}
 
 
                             {existTree && treeC.nested.map((elm, index) => <li key={index}><Link className="tree-link" to={`/projects/${this.props.match.params.project_id}/${elm.parent.id}/details`}>{elm.parent.name}</Link> <Link to={`/projects/${this.props.match.params.project_id}/${elm.parent.id}/archive/new`}><img className="image" src={Add} alt="Añadir"></img></Link>
-                                
+
                                 <Link onClick={() => this.handleModalEditFolder(true, elm.parent.id)}><img className="image" src={Edit} alt="Editar" /></Link>
                                 <Link onClick={() => this.handleModalDeleteAlert(true, "character", elm.parent.id, null)}><img className="image" src={Delete} alt="Eliminar"></img></Link></li>)}
 
@@ -214,9 +214,9 @@ class TreeComponent extends Component {
                         <span>
                             {existTree &&
                                 <ul>
-                                    {treeC.nested.map(elm => elm.nested ? elm.nested.map((subelm, index) => <li key={index}>{elm.parent.name}: <Link className="tree-link" to={`/projects/${this.props.match.params.project_id}/${elm.parent.id}/archive/${subelm.id}/details`}>{subelm.name}</Link>
+                                    {treeC.nested.map(elm => elm.nested ? elm.nested.map((subelm, index) => <li key={index}>{elm.parent.name}: <Link className="tree-link" to={`/projects/${this.props.match.params.project_id}/folder/${elm.parent.id}/archive/${subelm.id}/details`}>{subelm.name}</Link>
 
-                                        <Link to={`/projects/${this.props.match.params.project_id}/${elm.parent.id}/${subelm.id}/archive/edit`}><img className="image" src={Edit} alt="Editar" /></Link>
+                                        <Link to={`/projects/${this.props.match.params.project_id}/folder/${elm.parent.id}/${subelm.id}/archive/edit`}><img className="image" src={Edit} alt="Editar" /></Link>
                                         <Link onClick={() => this.handleModalDeleteAlert(true, "character", elm.parent.id, subelm.id)}><img className="image" src={Delete} alt="Eliminar"></img></Link></li>) : null)}
                                 </ul>}
                         </span>

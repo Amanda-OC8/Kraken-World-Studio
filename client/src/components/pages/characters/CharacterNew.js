@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { withRouter } from 'react-router-dom';
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
@@ -74,6 +75,7 @@ class CharacterNew extends Component {
             owner: this.props.theUser._id,
             isPublic: false,
         })
+        this.props.history.push(`/projects/${this.props.match.params.project_id}/details`)
     }
 
     render() {
@@ -154,4 +156,4 @@ class CharacterNew extends Component {
         )
     }
 }
-export default CharacterNew
+export default withRouter(CharacterNew)
