@@ -39,23 +39,23 @@ class ProfileEdit extends Component {
 
 
     render() {
-        console.log(this.state.username)
+
         return (
 
             <Form onSubmit={this.handleFormSubmit}>
                 <Form.Group>
                     <Form.Label>Nombre de usuario</Form.Label>
-                    <Form.Control type="text" name="username" value={this.state.username} onChange={this.handleInputChange} />
+                    <Form.Control type="text" name="username" value={this.state.username} placeholder={this.state.username} onChange={this.handleInputChange} />
                 </Form.Group>
 
                 <Form.Group>
                     <Form.Label>Email</Form.Label>
-                    <Form.Control type="email" name="email" value={this.state.email} onChange={this.handleInputChange} />
+                    <Form.Control type="email" name="email" value={this.state.email} placeholder={this.state.email} onChange={this.handleInputChange} />
                 </Form.Group>
 
                 <Form.Group>
                     <Form.Label>Biografía</Form.Label>
-                    <Form.Control type="text" name="bio" value={this.state.bio} onChange={this.handleInputChange} />
+                    <Form.Control type="text" name="bio" value={this.state.bio} placeholder={this.state.bio} onChange={this.handleInputChange} />
                 </Form.Group>
 
                 <Button variant='dark' className='btn-shape btn-dark-mode-config' type="submit">Editar</Button>
