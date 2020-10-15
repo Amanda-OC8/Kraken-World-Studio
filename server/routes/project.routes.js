@@ -60,9 +60,9 @@ router.delete('/:project_id/delete', (req, res) => {
     // const archivePromise = Archive.deleteMany({ originProject: { $in: req.params.folder_id } })
 
 
-
+    
     // Promise.all([projectPromise, folderPromise, characterPromise, archivePromise])
-    Project.findByIdAndDelete(req.params.folder_id)
+    Project.findByIdAndDelete(req.params.project_id)
         .then(response => res.json(response))
         .catch(err => res.status(500).json(err))
 

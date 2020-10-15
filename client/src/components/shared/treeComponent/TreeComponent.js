@@ -141,21 +141,36 @@ class TreeComponent extends Component {
     render() {
         let treeC = {}
         let existTree = false
+        let hasCharacters = false
+        let hasFolders = false
+        let hasArchives = false
         if (this.state.components.length !== 0) {
             treeC = this.createNode()
             existTree = true
+            if (treeC.characters.length) {
+                hasCharacters = true
+            }
+            if (treeC.folders.length) {
+                hasFolders = true
+            }
+            if (treeC.archives.length) {
+                hasArchives = true
+            }
+           
 
 
         }
-        console.log(this.props)
+        
 
 
         return (
             <>
 
                 <ul>
-                    <h4><Link className="tree-link" to={`/projects/${this.props.match.params.project_id}/all-characters`}>Personajes</Link>
-                        <Link to={`/projects/${this.props.match.params.project_id}/character/new`}><img className="image" src={Add} alt="Añadir"></img></Link></h4>
+                    {hasCharacters && <h4><Link className="tree-link" to={`/projects/${this.props.match.params.project_id}/all-characters`}>Personajes</Link> <Link to={`/projects/${this.props.match.params.project_id}/character/new`}><img className="image" src={Add} alt="Añadir"></img></Link></h4>}
+
+                    {!hasCharacters && <h4>Personajes  <Link to={`/projects/${this.props.match.params.project_id}/character/new`}><img className="image" src={Add} alt="Añadir"></img></Link></h4>}
+                    
                     {!this.state.showMoreCharac && <NavLink onClick={this.showMoreTextCharac} className="show-more">Mostrar todos</NavLink>}
                     {this.state.showMoreCharac && <NavLink onClick={this.showMoreTextCharac} className="show-more">Ocultar todos</NavLink>}
                     <Collapse in={this.state.showMoreCharac}>
@@ -191,6 +206,7 @@ class TreeComponent extends Component {
                         </span>
                     </Collapse>
                     <br />
+                    
                     <h4>Archivos</h4>
                     {!this.state.showMoreArchives && <NavLink onClick={this.showMoreTextArchives} className="show-more">Mostrar todos</NavLink>}
                     {this.state.showMoreArchives && <NavLink onClick={this.showMoreTextArchives} className="show-more">Ocultar todos</NavLink>}
