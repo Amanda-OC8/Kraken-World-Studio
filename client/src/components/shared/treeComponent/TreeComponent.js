@@ -176,7 +176,7 @@ class TreeComponent extends Component {
 
                     <Collapse in={this.state.showMoreFolders}>
                         <span>
-                            {existTree && treeC.folders.map((elm, index) => <li key={index}><Link className="tree-link" to={`/projects/${this.props.match.params.project_id}/${elm.id}/details`}>{elm.name}</Link>
+                            {existTree && treeC.folders.map((elm, index) => <li key={index}><Link className="tree-link" to={`/projects/${this.props.match.params.project_id}/folder/${elm.id}/details`}>{elm.name}</Link>
                                 <Link to={`/projects/${this.props.match.params.project_id}/${elm.id}/archive/new`}><img className="image" src={Add} alt="Añadir"></img></Link>
                                 <Link onClick={() => this.handleModalEditFolder(true, elm.id)}><img className="image" src={Edit} alt="Editar" /></Link>
                                 
@@ -198,7 +198,7 @@ class TreeComponent extends Component {
                         <span>
                             {existTree &&
                                 <ul>
-                                    {treeC.nested.map(elm => elm.nested ? elm.nested.map((subelm, index) => <li key={index}>{elm.parent.name}: <Link className="tree-link" to={`/projects/${this.props.match.params.project_id}/folder/${elm.parent.id}/archive/${subelm.id}/details`}>{subelm.name}</Link>
+                                    {treeC.nested.map(elm => elm.nested ? elm.nested.map((subelm, index) => <li key={index}>{elm.parent.name}: <Link className="tree-link" to={`/projects/${this.props.match.params.project_id}/${elm.parent.id}/archive/${subelm.id}/details`}>{subelm.name}</Link>
 
                                         <Link to={`/projects/${this.props.match.params.project_id}/${elm.parent.id}/${subelm.id}/archive/edit`}><img className="image" src={Edit} alt="Editar" /></Link>
                                         <Link onClick={() => this.handleModalDeleteAlert(true, "character", elm.parent.id, subelm.id)}><img className="image" src={Delete} alt="Eliminar"></img></Link></li>) : null)}

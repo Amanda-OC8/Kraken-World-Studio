@@ -44,6 +44,7 @@ router.post('/signup', (req, res, next) => {
         });
 
         aNewUser.save(err => {
+            console.log(err)
             if (err) {
                 res.status(500).json({ message: 'Error guardando nombre de usuario' });
                 return;

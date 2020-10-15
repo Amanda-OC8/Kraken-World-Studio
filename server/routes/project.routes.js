@@ -21,52 +21,52 @@ router.get('/all', (req, res) => {
 
 //Endpoints Project
 router.get('/:project_id', (req, res) => {
-    
+
     Project.findById(req.params.project_id)
         .populate("owner")
         .then(response => res.json(response))
         .catch(err => res.status(500).json(err))
-    })
-    
-    router.post('/new', (req, res) => {
-        
-        Project.create(req.body)
+})
+
+router.post('/new', (req, res) => {
+
+    Project.create(req.body)
         .then(response => {
             res.json(response)
-            
-            return Archive.create({ isStory: true, originProject: response._id, name: "Historia", description: "Aquí va tu historia", owner: req.user._id})
-            
+
+            return Archive.create({ isStory: true, originProject: response._id, name: "Historia", description: "Aquí va tu historia", owner: req.user._id })
+
         })
         .then(response => {
             console.log(response)
             res.json(response)
         })
         .catch(err => res.status(500).json(err))
-        
-    })
-    
-    router.put('/:project_id/edit', (req, res) => {
-        
-        Project.findByIdAndUpdate(req.params.project_id, req.body)
+
+})
+
+router.put('/:project_id/edit', (req, res) => {
+
+    Project.findByIdAndUpdate(req.params.project_id, req.body)
         .then(response => res.json(response))
         .catch(err => res.status(500).json(err))
-    })
-    
-    router.delete('/:project_id/delete', (req, res) => {
-                
-        // const projectPromise = Project.findByIdAndDelete(req.params.folder_id)
-        // const folderPromise = Folder.deleteMany({ originProject: { $in: req.params.folder_id } })
-        // const characterPromise = Character.deleteMany({ originProject: { $in: req.params.folder_id } })
-        // const archivePromise = Archive.deleteMany({ originProject: { $in: req.params.folder_id } })
+})
 
-        
+router.delete('/:project_id/delete', (req, res) => {
+
+    // const projectPromise = Project.findByIdAndDelete(req.params.folder_id)
+    // const folderPromise = Folder.deleteMany({ originProject: { $in: req.params.folder_id } })
+    // const characterPromise = Character.deleteMany({ originProject: { $in: req.params.folder_id } })
+    // const archivePromise = Archive.deleteMany({ originProject: { $in: req.params.folder_id } })
+
+
 
     // Promise.all([projectPromise, folderPromise, characterPromise, archivePromise])
-        Project.findByIdAndDelete(req.params.folder_id)
+    Project.findByIdAndDelete(req.params.folder_id)
         .then(response => res.json(response))
         .catch(err => res.status(500).json(err))
-    
-    
+
+
 })
 
 // //Endpoints Timeline
@@ -126,7 +126,7 @@ router.get('/story/:project_id', (req, res) => {
 
 router.put('/story/:project_id/edit', (req, res) => {
 
-    const {description} = req.body
+    const { description } = req.body
 
     Archive.find({}, { description: 1, name: 1 })
         .populate({
@@ -138,12 +138,12 @@ router.put('/story/:project_id/edit', (req, res) => {
         .then(response => {
             let filterResponse = response.filter(elm => elm.originProject != null)
             res.json(filterResponse)
-            
+
             return Archive.findByIdAndUpdate(filterResponse[0]._id, { description })
         })
         .then(response => res.json(response))
         .catch(err => res.status(500).json(err))
-   
+
 })
 
 

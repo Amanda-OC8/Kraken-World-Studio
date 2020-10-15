@@ -1,10 +1,13 @@
 import React, { Component } from 'react'
+import { withRouter } from 'react-router-dom';
 
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
+
+import PopUpAlert from '../../../shared/popUpAlert/PopUpAlert'
 
 import projectService from "../../../../service/project.service"
 
@@ -15,11 +18,11 @@ class ProjectNew extends Component {
             title: "",
             genre: "",
             tagLines: "",
-            shareholders: [{ tagLines: "" }],
             type: "",
             synopsis: "",
             owner: props.theUser._id,
             isPublic: false,
+            createdProject: false
         }
 
         this.project = new projectService()
@@ -34,37 +37,17 @@ class ProjectNew extends Component {
         if (name === "isPublic") {
             value = e.target.checked
         }
-
+        if (name === "tagLines") {
+            value = e.target.value.split(",")
+        }
 
         this.setState({ [name]: value })
     }
 
 
 
-    handleShareholderNameChange = idx => evt => {
-        
-        const newShareholders = this.state.shareholders.map((shareholder, sidx) => {
-            if (idx !== sidx) return shareholder
-            return { ...shareholder, tagLines: evt.target.value }
-        })
-
-        this.setState({ shareholders: newShareholders })
-        this.setState({ tagLines: this.state.shareholders.map(elm => elm.tagLines) })
-  
-    }
 
 
-    handleAddShareholder = () => {
-        this.setState({
-            shareholders: this.state.shareholders.concat([{ tagLines: "" }])
-        })
-    }
-
-    handleRemoveShareholder = idx => () => {
-        this.setState({
-            shareholders: this.state.shareholders.filter((s, sidx) => idx !== sidx)
-        })
-    }
 
 
     handleFormSubmit = e => {
@@ -72,7 +55,7 @@ class ProjectNew extends Component {
         e.preventDefault()
 
         let { title, genre, tagLines, type, synopsis, owner, isPublic } = this.state
-     
+        this.setState({createdProject: true})
 
         this.project.newProject({ title, genre, tagLines, type, synopsis, owner, isPublic })
             .then(response => console.log(response))
@@ -82,12 +65,13 @@ class ProjectNew extends Component {
             title: "",
             genre: "",
             tagLines: "",
-            shareholders: [{ tagLines: "" }],
             type: "",
             synopsis: "",
             owner: this.props.theUser._id,
             isPublic: false,
+            createdProject: true
         })
+        this.props.history.push('/all-projects')
     }
 
     render() {
@@ -114,14 +98,8 @@ class ProjectNew extends Component {
 
  
                             <Form.Group>
-                                <Form.Label>Tags (ej: comedia, viajes en el tiempo...)</Form.Label>
-                                {this.state.shareholders.map((shareholder, idx) => (
-                                    <React.Fragment>
-                                    <Form.Control type="text" name="tagLines" value={shareholder.tagLines} onChange={this.handleShareholderNameChange(idx)}/><Button className="btn-shape btn-dark-mode-secondary" onClick={this.handleRemoveShareholder(idx)}> - </Button>
-                                    </React.Fragment>
-                                ))}
-                                <Button className="btn-shape btn-dark-mode-secondary" onClick={this.handleAddShareholder}> + </Button>
-
+                                <Form.Label>Tags separados por comas* (ej: comedia, viajes en el tiempo...)</Form.Label>
+                                <Form.Control required type="text" name="tagLines" value={this.state.tagLines} onChange={this.handleInputChange} />
                             </Form.Group>
 
                             <Form.Group>
@@ -145,6 +123,7 @@ class ProjectNew extends Component {
                             </Form.Group>
 
                             <Button className="btn-shape btn-dark-mode-config" variant="dark" type="submit">Crear</Button>
+                            {this.state.createdProject  && <PopUpAlert title="Proyecto creado" text="Se ha creado tu proyecto" />}
                         </Form>
                     </Col>
                 </Row>
@@ -152,4 +131,4 @@ class ProjectNew extends Component {
         )
     }
 }
-export default ProjectNew
+export default withRouter(ProjectNew)
