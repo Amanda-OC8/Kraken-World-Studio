@@ -17,16 +17,10 @@ const userSchema = new Schema({
     },
     email: {
         type: String,
-        // required: true,
-        unique: true,
     },
     bio: {
         type: String,
         maxlength: 200,
-    },
-    image: {
-        type: String,
-        default: "../images/default-profile.png"
     },
     role: {
         type: String,

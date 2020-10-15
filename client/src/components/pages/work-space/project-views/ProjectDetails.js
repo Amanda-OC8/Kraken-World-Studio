@@ -24,7 +24,8 @@ class ProjectDetails extends Component {
         super(props)
         this.state = {
             projects: {},
-            showModal: false
+            showModal: false, 
+            projectLoaded: false
         }
 
         this.projectService = new projectService()
@@ -43,7 +44,7 @@ class ProjectDetails extends Component {
         this.projectService
             .getProject(this.props.match.params.project_id)
             .then(response => {
-                this.setState({ projects: response.data })
+                this.setState({ projects: response.data, projectLoaded: true })
             })
             .catch(err => console.log('Error:', err))
     }
@@ -59,17 +60,24 @@ class ProjectDetails extends Component {
 
         let user = this.state.projects.owner
         let ownProject = false
+        let tagLines = ""
 
         if (user !== undefined) {
             user = this.state.projects.owner._id
 
             ownProject = (user === this.props.theUser._id)
-
+            
+        }
+        
+        if (this.state.projectLoaded) {
+            tagLines = this.state.projects.tagLines.join()
+            
         }
 
         return (
             <>
                 <Container>
+                    
                     <Row className="justify-content-md-center">
 
                         <Col md={{ span: 2 }}>
@@ -102,7 +110,7 @@ class ProjectDetails extends Component {
                             <h2>{this.state.projects.title}</h2>
                             <h4>Género: {this.state.projects.genre}</h4>
                             <Row >
-                                <Col md={{ span: 4 }}> <p>Taglines: {this.state.projects.tagLines}</p> </Col>
+                                <Col md={{ span: 4 }}> <p>Taglines: {tagLines}</p> </Col>
                                 <Col md={{ span: 4, offset: 4 }}> <p>Tipo de proyecto: {this.state.projects.type}</p> </Col>
                             </Row>
                             <h3>Sinópsis/resumen</h3>

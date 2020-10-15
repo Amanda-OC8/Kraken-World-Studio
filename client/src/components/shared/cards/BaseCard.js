@@ -49,7 +49,7 @@ class ProjectCard extends Component {
 
                         {this.props.typeCard === "project" && <Link className="btn-shape btn-dark-mode-config" to={`/projects/${this.props.id}/details`}>Detalles</Link>}
                         {this.props.typeCard === "character" && <Link className="btn-shape btn-dark-mode-config" to={`/projects/${this.props.projectId}/character/${this.props.id}/details`}>Detalles</Link>}
-                        {this.props.typeCard === "archive" && <Link className="btn-shape btn-dark-mode-config" to={`/projects/${this.props.projectId}/folder/${this.props.folderId}/archive/${this.props.archiveId}/details`}>Detalles</Link>}
+                        {this.props.typeCard === "archive" && <Link className="btn-shape btn-dark-mode-config" to={`/projects/${this.props.projectId}/${this.props.folderId}/archive/${this.props.archiveId}/details`}>Detalles</Link>}
 
 
                     </Card.Body>

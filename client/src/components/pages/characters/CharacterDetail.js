@@ -5,12 +5,14 @@ import characterService from "../../../service/character.service"
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
+import Table from 'react-bootstrap/Table'
 import Modal from 'react-bootstrap/Modal'
 import Dropdown from 'react-bootstrap/Dropdown'
-import Button from 'react-bootstrap/Button'
 import { Link } from 'react-router-dom/cjs/react-router-dom.min'
 
 import CharacterEdit from './CharacterEdit'
+
+import './CharacterDetail.css'
 
 class CharacterDetail extends Component {
     constructor(props) {
@@ -51,11 +53,18 @@ class CharacterDetail extends Component {
     render() {
         let project = this.state.project
         let ownCharacter = false
+        let physicalDescription = ""
+        let personality = ""
+        let habits = ""
+
 
         if (project !== undefined) {
             project = this.state.project._id
 
             ownCharacter = (project === this.props.theProject._id)
+            physicalDescription = this.state.project.physicalDescription.join()
+            personality = this.state.project.personality.join()
+            habits = this.state.project.habits.join()
 
         }
 
@@ -75,15 +84,37 @@ class CharacterDetail extends Component {
                 <Container>
                     <Row className="justify-content-md-center">
                         <Col className="m-auto" md={{ span: 8 }} >
-                            {ownCharacter && "Es mi personaje"}
+                            
                             <h2>{this.state.name} {this.state.character.surname}</h2>
-                            <h4>Género: </h4><p>{this.state.character.genre}</p>
-                            <h4>Edad: </h4><p>{this.state.character.age}</p>
-                            <h4>Rol: </h4><p>{this.state.character.rolHistory}</p>
-                            <h4>Ocupación: </h4><p>{this.state.character.occupation}</p>
-                            <h4>Descripción física: </h4><p>{this.state.character.physicalDescription}</p>
-                            <h4>Personalidad: </h4><p>{this.state.character.personality}</p>
-                            <h4>Hábito: </h4><p>{this.state.character.habits}</p>
+
+
+                            <Table responsive borderless={true}   >
+                                <tbody>
+                                    <tr>
+                                        <td className="charac-title">Género: </td>
+                                        <td>{this.state.character.genre}</td>
+                                        <td className="charac-title">Edad: </td>
+                                        <td>{this.state.character.age}</td>
+                                        
+                                    </tr>
+                            </tbody>
+                            </Table>
+                            <Table responsive borderless={true} size="sm">
+                                <tbody>
+                                    <tr>
+                                        <td className="charac-title">Descripción física:</td>
+                                        <td>{physicalDescription}</td>
+                                    </tr>
+                                    <tr>
+                                        <td className="charac-title">Personalidad:</td>
+                                        <td colSpan="3">{personality}</td>
+                                    </tr>
+                                    <tr>
+                                        <td className="charac-title">Costumbres:</td>
+                                        <td colSpan="3">{habits}</td>
+                                    </tr>
+                                </tbody>
+                            </Table>
                             {ownProject && (<div><h4>Notas: </h4><p>{this.state.character.notes}</p></div>)}
                             <h3>Trasfondo</h3>
                             <p>{this.state.character.background}</p>

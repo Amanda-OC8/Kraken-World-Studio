@@ -61,7 +61,6 @@ class ProfileEdit extends Component {
                     <Form.Control type="text" name="bio" value={this.state.bio} placeholder={this.state.bio} onChange={this.handleInputChange} />
                 </Form.Group>
 
-
                 <Button variant='dark' className='btn-shape btn-dark-mode-config' type="submit">Editar</Button>
             </Form>
         )

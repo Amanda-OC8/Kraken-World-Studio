@@ -69,7 +69,7 @@ strong {
  }
 
  .warning-drop {
-    background: red;
+    background: #D00000;
     border-radius: 5px;
  }
 
@@ -77,4 +77,8 @@ strong {
     margin-bottom: 15px;
     color:  #D00000;
     font-weight: 700;
+}
+
+.search-img {
+    width: 30px;
 }

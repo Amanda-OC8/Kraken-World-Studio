@@ -28,7 +28,7 @@ export default class extends Component {
     render() {
         return (
             <Navbar variant="dark" expand="lg" className="nav-bar" >
-                <Link to="/">
+                <Link to="/profile">
                     <Navbar.Brand>
                         <img
                             alt="Logotipo"
@@ -42,16 +42,15 @@ export default class extends Component {
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="ml-auto">
-                        <Link className="nav-link" to="/">Inicio</Link>
                         {!this.props.loggedInUser && <Link className="nav-link" to="/register">Registro</Link>}
                         {!this.props.loggedInUser && <Link className="nav-link" to="/login">Acceso</Link>}
                         {this.props.loggedInUser && <Link className="nav-link" to="/all-projects">Explorar</Link>}
-                        {this.props.loggedInUser && <Link className="nav-link" to="/project/new">Nuevo proyecto</Link>}
-                        <Link className="nav-link" to="/profile" > Hola, {this.props.loggedInUser ? this.props.loggedInUser.username : 'little kraken'}</Link>
+                        {this.props.loggedInUser && <Link className="nav-link" to="/projects/new">Nuevo proyecto</Link>}
+                        <Link className="nav-link" to="/profile" > Hola, {this.props.loggedInUser ? this.props.loggedInUser.username : 'pequeño kraken'}</Link>
                         {this.props.loggedInUser && <Link to="/logout" className="nav-link" onClick={this.logoutUser}>Cerrar sesión</Link>}
                     </Nav>
                 </Navbar.Collapse>
-            </Navbar >
+            </Navbar>
         )
     }
 }
