@@ -5,6 +5,8 @@ import Row from 'react-bootstrap/Row'
 
 import projectService from "../../../../service/project.service"
 import BaseCard from "../../../shared/cards/BaseCard"
+import Spinner from "../../../shared/spinner/Spinner"
+
 
 
 import SearchBar from '../../../layout/navbar/SearchBar'
@@ -49,6 +51,7 @@ class AllProjects extends Component {
         return (
 
             <Container>
+                {!filterProjects.length && <Spinner />}
                 <SearchBar searchProjects={this.searchProjects} />
                 <Row className="justify-content-md-center">
                     {filterProjects.map(elm => <BaseCard key={elm._id} author={elm.owner.username} title={elm.title} description={elm.synopsis} id={elm._id} typeCard="project"/>)}

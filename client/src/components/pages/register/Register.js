@@ -7,7 +7,7 @@ import Signup from './Signup'
 import './Register.css'
 
 
-const Register = () => {
+const Register = props => {
 
 
     return (
@@ -21,7 +21,7 @@ const Register = () => {
                         <RegisterInfo title={'Un espacio pensado para tu arte, sea cual sea'} text={'Como desarrollador te ofrecemos un espacio polivalente que no sólo hará maravillas con tus novelas y mundos, también con tus guiones, obras de teatro, manuales de rol e incluso proyectos para videojuegos, crea un kraken a gusto de tus necesidades.'} />
                     </Col>
                     <Col>
-                        <Signup />
+                        <Signup setTheUser={props.setTheUser} {...props}/>
                     </Col>
                 </Row>
             </Container>

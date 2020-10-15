@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import { Switch, Route } from 'react-router-dom'
+
+import { Switch, Route, Redirect } from 'react-router-dom'
 
 import Login from './pages/login/Login'
 // import Signup from './pages/register/Signup'
@@ -16,17 +17,15 @@ import profileService from './../service/profile.service'
 
 import './App.css'
 import Welcome from './pages/welcome/Welcome'
-import Testing from './Testing'
+
 
 import AllProjects from './pages/work-space/project-views/AllProjects'
 import ProjectDetails from './pages/work-space/project-views/ProjectDetails'
 import ProjectNew from './pages/work-space/project-views/ProjectNew'
-import ProjectEdit from './pages/work-space/project-views/ProjectEdit'
 
 import AllCharacters from './pages/characters/AllCharacters'
 import CharacterDetail from './pages/characters/CharacterDetail'
 import CharacterNew from './pages/characters/CharacterNew'
-import CharacterEdit from './pages/characters/CharacterEdit'
 
 import ArchiveDetails from './pages/archives/ArchiveDetails'
 import ArchiveNew from './pages/archives/ArchiveNew'
@@ -61,57 +60,44 @@ class App extends Component {
 
   render() {
 
-    if (!this.state.loggedInUser) {
-      return (
-        <>
-          <NavBar setTheUser={this.setTheUser} loggedInUser={this.state.loggedInUser} />
-          <main>
-            <Route path="/" exact render={() => <Welcome setTheUser={this.setTheUser} />} />
-            <Route path="/register" render={() => <Register />} />
-            <Route path="/login" render={props => <Login setTheUser={this.setTheUser} {...props} />} />
-            <Route path="/profile" render={props => <Profile theUser={this.state.loggedInUser} {...props} />} />
-          </main>
-          <Footer />
-        </>
-
-      );
-    } else {
 
       return (
 
         <>
           <NavBar setTheUser={this.setTheUser} loggedInUser={this.state.loggedInUser} />
+
           <Switch />
           <main>
+
+            <Route path="/" exact render={() => !this.state.loggedInUser ? <Welcome setTheUser={this.setTheUser} /> : <Redirect to="/all-projects" />} />
+            <Route path="/register" render={props => <Register setTheUser={this.setTheUser} {...props} />} />
             <Route path="/login" render={props => <Login setTheUser={this.setTheUser} {...props} />} />
-            <Route path="/profile" render={props => <Profile theUser={this.state.loggedInUser} {...props} />} />
+            <Route path="/profile" render={props => !this.state.loggedInUser ? <Login setTheUser={this.setTheUser} {...props} />: <Profile theUser={this.state.loggedInUser} {...props} />} />
+
+            <Route path="/logout" render={() => <Welcome setTheUser={this.setTheUser} />} />
+
 
             <Route path="/all-projects" render={props => <AllProjects theUser={this.state.loggedInUser} {...props} />} />
             <Route path="/projects/:project_id/details" exact render={props => <ProjectDetails theUser={this.state.loggedInUser} {...props} />} />
-            <Route path="/project/new" render={props => <ProjectNew theUser={this.state.loggedInUser} {...props} />} />
-            <Route path="/project/:project_id/edit" exact render={props => <ProjectEdit theUser={this.state.loggedInUser} {...props} />} />
-
-            <Route path="/testing" render={props => <Testing theUser={this.state.loggedInUser} {...props} />} />
-
+            <Route path="/projects/new" render={props => <ProjectNew theUser={this.state.loggedInUser} {...props} />} />
+            
             <Route path="/projects/:project_id/all-characters" render={props => <AllCharacters theUser={this.state.loggedInUser} {...props} />} />
             <Route path="/projects/:project_id/character/:character_id/details" exact render={props => <CharacterDetail theUser={this.state.loggedInUser} showModal={false} {...props} />} />
             <Route path="/projects/:project_id/character/new" render={props => <CharacterNew theUser={this.state.loggedInUser} {...props} />} />
-            <Route path="/projects/:project_id/:character_id/edit" exact render={props => <CharacterEdit theUser={this.state.loggedInUser} {...props} />} />
+           
+            <Route path="/projects/:project_id/folder/:folder_id/details" render={props => <AllArchivesInFolder theUser={this.state.loggedInUser} {...props} />} />
 
-
-            <Route path="/projects/:project_id/:folder_id/details" render={props => <AllArchivesInFolder theUser={this.state.loggedInUser} {...props} />} />
-            <Route path="/projects/:project_id/folder/:folder_id/archive/:archive_id/details" exact render={props => <ArchiveDetails theUser={this.state.loggedInUser} {...props} />} />
+            <Route path="/projects/:project_id/:folder_id/archive/:archive_id/details" exact render={props => <ArchiveDetails theUser={this.state.loggedInUser} {...props} />} />
             <Route path="/projects/:project_id/:folder_id/archive/new" exact render={props => <ArchiveNew theUser={this.state.loggedInUser} {...props} />} />
             <Route path="/projects/:project_id/:folder_id/:archive_id/archive/edit" exact render={props => <ArchiveEdit theUser={this.state.loggedInUser} {...props} />} />
 
-            <Route path="/testing" render={props => <Testing theUser={this.state.loggedInUser} {...props} />} />
           </main>
           <Switch />
           <Footer />
         </>
       );
 
-    }
+    
   }
 }
 

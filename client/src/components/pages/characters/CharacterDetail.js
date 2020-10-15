@@ -50,11 +50,18 @@ class CharacterDetail extends Component {
     render() {
         let project = this.state.project
         let ownCharacter = false
+        let physicalDescription = ""
+        let personality = ""
+        let habits = ""
+
 
         if (project !== undefined) {
             project = this.state.project._id
 
             ownCharacter = (project === this.props.theProject._id)
+            physicalDescription = this.state.project.physicalDescription.join()
+            personality = this.state.project.personality.join()
+            habits = this.state.project.habits.join()
 
         }
 
@@ -84,9 +91,9 @@ class CharacterDetail extends Component {
                             <h4>Edad: </h4><p>{this.state.character.age}</p>
                             <h4>Rol: </h4><p>{this.state.character.rolHistory}</p>
                             <h4>Ocupación: </h4><p>{this.state.character.occupation}</p>
-                            <h4>Descripción física: </h4><p>{this.state.character.physicalDescription}</p>
-                            <h4>Personalidad: </h4><p>{this.state.character.personality}</p>
-                            <h4>Hábito: </h4><p>{this.state.character.habits}</p>
+                            <h4>Descripción física: </h4><p>{physicalDescription}</p>
+                            <h4>Personalidad: </h4><p>{personality}</p>
+                            <h4>Hábito: </h4><p>{habits}</p>
                             {ownProject && (<div><h4>Notas: </h4><p>{this.state.character.notes}</p></div>)}
                             <h3>Trasfondo</h3>
                             <p>{this.state.character.background}</p>
