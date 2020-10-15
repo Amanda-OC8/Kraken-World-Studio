@@ -63,7 +63,7 @@ class ArchiveDetail extends Component {
                 </Row>
                 <Row>
                     <Col md={{ span: 3 }}>   <Link className="btn-shape btn-dark-mode-config" to={`/projects/${this.props.match.params.project_id}/folder/${this.props.match.params.folder_id}/details/`}>Volver a todos los archivos</Link> </Col>
-                    <Col md={{ span: 3 }}>   <Link className="btn-shape btn-dark-mode-config" to={`/projects/${this.props.match.params.project_id}/${this.props.match.params.folder_id}/${this.props.match.params.archive_id}/archive/edit`}>Editar archivo</Link> </Col>
+                    <Col md={{ span: 3 }}>   <Link className="btn-shape btn-dark-mode-config" to={`/projects/${this.props.match.params.project_id}/folder/${this.props.match.params.folder_id}/${this.props.match.params.archive_id}/archive/edit`}>Editar archivo</Link> </Col>
                     <Col md={{ span: 3 }}>   <Link className="btn-shape btn-dark-mode-config" to={`/projects/${this.props.match.params.project_id}/all-characters/`} onClick={() => this.deleteArchive()}>Borrar archivo</Link> </Col>
                     <Col md={{ span: 3 }}> <Link className="btn-shape btn-dark-mode-config" to={`/profile`}>Volver a tu perfil</Link> </Col>
                 </Row>
